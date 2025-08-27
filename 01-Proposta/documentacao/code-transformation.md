@@ -68,10 +68,10 @@ style M fill:#ccffcc,color:#000000
 style N fill:#ccffcc,color:#000000
 style O fill:#ccffcc,color:#000000
 style P fill:#ccffcc,color:#000000
-style Q fill:#3498db,color:#000000
-style R fill:#3498db,color:#000000
-style S fill:#3498db,color:#000000
-style T fill:#3498db,color:#000000
+style Q fill:#3498db,color:#ffffff
+style R fill:#3498db,color:#ffffff
+style S fill:#3498db,color:#ffffff
+style T fill:#3498db,color:#ffffff
 style U fill:#9b59b6,color:#000000
 ```
 

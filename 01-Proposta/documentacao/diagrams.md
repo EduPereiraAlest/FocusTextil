@@ -85,19 +85,19 @@ style I fill:#f39c12,color:#000000
 style J fill:#f39c12,color:#000000
 style K fill:#f39c12,color:#000000
 style L fill:#f39c12,color:#000000
-style M fill:#27ae60,color:#000000
-style N fill:#27ae60,color:#000000
-style O fill:#27ae60,color:#000000
-style P fill:#27ae60,color:#000000
-style Q fill:#27ae60,color:#000000
-style R fill:#27ae60,color:#000000
-style S fill:#27ae60,color:#000000
-style T fill:#27ae60,color:#000000
-style U fill:#3498db,color:#000000
-style V fill:#3498db,color:#000000
-style W fill:#3498db,color:#000000
-style X fill:#3498db,color:#000000
-style Y fill:#3498db,color:#000000
+style M fill:#27ae60,color:#ffffff
+style N fill:#27ae60,color:#ffffff
+style O fill:#27ae60,color:#ffffff
+style P fill:#27ae60,color:#ffffff
+style Q fill:#27ae60,color:#ffffff
+style R fill:#27ae60,color:#ffffff
+style S fill:#27ae60,color:#ffffff
+style T fill:#27ae60,color:#ffffff
+style U fill:#3498db,color:#ffffff
+style V fill:#3498db,color:#ffffff
+style W fill:#3498db,color:#ffffff
+style X fill:#3498db,color:#ffffff
+style Y fill:#3498db,color:#ffffff
 style Z fill:#9b59b6,color:#000000
 ```
 

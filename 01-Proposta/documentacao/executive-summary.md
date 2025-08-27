@@ -44,14 +44,14 @@ style B fill:#e74c3c,color:#000000
 style C fill:#e74c3c,color:#000000
 style D fill:#e74c3c,color:#000000
 style E fill:#e74c3c,color:#000000
-style F fill:#27ae60,color:#000000
-style G fill:#27ae60,color:#000000
-style H fill:#27ae60,color:#000000
-style I fill:#27ae60,color:#000000
-style J fill:#27ae60,color:#000000
-style K fill:#3498db,color:#000000
-style L fill:#3498db,color:#000000
-style M fill:#3498db,color:#000000
+style F fill:#27ae60,color:#ffffff
+style G fill:#27ae60,color:#ffffff
+style H fill:#27ae60,color:#ffffff
+style I fill:#27ae60,color:#ffffff
+style J fill:#27ae60,color:#ffffff
+style K fill:#3498db,color:#ffffff
+style L fill:#3498db,color:#ffffff
+style M fill:#3498db,color:#ffffff
 style N fill:#f39c12,color:#000000
 ```
 
