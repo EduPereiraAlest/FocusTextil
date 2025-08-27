@@ -275,40 +275,23 @@ style F2 fill:#ccffcc,color:#000000
 
 ## 📋 ROADMAP DE MIGRAÇÃO DETALHADO
 
-### 🗓️ Cronograma de 24 Semanas
+### 🚀 Roadmap Visual - 5 Fases Estratégicas
 
 ```mermaid
-gantt
-    title 🚀 Roadmap de Migração Focus Textil
-    dateFormat YYYY-MM-DD
-    axisFormat %m-%d
+flowchart TD
+    A["🏗️ FASE 1 - FUNDAÇÃO<br/>Semanas 1-4<br/>• Setup Infraestrutura AWS<br/>• CI/CD Pipeline<br/>• Arquitetura Base<br/>• Database Design"] --> B["⚛️ FASE 2 - FRONTEND<br/>Semanas 5-10<br/>• React Setup<br/>• Component Migration<br/>• State Management<br/>• PWA Implementation"]
+    
+    B --> C["⚙️ FASE 3 - BACKEND<br/>Semanas 11-16<br/>• Microservices Core<br/>• API Development<br/>• Auth & Security<br/>• Performance Opt"]
+    
+    C --> D["🔄 FASE 4 - INTEGRAÇÃO<br/>Semanas 17-20<br/>• Data Migration<br/>• Testing & QA<br/>• Sistema Integrado"]
+    
+    D --> E["🚀 FASE 5 - DEPLOY<br/>Semanas 21-24<br/>• Staging Deploy<br/>• Production Deploy<br/>• Training & Handover"]
 
-    section 🏗️ Fundação
-    Setup Infraestrutura    :done, infra, 2024-01-01, 7d
-    CI/CD Pipeline          :done, cicd, 2024-01-08, 7d
-    Arquitetura Base        :active, arch, 2024-01-15, 7d
-    Database Design         :db, 2024-01-22, 7d
-
-    section ⚛️ Frontend
-    React Setup             :react, 2024-01-29, 7d
-    Component Migration     :comp, 2024-02-05, 21d
-    State Management        :state, 2024-02-26, 14d
-    PWA Implementation      :pwa, 2024-03-11, 7d
-
-    section ⚙️ Backend
-    Microservices Core      :micro, 2024-03-18, 21d
-    API Development         :api, 2024-04-08, 21d
-    Auth & Security         :auth, 2024-04-29, 14d
-    Performance Opt         :perf, 2024-05-13, 14d
-
-    section 🔄 Integração
-    Data Migration          :data, 2024-05-27, 21d
-    Testing & QA            :test, 2024-06-03, 14d
-
-    section 🚀 Deploy
-    Staging Deploy          :staging, 2024-06-17, 7d
-    Production Deploy       :prod, 2024-06-24, 7d
-    Training & Handover     :training, 2024-07-01, 7d
+    style A fill:#e8f4fd,color:#000000
+    style B fill:#61dafb,color:#000000
+    style C fill:#68d391,color:#000000
+    style D fill:#fc8181,color:#000000
+    style E fill:#9f7aea,color:#000000
 ```
 
 ### 📊 Milestones Críticos
