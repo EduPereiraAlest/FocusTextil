@@ -1,0 +1,61 @@
+<!-- SEARCH -->
+<search-box title="PRODUTO" info="Buscar" model="vm.page.search" send="vm.submitForm($event)" clear="vm.clearForm()"> 
+  <div class="btn-group-right">
+    <!-- button type="button" class="btn" ng-class="{active: vm.page.books}" ng-click="vm.setBookView()">
+      <span class="icon icon-books"></span> Books
+    </button -->
+    <selects model="vm.page.type" items="vm.types" ng-disabled="vm.blockSelect" on-change="vm.submitForm($event)" id="books-select-type"></selects>
+    <selects model="vm.page.materialType" items="vm.materialTypes" ng-disabled="vm.blockSelect" on-change="vm.submitForm($event)" id="books-select-material"></selects>
+    <!-- selects model="vm.page.branch" items="vm.branches" on-change="vm.submitForm($event)"></selects -->
+  </div>
+</search-box>
+<!-- FILTER -->
+<filter-book ng-if="!vm.page.books" query="vm.page.filters" range="vm.page.grammage" disabled="!vm.materials.length" on-clear="vm.setOffFilters(cleaner)" on-confirm="vm.submitForm($event)" >
+<div class="btn-group-right">
+  <selects model="vm.page.branch" items="vm.conditionalCenters" on-change="vm.submitForm($event)" ng-disabled="vm.disableConditionalCenter" id="books-select-conditional-center"></selects>
+  <selects model="vm.page.currency" items="vm.currs" ng-disabled="!!vm.kart.Master.Editavel" id="books-select-currency"></selects>
+  <button class="btn btn-icon" ng-class="{active: !vm.page.list}" ng-click="vm.setTableView('image')" id="books-list-imgs-btn">
+    <span class="icon icon-image"></span> Imagem
+  </button>
+  <button class="btn btn-icon" ng-class="{active: vm.page.list}" ng-click="vm.setTableView('list')" id="books-list-btn">
+    <span class="icon icon-list"></span> Lista
+  </button>
+</div>
+</filter-book>
+<div class="bread-content" ng-if="!vm.page.books">
+  <h2 ng-show="vm.materials.length">
+  Mostrando <b>{{vm.materials.length}}</b> de <b>{{vm.page.info.TotalRecords}}</b> resultados para a busca
+  <!-- <b>{{vm.page.info.CurrentPage}}</b> -->
+  "<b ng-if="!vm.page.ebook ">{{vm.currentSearch}}</b><b ng-if="vm.page.ebook ">Book {{vm.page.ebook}}</b>"
+  </h2>
+  <div class="btn-group-right">
+    <button class="btn btn-icon" ng-class="{active: vm.page.stock}" ng-click="vm.setStock()" ng-if="vm.page.type !== 'C'" id="books-stock-btn">
+      <span class="icon icon-stack"></span> Filtrar Estoque
+    </button>
+    <button class="btn btn-icon" ng-click="vm.updateStock()" ng-if="vm.page.offcor" id="books-update-stock-btn">
+      <span class="icon icon-cloud-check"></span> Atualizar Estoque
+    </button>
+  </div>
+</div>
+<!-- IMAGES -->
+<div ng-if="!vm.page.list">
+  <slides-book model="vm.materials" detail="vm.detail" kart="vm.kart" page="vm.page" params="vm.params" load-more="vm.loadMore(callback)" ng-show="vm.materials.length"></slides-book>
+  <detail-book model="vm.detail" kart="vm.kart" page="vm.page" params="vm.params" ng-show="vm.detail"></detail-book>
+</div>
+<!-- LIST -->
+<div ng-if="vm.page.list && !vm.page.books">
+  <books-total kart="vm.kart" ng-if="vm.kart.Master.Item902.length"></books-total>
+  <table-book model="vm.materials" kart="vm.kart" client="vm.address.cli" page="vm.page" params="vm.params" load-more="vm.loadMore(callback)" line-click="vm.updateStock(list)" sort-click="vm.submitForm()" ng-if="vm.materials.length">
+  </table-book>
+</div>
+<!-- BOOKS -->
+<div ng-if="vm.page.books">
+  <list-book model="vm.books" kart="vm.kart" page="vm.page" ng-show="vm.books.length" book-click="vm.setBook(book,hyer)" sort-click="vm.submitForm()">
+    
+  </list-book>
+</div>
+<!-- BACKGROUND -->
+<div class="empty-content" ng-show="vm.page.books ? !vm.books.length : !vm.materials.length" fluid-height="270"></div>
+<div class="generic-loader-container">
+  <div class="materiais-loader"></div>
+</div>

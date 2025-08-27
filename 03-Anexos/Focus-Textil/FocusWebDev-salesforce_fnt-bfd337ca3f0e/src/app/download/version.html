@@ -1,0 +1,43 @@
+<div class="store_main">
+    <div class="store_header">
+        <h2>Focus App</h2>
+        <span class="version-info">{{ ::vm.env }}</span>
+    </div>
+    <div class="content" fluid-height="100">
+        <div class="store_box">
+            <div class="store_box-icon">
+                <img src="images/icon-512.png" alt="WebRep">
+            </div>
+            <div class="store_box-collumn">
+                <h1>{{vm.data.Name}} - {{vm.data.Description}}</h1>
+                <a class="sub-title" href="#">Focus Têxtil</a>
+                <br>
+                <br>
+                <a href="itms-services://?action=download-manifest&url=https://webrep.focustextil.com.br/app/manifest.plist" id="text" class="btn btn_store">Download</a>
+            </div>
+        </div>
+        <section class="store_desc">
+            <div class="store_desc-title">
+                <h2>Observações</h2>
+            </div>
+            <div class="store_desc-content">
+                <p>
+                    {{vm.data.Obs}}
+                </p>
+            </div>
+        </section>
+        <section class="store_news">
+            <div class="store_news-title">
+                <h2>Atualizações</h2>
+                <div class="store_news-date">{{vm.data.ReleaseDate}}</div>
+                <a class="btn-text" ng-click="vm.openVersions()">Versões Anteriores</a>
+            </div>
+            <div class="store_news-content">
+                <ul class="store_news-info">
+                    <li ng-repeat="note in vm.data.ReleaseNotes">- {{note}}</li>
+                </ul>
+                <div class="store_news-latest">Version {{vm.data.Version}}</div>
+            </div>
+        </section>
+    </div>
+</div>

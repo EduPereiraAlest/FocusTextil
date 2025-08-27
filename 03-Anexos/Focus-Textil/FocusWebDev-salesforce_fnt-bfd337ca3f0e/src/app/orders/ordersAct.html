@@ -1,0 +1,35 @@
+<div class="ngdialog-message">
+  <form name="formact" class="form-box-modal" ng-submit="vm.sendAction()" novalidate>
+    <div class="form-row">
+      <div class="form-group form-group-ct">
+        <label>Ação</label>
+        <div class="form-select">
+          <select class="form-control" ng-model="vm.data.Kvgr4" required id="orders-act-action">
+            <option value="">Selecione</option>
+            <option ng-repeat="action in vm.actions" value="{{action.Cod}}">{{action.Desc}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-dq" ng-if="vm.data.Kvgr4 === '04'" >
+        <label>Data</label>
+        <div class="form-select">
+          <select class="form-control" ng-model="vm.data.DateAtc" required id="orders-act-date">
+            <option value="">Selecione</option>
+            <option ng-repeat="date in vm.dates">{{date}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-group-fl">
+        <label for="obsPv">Observações</label>
+        <textarea rows="4" name="obsPv" ng-model="vm.data.Text" class="form-control" id="orders-act-obs"></textarea>
+      </div>
+    </div>
+    <div class="form-end">
+      <div class="form-group form-group-fl">
+        <button class="btn fright" name='upload' ng-disabled="formact.$invalid" id="orders-act-confirm-btn">Confirmar</button>
+      </div>
+    </div>
+  </form>
+</div>

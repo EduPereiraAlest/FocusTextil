@@ -1,0 +1,114 @@
+<div class="search-content">
+  <h2 class="form-title">ABERTURA RA</h2>
+  <button type="button" class="btn btn-icon fright" ui-sref="ras" id="ra-ltn-back-btn">
+    <span class="icon icon-tag-left"></span> Voltar
+  </button>
+</div>
+<div class="filter-content">
+  <div class="cart-menu">
+    <input type="radio" id="chk1" name="wzd-step" class="wzd-step" disabled="disabled">
+    <label for="chk1">1. Pedido</label>
+    <input type="radio" id="chk2" name="wzd-step" class="wzd-step" checked="checked">
+    <label for="chk2">2. Itens do Pedido</label>
+    <input type="radio" id="chk3" name="wzd-step" class="wzd-step" disabled="disabled">
+    <label for="chk3">3. Feedback</label>
+  </div>
+</div>
+<!-- FORM -->
+<div class="order-form-content form-box">
+  <div class="form-col">
+    <div class="form-row">
+      <div class="form-group form-group-dt">
+        <label for="orderCode">Nº Pedido</label>
+        <input type="text" name="orderCode" class="form-control" ng-model="vm.order.Master.CodeOv" disabled id="ra-ltn-order-number">
+      </div>
+      <div class="form-group form-group-dt">
+        <label for="nfenum">Nota Fiscal</label>
+        <input type="text" name="nfenum" class="form-control" ng-model="vm.order.Master.Nfenum" disabled id="ra-ltn-nf">
+      </div>
+      <div class="form-group form-group-dt">
+        <label for="vsartDesc">Data</label>
+        <input type="text" name="vsartDesc" class="form-control" ng-model="vm.ra.RaDate" disabled="disabled" id="ra-ltn-date">
+      </div>
+      <div class="form-group form-group-dt">
+        <label for="rndRa">Dias Corridos</label>
+        <input type="text" name="rndRa" parse-date class="form-control" ng-model="vm.ra.RndRa" disabled="disabled" id="ra-ltn-calendar-days">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-group-dt">
+        <label for="codeCentro">CNPJ</label>
+        <input type="text" name="codeCentro" class="form-control" ng-model="vm.ra.CnpjCli" disabled id="ra-ltn-cnpj">
+      </div>
+      <div class="form-group form-group-db">
+        <label for="codeCli">Cliente</label>
+        <input type="text" name="codeCli" class="form-control" ng-model="vm.order.Master.Razao01Cli" disabled id="ra-ltn-client">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="order-detail-content" fluid-height="430" simple-accordion>
+  <div class="form-box active">
+    <h3 class="form-box-title">
+      <span class="icon icon-tag-down"></span>
+      <span class="icon icon-tag-up"></span>
+      Item do Pedido
+      <div class="form-select control-default form-group-dt fright">
+        <select class="form-control" ng-model="vm.ra.RaMotive" ng-options="motive.Desc for motive in vm.motives | filter: vm.filterExpression" ng-disabled="!vm.ra.RaType" id="ra-ltn-order-items-reasons">
+          <option value="">Motivos Reclamação</option>
+        </select>
+      </div>
+      <div class="form-select control-default form-group-ee fright">
+        <select class="form-control" ng-model="vm.ra.RaType" ng-options="type.Desc for type in vm.types" id="ra-ltn-order-items-ra">
+          <option value="">Tipos RA</option>
+        </select>
+      </div>
+    </h3>
+    <div class="form-box-content form-box-clean">
+      <table class="table table-scroll form-box-table">
+        <thead>
+          <tr>
+            <th class="cell-big">
+              Código do
+              <br> Artigo
+            </th>
+            <th>Descrição do
+            <br> Artigo</th>
+            <th class="cell-disp">Unidade
+            <br>Multiplo</th>
+            <th class="cell-disp">Qtd.
+            <br>Original</th>
+            <th class="cell-input">QTD</th>
+          </tr>
+        </thead>
+        <tbody style="height: 200px">
+          <tr ng-repeat="item in vm.order.Master.Item904">
+            <td class="cell-big" id="{{'ra-ltn-item-code' + $index}}">{{item.MaterialCode}}</td>
+            <td id="{{'ra-ltn-item-desc' + $index}}">{{item.DescMat}}</td>
+            <td class="cell-disp" id="{{'ra-ltn-item-multiple-' + $index}}">{{item.UnidMed}}</td>
+            <td class="cell-disp" id="{{'ra-ltn-item-original-amount-' + $index}}">{{item.QtdMaterialOrg}}</td>
+            <td class="cell-input">
+              <input type="text" class="form-control" only-digits ng-model="item.Qtd" placeholder="0" id="{{'ra-ltn-item-original-amount-' + $index}}">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-end">
+    <div class="btn-group-right">
+      <button class="btn btn-icon" onclick="history.back()" id="ra-ltn-previous-btn">
+        Passo Anterior
+        <span class="icon icon-tag-left"></span>
+      </button>
+      <a class="btn btn-icon-right" ng-href="#!/ras-feed/{{vm.order.Master.CodeOv}}" id="ra-ltn-next-btn">
+        Proximo Passo
+        <span class="icon icon-tag-right"></span>
+      </a>
+    </div>
+  </div>
+  <!--   <div class="form-end">
+    <a ng-href="#!/ras-feed/{{vm.order.Master.CodeOv}}" class="btn btn-sm btn-icon-right btn-default fright" > <span class="icon icon-tag-right"></span> Proximo Passo </a>
+    <button class="btn btn-sm btn-icon btn-default fright" onclick="history.back()"> <span class="icon icon-tag-left"></span> Passo Anterior </button>
+  </div> -->
+</div>

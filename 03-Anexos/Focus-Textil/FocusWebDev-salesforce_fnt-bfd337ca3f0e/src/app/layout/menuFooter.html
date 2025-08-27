@@ -1,0 +1,93 @@
+<footer class="menu-footer" auto-active ng-show="$ctrl.menu">
+  <a ui-sref="home" class="btn-icon btn-menu" id="menu-footer-home">
+    <span class="badge badge-pend pend-txt" ng-show="$ctrl.Pends > 0"></span>
+    <span class="icon icon-home"></span>
+    <span class="leg">Home</span>
+  
+  </a>
+  <span class="sep-menu" ng-show="!$ctrl.kart"></span>
+  <p class="client-name" ng-show="$ctrl.kart">
+    <span class="icon icon-user"></span>
+    {{$ctrl.kart.Master.NomeCli | characters: 23: true}}<br>
+    {{$ctrl.kart.Master.CodeCli}} <span ng-if="$ctrl.kart.Master.Premiere" class="gold-premiere">Premiere</span><!-- TO:DO exebir somente quando o user for premiere -->
+    <a ng-if="!isEfocusCustomer" id="menu-footer-reset-client">
+      <span class="icon-cross icon-delete-chart" ng-click="resetCliente()"></span>
+   </a>
+  </p>
+  <a ng-if="!isEfocusCustomer" ui-sref="clients-fav" class="btn-icon btn-menu" id="menu-footer-client-favorite">
+    <span class="icon icon-user-fav"></span>
+    <span class="leg">Favoritos</span>
+  </a>
+  <a ng-if="!isEfocusCustomer" ui-sref="clients" class="btn-icon btn-menu" id="menu-footer-client-search">
+    <span class="icon icon-user-search"></span>
+    <span class="leg">Buscar</span>
+  </a>
+  <!-- /client-add  ERROR-->
+  <a ng-if="!isEfocusCustomer" href="#!/clients-add/" class="btn-icon btn-menu" id="menu-footer-client-add">
+    <span class="icon icon-user-add"></span>
+    <span class="leg">Adicionar</span>
+  </a>
+<!-- Botão com bloqueio por perfil
+  <a href="#!/clients-add/" ng-class="{disabled: $ctrl.profileBlocked}" class="btn-icon btn-menu">
+    <span class="icon icon-user-add"></span>
+    <span class="leg">Adicionar</span>
+  </a> -->
+
+
+  <span ng-if="!isEfocusCustomer" class="sep-menu"></span>
+  <a ui-sref="books" class="btn-icon btn-menu" id="menu-footer-catalog">
+    <span class="icon icon-book"></span>
+    <span class="leg">Catálogo</span>
+  </a>
+  <a  ng-if="!isEfocusCustomer" ui-sref="books-fav" class="btn-icon btn-menu" ng-class="{disabled: !$ctrl.kart}" id="menu-footer-book-favorite">
+    <span class="icon icon-fav-book"></span>
+    <span class="leg">Favoritos</span>
+  </a>
+  <!-- /status -->
+  <a ui-sref="status" class="btn-icon btn-menu" id="menu-footer-requests">
+    <span class="icon icon-status"></span>
+    <span class="leg">Pedidos</span>
+  </a>
+  <!-- /status -->
+  <a ui-sref="orders" class="btn-icon btn-menu" id="menu-footer-orders">
+    <span class="icon icon-check-empty"></span>
+    <span class="leg">Ordens</span>
+  </a>
+  <!-- cart -->
+  <a ui-sref="carts" class="btn-icon btn-menu" ng-class="{disabled: !$ctrl.kart || !$ctrl.items}" id="menu-footer-cart">
+    <span class="badge badge-float" ng-show="$ctrl.kart && $ctrl.items">{{$ctrl.items}}</span>
+    <span class="icon icon-cart"></span>
+    <span class="leg">Carrinho</span>
+  </a>
+  <span class="sep-menu"></span>
+  <a ng-if="!isEfocusCustomer" ui-sref="home" class="btn-icon btn-menu disabled" id="menu-footer-map">
+    <span class="icon icon-map-focus"></span>
+    <span class="leg">Mapa</span>
+  </a>
+  <a ng-if="!isEfocusCustomer" ui-sref="contact" class="btn-icon btn-menu" id="menu-footer-channel">
+    <span class="icon icon-chat-focus"></span>
+    <span class="leg">Canal</span>
+  </a>
+  <a ng-if="!isEfocusCustomer" ui-sref="home" class="btn-icon btn-menu disabled" id="menu-footer-collections">
+    <span class="icon icon-site-focus"></span>
+    <span class="leg">Coleções</span>
+  </a>
+  <a ng-if="!isEfocusCustomer" ui-sref="ras" class="btn-icon btn-menu " id="menu-footer-ra">
+    <span class="icon icon-clipboard"></span>
+    <span class="leg">Ra</span>
+  </a>
+  <a ng-if="!isEfocusCustomer" ui-sref="commission" class="btn-icon btn-menu " id="menu-footer-comminsion">
+    <span class="icon icon-dollar"></span>
+    <span class="leg">Comissão</span>
+  </a> 
+  <!--
+  <a ng-if="!isEfocusCustomer" ui-sref="faq" class="btn-icon btn-menu">
+    <span class="icon icon-info"></span>
+    <span class="leg">FAQ</span>
+  </a>
+  -->
+  <a ng-if="false" ui-sref="dashboard" class="btn-icon btn-menu " id="menu-footer-dashboard">
+    <span class="icon icon-display"></span>
+    <span class="leg">Dashboard</span>
+  </a>
+</footer>

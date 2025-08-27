@@ -1,0 +1,15 @@
+<div class="form-select" ng-class="$ctrl.classes">
+  <select
+    class="form-control"
+    ng-model="$ctrl.model"
+    ng-change="$ctrl.asyncChange()"
+    ng-options="i.value as i.name for i in $ctrl.items"
+    ng-disabled="$ctrl.disabled"
+    required
+  >
+    <option
+      ng-if="$ctrl.firstOption"
+      value=""
+    >Selecione</option>
+  </select>
+</div>

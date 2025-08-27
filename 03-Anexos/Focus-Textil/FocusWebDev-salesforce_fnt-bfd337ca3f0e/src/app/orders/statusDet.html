@@ -1,0 +1,271 @@
+<div class="search-content">
+  <h2 class="form-title">PEDIDO - {{ vm.pdMask }}</h2>
+  <div class="btn-group-right">
+    <button type="button" class="btn btn-icon" ng-if="vm.order.Master.OrderNum" ng-click="vm.setOrder()" id="status-det-view-order-btn">
+      <span class="icon icon-check-empty"></span> Visualizar Ordens
+    </button>
+    <button type="button" class="btn btn-icon" ui-sref="status" id="status-det-back-btn">
+      <span class="icon icon-tag-left"></span> Voltar
+    </button>
+  </div>
+</div>
+<!-- ACCORDION -->
+<div class="order-detail-content" ng-if="vm.order.Master" fluid-height="172" simple-accordion>
+  <div class="form-box active">
+    <h3 class="form-box-title" id="status-det-order-data-title">
+      <span class="icon icon-tag-down"></span>
+      <span class="icon icon-tag-up"></span>
+      Dados do Pedido - {{ vm.pdMask }}
+    </h3>
+    <fieldset class="form-box-content" disabled="disabled">
+      <div class="form-col auto-height">
+        <div class="form-row">
+          <div class="form-group form-group-dt">
+            <label for="orderCode">Nº Pedido</label>
+            <input type="text" name="orderCode" class="form-control" ng-model="vm.order.Master.CodePv" id="status-det-order-data-number">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="dateProcess">Emissão</label>
+            <input type="text" name="dateProcess" parse-date class="form-control" ng-model="vm.order.Master.DateProcess" id="status-det-order-data-date">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="payCondDesc">Forma de Pagamento</label>
+            <input type="text" name="payCondDesc" class="form-control" ng-model="vm.order.Master.PayCondDesc" id="status-det-order-data-payment-method">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="vsartDesc">Tipo Expedição</label>
+            <input type="text" name="vsartDesc" class="form-control" ng-model="vm.order.Master.VsartDesc" id="status-det-order-data-type-expedition">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-dt">
+            <label for="Angdt">Pedido Programado</label>
+            <div ng-if="vm.order.Master.Angdt != 00000000">
+              <input type="text" name="Angdt" class="form-control" ng-model="vm.order.Master.Angdt" ui-date-mask="DD/MM/YYYY" id="status-det-order-data-PE">
+            </div>
+            <div ng-if="vm.order.Master.Angdt == 00000000">
+              <input type="text" name="Angdt" class="form-control">
+            </div>
+          </div>
+          <div class="form-group form-group-db">
+            <label for="nomeCli">Cliente</label>
+            <input type="text" name="nomeCli" class="form-control" value="{{vm.order.Master.CodeCli + ' - ' + vm.order.Master.NomeCli}}" id="status-det-order-data-client">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-ft">
+            <label for="obsPv">Observações</label>
+            <textarea rows="3" type="text" name="obsPv" class="form-control" ng-model="vm.order.Master.ObsOv" id="status-det-order-data-obs"></textarea>
+          </div>
+          <div class="form-group form-group-ft" ng-if="vm.order.Master.Msg">
+            <label for="obsPv">Mensagem</label>
+            <textarea rows="3" type="text" name="obsPv" class="form-control" ng-model="vm.order.Master.Msg" id="status-det-order-data-msg"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="form-col form-col-total">
+        <div class="form-row">
+          <div class="form-group form-group-de form-group-total fright">
+            <label>TOTAL</label>
+            <br>
+            <span id="status-det-order-data-total">{{::vm.order.Master.CodeCurr}} {{::vm.parseCurr(vm.order.Master.Total)}}</span>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="form-box">
+    <h3 class="form-box-title" id="status-det-delivery-data-title">
+      <span class="icon icon-tag-down"></span>
+      <span class="icon icon-tag-up"></span>
+      Dados de Entrega
+    </h3>
+    <fieldset class="form-box-content" disabled="disabled">
+      <div class="form-row">
+        <div class="form-group form-group-bb">
+          <label for="razao01Cli">Local de Entrega</label>
+          <input type="text" name="razao01Cli" class="form-control" ng-model="vm.delivery.Razao01Cli" id="status-det-delivery-data-location">
+        </div>
+        <div class="form-group form-group-bb">
+          <label for="descMagazine">Magazine</label>
+          <input type="text" name="descMagazine" class="form-control" ng-model="vm.order.Master.DescMagazine" id="status-det-delivery-data-magazine">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-bt">
+          <label for="logr">Logradouro</label>
+          <input type="text" name="logr" class="form-control" ng-model="vm.delivery.LogrCli" id="status-det-delivery-data-street">
+        </div>
+        <div class="form-group form-group-et">
+          <label for="num">Número</label>
+          <input type="text" name="num" class="form-control" ng-model="vm.delivery.NumHouseCli" id="status-det-delivery-data-number">
+        </div>
+        <div class="form-group form-group-et">
+          <label for="comp">Complemento</label>
+          <input type="text" name="comp" class="form-control" ng-model="vm.delivery.ComplCli" id="status-det-delivery-data-complement">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-ct">
+          <label for="bairro">Bairro</label>
+          <input type="text" name="bairro" class="form-control" ng-model="vm.delivery.BairroCli" id="status-det-delivery-data-district">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="cidade">Cidade</label>
+          <input type="text" name="cidade" class="form-control" ng-model="vm.delivery.CityCli" id="status-det-delivery-data-city">
+        </div>
+        <div class="form-group form-group-et">
+          <label for="uf">UF</label>
+          <input type="text" name="uf" class="form-control" ng-model="vm.delivery.UfCliAdr" id="status-det-delivery-data-state">
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="form-box">
+    <h3 class="form-box-title" id="status-det-item-title">
+      <span class="icon icon-tag-down"></span>
+      <span class="icon icon-tag-up"></span> Item do Pedido
+    </h3>
+    <div class="form-box-content form-box-clean">
+      <table class="table table-scroll form-box-table">
+        <thead>
+          <tr>
+            <th class="cell-img"></th>
+            <th class="cell-bas">
+              Código do
+              <br> Artigo
+            </th>
+            <th>Descrição do
+            <br> Artigo</th>
+            <th class="cell-med">Sequência</th>
+            <th class="cell-med">Ton</th>
+            <th class="cell-sm">Unidade
+            <br>Multiplo</th>
+            <th class="cell-med">Qtd.
+            <br>Original</th>
+            <th class="cell-btn-gd">Preço
+              <br>{{::vm.order.Master.CodeCurr}}
+            </th>
+            <th class="cell-btn ">Sub
+              <br>Total
+            </th>
+          </tr>
+        </thead>
+        <tbody fluid-height="442">
+          <tr ng-repeat="item in vm.order.Master.Item902">
+            <td class="cell-img" id="{{'status-det-order-item-img-' + $index}}"><span class="thumb-image" background-image="{{::item.MaterialCode}}"></span></td>
+            <td class="cell-bas" id="{{'status-det-order-item-code-' + $index}}">{{::item.MaterialCode}}</td>
+            <td id="{{'status-det-order-item-desc-' + $index}}">{{::item.DescMat}}</td>
+            <td class="cell-med" id="{{'status-det-order-item-posex-' + $index}}">{{::item.Posex}}</td>
+            <td class="cell-sm" id="{{'status-det-order-item-tonality-' + $index}}">{{::item.Tonalidade}}</td>
+            <td class="cell-sm" id="{{'status-det-order-item-multiple-' + $index}}">{{::item.QtdeMultiplo}} {{item.UnidMed}}</td>
+            <td class="cell-med" id="{{'status-det-order-item-original-' + $index}}">{{::item.Stock.QtdMaterial}}</td>
+            <td class="cell-btn-gd" id="{{'status-det-order-item-price-' + $index}}">{{::vm.parseCurr(item.PrcMaterial)}}</td>
+            <td class="cell-btn" id="{{'status-det-order-item-subtotal-' + $index}}">{{::vm.subTotal(item)}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-box" ng-if="vm.order.Master.Redispatch" >
+    <h3 class="form-box-title" id="status-det-redispatch-title">
+      <span class="icon icon-tag-down"></span>
+      <span class="icon icon-tag-up"></span>
+      Redespacho
+    </h3>
+    <fieldset class="form-box-content" disabled="disabled">
+      <div class="form-row">
+        <div class="cart-centers">
+          <div class="cart-center" ng-repeat="centro in vm.cartCenters" ng-class="{ 'selected': vm.redispCenterSelected == centro}" ng-click="vm.activateRedispCentro(centro)"><span class="center">{{ centro }}</span><br><span ng-if="vm.redespachoData[centro]" class="filled">{{ vm.redespachoData[centro].CnpjAdrPretty }}</span><span ng-if="!vm.redespachoData[centro]" class="center">(sem redespacho)</span></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-bt">
+          <label for="razao01Cli">Transportadora Redespacho</label>
+          <input type="text" name="razao01Cli" class="form-control" ng-model="vm.redespacho.Razao01Cli" id="status-det-redispatch-company">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="cnpj">CNPJ</label>
+          <input type="text" name="cnpj" class="form-control" ng-model="vm.redespacho.CnpjAdr" id="status-det-redispatch-cnpj">
+        </div>
+      </div>
+      <!-- PostCodRedisp -->
+      <div class="form-row">
+        <div class="form-group form-group-et">
+          <label for="logr">CEP</label>
+          <input type="text" name="logr" class="form-control" ng-model="vm.redespacho.CepCli" id="status-det-redispatch-cep">
+        </div>
+         <div class="form-group form-group-ct">
+          <label for="inscricaoestadual">Inscrição Estadual</label>
+          <input type="text" name="inscricaoestadual" class="form-control" ng-model="vm.redespacho.InscEstAdrCli" id="status-det-redispatch-state-registration">
+        </div>
+         <div class="form-group form-group-ct">
+          <label for="inscricaoestadual">Suframa</label>
+          <input type="text" name="suf" class="form-control" ng-model="vm.redespacho.Suframa" id="status-det-redispatch-suframa">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-ct">
+          <label for="logr">Logradouro</label>
+          <input type="text" name="logr" class="form-control" ng-model="vm.redespacho.LogrCli" id="status-det-redispatch-street">
+        </div>
+        <div class="form-group form-group-et">
+          <label for="num">Numero</label>
+          <input type="text" name="num" class="form-control" ng-model="vm.redespacho.NumHouseCli" id="status-det-redispatch-number">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="comp">Complemento</label>
+          <input type="text" name="comp" class="form-control" ng-model="vm.redespacho.Complemento" id="status-det-redispatch-complement">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-ct">
+          <label for="bairro">Bairro</label>
+          <input type="text" name="bairro" class="form-control" ng-model="vm.redespacho.BairroCli" id="status-det-redispatch-district">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="cidade">Cidade</label>
+          <input type="text" name="cidade" class="form-control" ng-model="vm.redespacho.CityCli" id="status-det-redispatch-city">
+        </div>
+        <div class="form-group form-group-et">
+          <label for="uf">UF</label>
+          <input type="text" name="uf" class="form-control" ng-model="vm.redespacho.UfCliAdr" id="status-det-redispatch-state">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-bt">
+          <label for="razao01Cli">E-mail</label>
+          <input type="email" name="email" class="form-control" ng-model="vm.redespacho.Email" id="status-det-redispatch-email">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="cnpj">Telefone</label>
+          <input type="text" name="fone" class="form-control" ng-model="vm.redespacho.FoneAdr" id="status-det-redispatch-phone">
+        </div>
+      </div>
+      <!-- <div class="form-row" ng-if="vm.redespacho.Transportadora">
+        <div class="form-group form-group-bb">
+          <label for="transportadora">Transportadora</label>
+          <input type="text" name="transportadora" class="form-control" ng-model="vm.redespacho.">
+        </div>
+        <div class="form-group form-group-bb">
+          <label for="ordemTransporte">Ordem de Transporte</label>
+          <input type="text" name="ordemTransporte" class="form-control" ng-model="vm.redespacho.">
+        </div>
+      </div>
+      <div class="form-row" ng-if="vm.redespacho.Transportadora">
+        <div class="form-group form-group-ed">
+          <label for="dateOrdemTransp">Data Ordem Trans.</label>
+          <input type="text" name="dateOrdemTransp" class="form-control" parse-date ng-model="vm.redespacho.">
+        </div>
+        <div class="form-group form-group-ed">
+          <label for="dtDelivery">Data Entrega</label>
+          <input type="text" name="dtDelivery" class="form-control" parse-date ng-model="vm.redespacho.">
+        </div>
+        <div class="form-group form-group-ed">
+          <label for="dtConfDelivery">Data Conf. Entrega</label>
+          <input type="text" name="dtConfDelivery" class="form-control" parse-date ng-model="vm.redespacho.">
+        </div>
+      </div> -->
+    </fieldset>
+  </div>
+</div>

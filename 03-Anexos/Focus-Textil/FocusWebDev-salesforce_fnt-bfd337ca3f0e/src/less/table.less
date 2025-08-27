@@ -1,0 +1,142 @@
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin: 5px 0;
+  color: @color_2;
+  font-size: 1.15rem;
+  font-family: Arial, sans-serif;
+ 
+  th,
+  td {
+    line-height: 1.15rem;
+    height: 30px;
+    padding: 5px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #ccc;
+    &.overflowHidden{
+      table-layout: fixed;
+      overflow: hidden;
+    }&.right{
+      text-align: right;
+    }&.center{
+      text-align: center;
+    }
+  } &.order{
+    th,td{
+      text-align: right;
+      &.cell-bas,&.cell-des{
+        text-align: left;
+      }&.right{
+        text-align: right;
+      }&.center{
+        text-align: center;
+      }
+    }
+  }
+  thead th {
+    color: @color_2;
+    padding-top: 1rem;
+    min-height: 4rem;
+    vertical-align: bottom;
+  }
+  tbody tr {
+    position: relative;
+    background-image: linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      #e8e8e8 4px,
+      #f0f0f0 60%,
+      #f8f8f8 100%
+    );
+
+  }
+}
+.cell-active{
+  background-image: linear-gradient(
+    to bottom, 
+    #efefef 0%, 
+    #bfbebe 4px, 
+    #bfbebe 60%, 
+    #bfbebe 100%
+  ) !important;
+}
+.table-scroll {
+  margin: 0;
+  table-layout: fixed;
+  thead {
+    display: block;
+    table-layout: fixed;
+    th:last-child {
+      padding-right: 0px;
+      border-right: 16px solid transparent;
+    }
+  }
+  tbody {
+    .overflow-scrolling();
+    background-color: #fff;
+    height: 360px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: block;
+    width: 100%;
+    table-layout: fixed;
+    &::-webkit-scrollbar {
+      width: 8px;
+      border-left: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      background-color: #efefef;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 10px;
+    }
+    &::-moz-scrollbar {
+      width: 8px;
+      border-left: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      background-color: #efefef;
+    }
+    &::-moz-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 10px;
+    }
+    &::-ms-scrollbar {
+      width: 8px;
+      border-left: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      background-color: #efefef;
+    }
+    &::-ms-scrollbar-thumb {
+      background-color: #ccc;
+      border-radius: 10px;
+    }
+  }
+  tr {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+}
+
+  tr.top-table-screen{display:none;}
+
+@media only screen and (device-width: 768px) {
+  .table-scroll {
+    thead {
+      padding-right: 0;
+      border-right: none;
+    }
+  }
+}
+
+.nfe-download {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  color: #333;
+  text-wrap: nowrap;
+  font-size: 20px;
+}

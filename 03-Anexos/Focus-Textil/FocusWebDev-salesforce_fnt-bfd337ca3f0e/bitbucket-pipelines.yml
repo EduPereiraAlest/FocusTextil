@@ -1,0 +1,92 @@
+definitions:
+  commonItems: &setup-common-node
+    echo "GET VERSION NODE" && 
+    export NVM_DIR=~/.nvm &&
+    source /home/deploy/.nvm/nvm.sh &&
+    nvm use 14.21.3 &&
+    echo "Install project dependencies" &&
+    rm -r bower_components &&
+    npm i -g bower &&
+    bower install --allow-root &&
+    export NPM_CONFIG_PRODUCTION=false &&
+    npm install
+
+  commonEnv: &setup-environment
+    echo "Setup environment variables" &&
+      touch .env &&
+      echo "API_URL=$API_URL" >> .env &&
+      echo "APP_ENV=$APP_ENV" >> .env
+      echo "APP_VERSION=$APP_VERSION" >> .env
+
+  steps:   
+    - step: &check-dependencies
+        name:  Check Dependencies
+        runs-on:
+          - self.hosted
+          - linux.shell
+          - oracle.machine.qa.one
+
+        script:
+          - *setup-common-node
+
+    - step: &deployment
+        name: Run building project
+        script:
+          - *setup-common-node
+
+          - echo "Creating a enviroments"
+          - *setup-environment
+
+          - echo "Build Application"
+          - export NODE_ENV=$NODE_ENV
+          - npm run build:$NODE_ENV
+
+          - echo "transfer artifact"
+          - touch webrep-frontend-$BITBUCKET_BUILD_NUMBER.tar.gz
+          - rm -rf /opt/services/webrep/versions/current/www
+          - mkdir /opt/services/webrep/versions/current/www
+          - tar --exclude=webrep-frontend-$BITBUCKET_BUILD_NUMBER.tar.gz -zcvf webrep-frontend-$BITBUCKET_BUILD_NUMBER.tar.gz -C ./dist .
+          - mv webrep-frontend-$BITBUCKET_BUILD_NUMBER.tar.gz /opt/services/webrep/versions/current/www
+
+          - echo "extract artifact"
+          - tar -xzf /opt/services/webrep/versions/current/www/webrep-frontend-$BITBUCKET_BUILD_NUMBER.tar.gz -C /opt/services/webrep/versions/current/www
+          - rm -rf /opt/services/webrep/versions/current/webrep-frontend-$BITBUCKET_BUILD_NUMBER.tar.gz
+          - pm2 restart webrep
+
+          - echo "Finished Deployment!!!!"
+
+pipelines:
+  pull-requests:
+    '**':
+      - step: 
+          <<: *check-dependencies
+          deployment: test
+          name: Testing dependencies to open PR
+
+  branches:
+    develop:
+      - step: 
+          <<: *check-dependencies
+          deployment: test
+          name: Testing dependencies to current branch
+
+    master:          
+      - step: 
+          <<: *deployment
+          runs-on:
+            - self.hosted
+            - linux.shell
+            - oracle.machine.prd.two
+          deployment: production_machine_one
+          name: Deploy to production - Machine 02
+
+    qa:
+      - step: 
+          <<: *deployment
+          runs-on:
+            - self.hosted
+            - linux.shell
+            - oracle.machine.qa.two
+          deployment: qas_machine_two
+          name: Deploy to QAS - Machine 02
+          

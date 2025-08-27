@@ -1,0 +1,143 @@
+<div class="search-content">
+  <h2>CARRINHO</h2>
+</div>
+<div class="filter-content">
+  <div class="cart-menu">
+    <input type="radio" id="chk1" name="wzd-step" class="wzd-step" disabled="disabled">
+    <label for="chk1">1. Itens</label>
+    <input type="radio" id="chk2" name="wzd-step" class="wzd-step" checked="checked">
+    <label for="chk2">2. Dados de Entrega</label>
+    <input type="radio" id="chk3" name="wzd-step" class="wzd-step" disabled="disabled">
+    <label for="chk3">3. Confirmação Pedido</label>
+  </div>
+</div>
+<!-- FORM -->
+<div class="cart-form-content form-box" fluid-height="220">
+  <div class="form-row">
+    <div class="form-group form-group-ct">
+      <label>Local de Entrega</label>
+      <div class="form-select">
+        <select class="form-control" ng-model="vm.kart.Master.CodeDelivLoc" ng-disabled="!((!!vm.options.Address.length && !vm.kart.Master.CodeOv) || (vm.kart.Master.Editavel && (vm.kart.Master.CodeCli != vm.kart.Master.CodeDelivLoc))) || (vm.kart.Master.TipoOrdem == 'ZVSR' || vm.kart.Master.TipoOrdem == 'ZVSF')" ng-change="vm.changeDeliveryLocation()" id="carts-delv-delivery-place">
+          <option value="{{vm.kart.Master.CodeCli}}">Selecione</option>
+          <option ng-repeat="addr in vm.options.Address" value="{{addr.value}}">{{addr.value}} - {{addr.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group form-group-ct">
+      <label>Tipo Expedição</label>
+      <div class="form-select">
+        <select class="form-control" ng-model="vm.kart.Master.Vsart" ng-disabled="!vm.options.Expedition.length || isEfocusCustomer" id="carts-delv-expedition-type">
+          <option value="">Selecione</option>
+          <option ng-repeat="exp in vm.options.Expedition" value="{{exp.value}}">{{exp.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group form-group-ct" ng-class="{'form-group-red': vm.page.delivery === 'X'}">
+      <label>Redespacho <span class="required-label" ng-if="vm.RedispatchRequired && !vm.RedispatchOk">Obrigatório</span><span class="filled" ng-if="vm.RedispatchRequired && vm.RedispatchOk"><span class="icon icon-checkmark"></span></span></label>
+      <div class="form-select">
+        <select ng-model="vm.page.delivery" class="form-control" ng-disabled="vm.RedispatchRequired" id="carts-delv-redispatch">
+          <option value="">Não</option>
+          <option value="X">Sim</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <!-- REDESPACHO -->
+  <form name="vm.redform" class="red-form-content" ng-show="vm.page.delivery === 'X'">
+    <div class="form-row">
+      <div class="cart-centers">
+        <div class="cart-center" ng-repeat="centro in vm.cartCenters" ng-class="{ 'selected': vm.redispCenterSelected == centro}" ng-click="vm.changeRedispCentro(centro)"><span class="center">{{ centro }}</span><br><span class="required" ng-if="vm.RedispatchRequiredCenter[centro] && !vm.RedispatchFilledCenter[centro]">Obrigatório</span><span class="filled" ng-if="vm.RedispatchFilledCenter[centro]"><span class="icon icon-checkmark"></span> {{ vm.RedispatchFilledCenter[centro] }}</span></div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-group-cb">
+        <label for="transRedisp">Transportadora Redespacho*</label>
+        <input type="text" name="transRedisp" class="form-control" ng-model="vm.redispModel.NmTransRedisp" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" ng-required="EditRedispFields[vm.redispCenterSelected]" id="carts-delv-redispatch-company">
+      </div>
+      <div ng-if="!vm.kart.Master.Editavel" class="form-group form-group-ct">
+        <label for="cnpjRedisp">CNPJ*</label>
+        <input type="text" name="cnpjRedisp" class="form-control recuado" ng-model="vm.redispModel.CnpjRedisp" ui-br-cnpj-mask ng-required="EditRedispFields[vm.redispCenterSelected]" ng-disabled="EditRedispFields[vm.redispCenterSelected]" id="carts-delv-cnpj">
+        <button type="button" class="btn btn-sm" ng-click="vm.getRedespachoData(vm.redispModel.CnpjRedisp, vm.redispCenterSelected)" id="carts-delv-redispatch-data">
+          <span class="icon icon-search"></span>
+        </button>
+      </div>
+      <div ng-if="vm.kart.Master.Editavel" class="form-group form-group-ct">
+        <label for="cnpjRedisp">CNPJ*</label>
+        <input type="text" name="cnpjRedisp" class="form-control" ng-model="vm.redispModel.CnpjRedisp" ui-br-cnpj-mask disabled id="carts-delv-cnpj2">
+      </div>
+
+    </div>
+    <div class="form-row">
+      <input-cep model="vm.redispModel" name="PostCodRedisp" form-ctrl="vm.redform" disabled="!EditRedispFields[vm.redispCenterSelected]"></input-cep>
+      <div class="form-group form-group-ct">
+        <label for="insSttRedisp">Inscrição Estadual</label>
+        <input type="text" name="insSttRedisp" class="form-control" ng-model="vm.redispModel.InsSttRedisp" ui-br-ie-mask="vm.redispModel.StateRedisp" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" id="carts-delv-state-registration">
+      </div>
+      <div class="form-group form-group-ct">
+        <label for="sufrRedisp">Suframa</label>
+        <input type="text" name="sufrRedisp" ng-model="vm.redispModel.SufrRedisp" class="form-control" ng-pattern="/[0-9]+([\.,-][0-9]+)?/" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" id="carts-delv-suframa">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-group-cb">
+        <label for="addrRedisp">Logradouro*</label>
+        <input type="text" name="addrRedisp" ng-model="vm.redispModel.AddrRedisp" class="form-control" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" ng-required="EditRedispFields[vm.redispCenterSelected]" id="carts-delv-street">
+      </div>
+      <div class="form-group form-group-et">
+        <label for="numAddrRedisp">Número*</label>
+        <input type="text" name="numAddrRedisp" ng-model="vm.redispModel.NumAddrRedisp" class="form-control" maxlength="6" ng-pattern="/[0-9]+/" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" ui-number-mask="0" ui-hide-group-sep ng-required="EditRedispFields[vm.redispCenterSelected]" id="carts-delv-number">
+      </div>
+      <div class="form-group form-group-et">
+        <label for="complRedisp">Complemento</label>
+        <input type="text" name="complRedisp" ng-model="vm.redispModel.ComplRedisp" class="form-control" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" id="carts-delv-complement">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-group-bb">
+        <label for="neighRedisp">Bairro*</label>
+        <input type="text" name="neighRedisp" ng-model="vm.redispModel.NeighRedisp" class="form-control" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" ng-required="EditRedispFields[vm.redispCenterSelected]" id="carts-delv-district">
+      </div>
+      <div class="form-group form-group-bb">
+        <label for="cityRedisp">Cidade*</label>
+        <input type="text" name="cityRedisp" ng-model="vm.redispModel.CityRedisp" class="form-control" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" ng-required="EditRedispFields[vm.redispCenterSelected]" id="carts-delv-city">
+      </div>
+      <div class="form-group form-group-et">
+        <label for="stateRedisp">UF*</label>
+        <input type="text" name="stateRedisp" ng-model="vm.redispModel.StateRedisp" class="form-control" maxlength="2" ng-pattern="/[A-Z]+/" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" ng-required="EditRedispFields[vm.redispCenterSelected]" id="carts-delv-state">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-group-bb">
+        <label for="contactRedisp">E-Mail*</label>
+        <input type="email" name="contactRedisp" ng-model="vm.redispModel.ContactRedisp" class="form-control" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" ng-required="EditRedispFields[vm.redispCenterSelected]" id="carts-delv-email">
+      </div>
+      <div class="form-group form-group-dt">
+        <label for="phoneRedisp">Tel.*</label>
+        <input type="text" name="telefone" ng-model="vm.redispModel.PhoneRedisp" class="form-control" ng-disabled="!EditRedispFields[vm.redispCenterSelected]" ui-br-phone-number ng-required="EditRedispFields[vm.redispCenterSelected]" id="carts-delv-phone">
+      </div>
+    </div>
+    <div class="form-row acao-redisp">
+      <button type="button" class="btn btn-icon btn-icon-left" ng-if="EditRedispFields[vm.redispCenterSelected]" ng-click="vm.cancelUpdateRedispData(vm.redispCenterSelected)" id="carts-delv-cancel-btn">
+       <span class="icon icon-undo2"></span> Cancelar
+      </button>
+      <div ng-if="!vm.kart.Master.Editavel">
+        <button type="button" class="btn btn-icon btn-icon-left" ng-if="updateRedispDataVisible" ng-click="vm.updateRedispData(vm.redispCenterSelected)" id="carts-delv-save-btn">
+        <span class="icon icon-clipboard" ng-class="{ 'icon-checkmark': EditRedispFields[vm.redispCenterSelected], 'icon-clipboard': !EditRedispFields[vm.redispCenterSelected] }"></span> {{ EditRedispFields[vm.redispCenterSelected] ? 'Salvar' : 'Atualizar Dados' }}
+        </button>
+      </div>
+      <button type="button" class="btn btn-icon btn-icon-left" ng-if="registerRedispDataVisible" ng-click="vm.registerRedispData(vm.redispCenterSelected)" id="carts-delv-register-redispatch">
+        <span class="icon icon-clipboard"></span> Cadastrar Redespacho
+      </button>
+    </div>
+  </form>
+  <div class="form-row" ng-class="{ 'stick-bottom': vm.page.delivery !== 'X' }">
+    <div class="btn-group-right">
+      <button class="btn btn-icon" ng-class="{active: vm.page.stock}" ng-click="vm.backToCarts()" id="carts-delv-previous-step">
+        <span class="icon icon-tag-left"></span> Passo Anterior
+      </button>
+      <button class="btn btn-icon-right ordem-concluir" ng-class="{active: vm.page.stock}" ng-click="vm.cartConfirmation()" id="carts-delv-confirm-data">
+        Confirmar Dados <span class="icon icon-tag-right">
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="search-content">
+  <h2 class="form-title">CLIENTES FAVORITOS</h2>
+</div>
+<div class="empty-content" ng-show=!vm.clients.length>
+  <span class="icon icon-user-fav"></span>
+</div>
+<div class="table-content simple-content" ng-show=vm.clients.length>
+  <table class="table table-scroll">
+    <thead>
+      <tr>
+        <th class="cell-cod">Código</th>
+        <th class="cell-xtra">Nome</th>
+        <th>CNPJ</th>
+        <th>Cidade</th>
+        <th>Status</th>
+        <th class="cell-btn"></th>
+        <th class="cell-btn-gd"></th>
+        <th class="cell-min"></th>
+      </tr>
+    </thead>
+    <tbody fluid-height="200" class="even-body">
+      <tr ng-repeat="client in vm.clients | filter : { Favorito: true }">
+        <td class="cell-cod" id="{{'clients-fav-code-item-' + $index}}">{{client.CodeCli}}</td>
+        <td class="cell-xtra" id="{{'clients-fav-name-item-' + $index}}">{{client.Razao01Cli}}</td>
+        <td id="{{'clients-fav-cnpj-item-' + $index}}">{{client.CnpjCli}}</td>
+        <td id="{{'clients-fav-state-item-' + $index}}">{{client.CityUf}}</td>
+        <td id="{{'clients-fav-status-item-' + $index}}">{{client.Status}}</td>
+        <td class="cell-btn">
+          <a class="btn" ng-href="#!/clients-det/{{client.CodeCli}}" id="{{'clients-fav-details-item-' + $index}}">Detalhes</a>
+        </td>
+        <td class="cell-btn-gd">
+          <button class="btn" ng-click="vm.selectClient(client)" id="{{'clients-fav-select-btn-' + $index}}">Selecionar</button>
+        </td>
+        <td class="cell-min">
+          <button client-favorite ng-model="client" class="btn btn-grid" id="{{'clients-fav-favorite-btn-' + $index}}">
+            <span class="icon" ng-class="client.Favorito ? 'icon-star-full' : 'icon-star-empty'"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

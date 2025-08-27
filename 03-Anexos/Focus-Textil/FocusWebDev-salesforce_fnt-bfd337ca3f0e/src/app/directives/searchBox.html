@@ -1,0 +1,39 @@
+<div>
+  <div class="search-content">
+    <form action="." class="search-form" ng-submit="::ctrl.send({$event})">
+      <h2 class="form-title">{{ctrl.title}}</h2>
+      <div class="form-group search-group">
+        <input type="search" class="form-control" ng-model="ctrl.model" placeholder="{{ctrl.info}}"
+          ng-focus="::ctrl.focus()" id="search-box-text">
+        <button type="button" class="btn-clear" ng-show="ctrl.model" ng-click="::ctrl.clear()" id="search-box-clear">
+          <span class="icon icon-blocked"></span> </button>
+        <button type="button" class="btn-clear" ng-click="initQrCode()" style="position: absolute; right: 2px; top: 0;" ng-if="$location.path() === '/books'">
+          <img src="images/qr-code-btn.svg" style="width: 20px; height: 20px;">
+        </button>
+      </div>
+      <ng-transclude-replace></ng-transclude-replace>
+    </form>
+  </div>
+  <div class="qrcode-popup" ng-if="qrcode.isActive && $location.path() === '/books'">
+    <div class="qrcode-popup-header">
+      <h2 id="qrcode-header-msg">Escaneie o QR Code</h2>
+      <span class="icon icon-blocked" id="close-qrcode" style="cursor: pointer;" ng-click="qrcode.closeQrCode()"></span>
+    </div>
+    <div class="qrcode-popup-content">
+      <div id="qr-code-block-inner" style="width:600px; max-height: 500px"></div>
+
+      <div class="qrcode-image" id="qrcodeimg">
+        <img src="images/qrcode.gif" style="width: 200px; height: 200px;" />
+      </div>
+      <div class="buttons">
+        <button class="btn btn-primary" id="setup-video" ng-click="qrcode.setupVideo()">Iniciar escaneamento</button>
+        <button class="d-none btn btn-primary" id="stop-video" ng-click="qrcode.stopVideo()">Parar escaneamento</button>
+        <label class="btn btn-primary">
+          <input id="qrcode-submit-file" type="file" maxlength="1"  accept="image/*"
+            onchange="angular.element(this).scope().sendFile(event)" />
+          Escanear imagem...
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

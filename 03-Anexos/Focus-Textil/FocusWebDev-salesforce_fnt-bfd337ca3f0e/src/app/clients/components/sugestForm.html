@@ -1,0 +1,31 @@
+<form name="vm.sugestForm" class="form-box flicker" novalidate>
+  <h3 class="form-box-title" id="sugest-form-title">
+    <span class="icon icon-tag-down"></span>
+    <span class="icon icon-tag-up"></span>
+    Sugestão Limite de Crédito
+    <span class="form-box-leg">(Obrigatório)</span>
+  </h3>
+  <div class="form-box-content flicker">
+    <div class="form-row">
+      <span class="form-leg">Ao sugerir um valor de limite de crédito, será necessário preencher o perfil do cliente.</span>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-group-ct">
+        <label for="sugLimCredCli">Valor</label>
+        <input type="text" name="sugLimCredCli" class="form-control" ng-model="$ctrl.model.SugLimCredCli" ui-money-mask="2" ng-required="!$ctrl.model.PgAntCli" ng-disabled="$ctrl.model.PgAntCli" id="sugest-form-value">
+      </div>
+      <div class="form-group form-group-de">
+        <br>
+        <input id="pgAntCli" class="checkbox-custom" name="pgAntCli" ng-model="$ctrl.model.PgAntCli" type="checkbox" id="sugest-form-advance-payment">
+        <label for="pgAntCli" class="checkbox-custom-label">Pagamento Antecipado</label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-group-tb">
+        <label for="justCli">Justifique</label>
+        <textarea rows="4" name="justCli" ng-model="$ctrl.model.JustCli" class="form-control" ng-required="!$ctrl.model.PgAntCli" ng-disabled="$ctrl.model.PgAntCli" id="sugest-form-justify">
+        </textarea>
+      </div>
+    </div>
+  </div>
+</form>

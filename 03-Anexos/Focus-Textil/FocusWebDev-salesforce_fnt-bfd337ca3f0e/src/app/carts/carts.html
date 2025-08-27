@@ -1,0 +1,82 @@
+<!-- SEARCH -->
+<div class="search-content">
+  <h2 class="form-title" ng-if="!vm.kart.Master.Editavel">CARRINHO</h2> 
+  <h2 class="form-title" ng-if="vm.kart.Master.Editavel">EDIÇÃO DE ORDEM</h2>
+  <h2 class="form-title order-cart-title font-14 mg-l-30" ng-if="vm.kart.Master.Editavel" id="carts-code">
+    {{ vm.kart.Master.CodeOvPrint }}</h2>
+  <h2 class="form-title order-cart-title font-14 mg-l-30" ng-if="vm.kart.Master.Editavel" id="carts-code-and-name">Cliente:
+    {{ vm.kart.Master.CodeCli }} - {{ vm.kart.Master.NomeCli }}</h2>
+</div>
+<!-- STEP MENU -->
+<div class="filter-content" ng-show="vm.page.payment.length">
+  <div class="cart-menu">
+    <input type="radio" id="chk1" name="wzd-step" class="wzd-step" checked="checked">
+    <label for="chk1">1. Itens</label>
+    <input type="radio" id="chk2" name="wzd-step" class="wzd-step" disabled="disabled">
+    <label for="chk2">2. Dados de Entrega</label>
+    <input type="radio" id="chk3" name="wzd-step" class="wzd-step" disabled="disabled">
+    <label for="chk3">
+      <span ng-if="vm.kart.Master.Editavel">3. Confirmar Edição Ordem</span> 
+      <span ng-if="!vm.kart.Master.Editavel">3. Confirmação de Pedido</span> 
+    </label>
+  </div>
+</div>
+<!-- TOP -->
+<div class="cart-bread-content" ng-show="vm.materials.length && vm.page.payment.length">
+  <!-- div class="form-group-float" ng-show="!vm.kart.Master.Outlet && !vm.kart.Master.St24Ho">
+    <input id="checkbox-1" class="checkbox-custom" ng-model="vm.page.flag" value name="checkbox-1" type="checkbox">
+    <label for="checkbox-1" class="checkbox-custom-label">Agendar chegada para última data do inicio de vendas.</label>
+  </div -->
+  <!-- 24h OUTLET -->
+
+  <div ng-show="vm.kart.Master.Outlet || vm.kart.Master.St24Ho">
+    <img src="./images/focus_outlet.png" alt="Outlet" class="form-group-float" ng-show="vm.kart.Master.Outlet">
+    <img src="./images/e_focus.png" alt="24h" class="form-group-float"
+      ng-show="vm.kart.Master.St24Ho && !vm.kart.Master.Outlet">
+    <!--  <img src="images/focus24.png" alt="24h" class="form-group-float" ng-show="vm.kart.Master.St24Ho && !vm.kart.Master.Outlet"> -->
+  </div>
+  <!-- TOTAL BOX -->
+  <div class="btn-group-right">
+    <!-- <carts-total model="vm.page"></carts-total> -->
+    <div class="cart-total-box fright">
+      <p class="cart-total-text"><span>PRODUTOS</span> {{ vm.page.currency + ' ' + vm.page.materialTotal }} </p>
+      <p class="cart-total-text"><span>IPI</span> {{ vm.page.currency + ' ' +  vm.page.ipiTotal }} </p>
+      <p class="cart-total-result"><span>TOTAL</span> {{ vm.page.currency + ' ' +  vm.page.cartTotal }}</p>
+    </div>
+    <button ng-show="vm.kart.Master.isSufr == 'X'" ng-click='vm.setSuframa(false, true)' class="btn btn-suframa {{vm.activeBtnSuframa}}" id="carts-suframa-btn">SUFRAMA </button>
+    <selects model="vm.page.currency" items="vm.currs" on-change="vm.getTotal()" id="carts-currency-select"></selects>
+    <selects model="vm.page.deadline" ng-disabled="!vm.blockPaymentMet" items="vm.page.payment" classes="control-max" on-change="vm.setPrice()" id="carts-deadline-select"></selects>
+    <!-- TO:DO Button here -->
+    
+
+  </div>
+</div>
+<!-- LIST -->
+<div ng-show="vm.materials.length && vm.page.payment.length">
+  <table-cart model="vm.materials" kart="vm.kart" warnings="vm.warnings" page="vm.page" params="vm.params" get-total="vm.getTotal()" save-kart="vm.saveKart()"></table-cart>
+
+  <div class="content btn-group-left no-clear">
+    <button class="btn btn-icon-left delete-button" ng-click="vm.discardCart()" id="carts-discard-cart-btn">
+      Descartar Carrinho <span class="icon icon-cancel-circle"></span>
+    </button>
+  </div>
+  <div class="content btn-group-right no-clear">
+    <div class="row">
+      <div class="cart-warning">
+        <h3 ng-show="vm.warningsBtn" >Seu carrinho contém alertas <a class="alert-txt" ng-click="vm.showWarnings()" id="carts-view-warning" >Visualizar</a></h3>
+       </div>
+      <div class="cart-warning">
+       <h3 ng-show="vm.disableBtn" >Seu carrinho contém erros <a class="red-txt" ng-click="vm.showErrors()" id="carts-view-error" >Visualizar</a></h3>
+      </div>
+      <div>
+        <button class="btn btn-icont f-right" ng-click="vm.saveKart()" ng-if="!vm.page.online" id="carts-update-btn">
+          Atualizar
+        </button>
+        <button class="btn btn-icon-right" ng-class="{disabled: vm.disableBtn}" ng-click="vm.saveKart('true', true)" ng-disabled="vm.disableBtn" ng-if="vm.page.online" id="carts-delivery-data-btn">
+        Dados de Entrega <span class="icon icon-tag-right">
+      </button>
+      </div>
+    </div>
+  </div>
+  <!-- BACKGROUND -->
+  <div class="empty-content" ng-show="!vm.page.payment.length"> <span class="icon icon-cart"></span></div>

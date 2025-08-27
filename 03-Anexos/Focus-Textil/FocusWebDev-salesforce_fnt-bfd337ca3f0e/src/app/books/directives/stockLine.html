@@ -1,0 +1,20 @@
+<div class="material-item-row">
+  <div class="material-item-cell cell-mn">{{stock.Tonalidade}}</div>
+  <!-- <div class="material-item-cell cell-sm">{{stock.Deposito}}</div> -->
+  <div class="material-item-cell cell-med">{{stock.QtdProntEntreg}}</div>
+  <div class="material-item-cell cell-btn cell-hide" ng-class="{'cell-value' : material.StockDetail[material.TpStockCode].length}" >
+    <span class="text-value">
+      {{stock.QtdEstApos}}
+    </span>
+    <!-- <stock-button model="material.DateAtcDelv" items="::material.StockDetail[material.TpStockCode]"></stock-button> -->
+  </div>
+  <div class="material-item-cell cell-btn cell-value">
+    <span class="text-value">
+      {{stock.Price[$ctrl.page.currency]}}
+    </span>
+    <currency-button price="stock.Price" params="$ctrl.params" currency="$ctrl.page.currency"></currency-button>
+  </div>
+  <div class="material-item-cell cell-input">
+    <quantity-input ng-model="stock.QtdMaterial" material="material" stock="stock" kart="$ctrl.kart" currency="$ctrl.page.currency" limits="$ctrl.params.StockLimits"></quantity-input>
+  </div>
+</div>

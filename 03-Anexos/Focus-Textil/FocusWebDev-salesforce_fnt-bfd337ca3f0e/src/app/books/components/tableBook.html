@@ -1,0 +1,183 @@
+<div class="table-box">
+  <div class="table-content">
+    <table class="table table-scroll" class="flicker" ng-class="table-open">
+      <thead>
+        <tr>
+          <th class="cell-info cell-big">
+            <sort-button collumn="Master._DescMat" id="table-book-sort-desc-article">
+              Descrição <br> do Artigo
+            </sort-button>
+          </th>
+          <th class="cell-info cell-color">
+            <sort-button collumn="Master._DescCor" id="table-book-sort-desc-color">
+              Descrição <br> da Cor
+            </sort-button>
+          </th>
+          <th class="cell-info cell-sap cell-anim">
+            <sort-button collumn="Master.MaterialCode" id="table-book-sort-sap-code">
+              Código <br> SAP 
+            </sort-button>
+          </th>
+          <th class="cell-info cell-sap cell-anim">
+            Nome <br> de Mercado
+          </th>
+          <th class="cell-info cell-sm">
+            Unidade <br> Múltiplo
+          </th>
+          <th class="cell-info cell-img">
+            Corte <br> Mínimo
+          </th>
+          <th class="cell-info cell-bar"></th>
+          <th class="material-item-cell cell-mn">Seg. <br> Estoque</th>
+          <th class="material-item-cell cell-mn">Ton</th>
+          <!-- <th class="material-item-cell cell-sm"> Depósito </th> -->
+          <th class="material-item-cell cell-med cell-hide">
+            <!-- sort-button collumn="{{::$ctrl.sortStock('QtdProntEntreg', $ctrl.page.type)}}">
+              Disp PE
+            </sort-button -->
+            Disp PE
+          </th>
+          <th class="material-item-cell cell-btn cell-hide">
+            <!-- sort-button collumn="{{::$ctrl.sortStock('QtdEstApos', $ctrl.page.type)}}">
+              Disp ATC
+            </sort-button -->
+            Disp ATC
+          </th>
+
+          <!-- Botão de Preços ($) -->
+          <th
+            ng-class="{'material-item-cell': true, 'cell-btn': true, 'promo-color': material.Ipad == 'C' }"
+          >
+            Preço <br> {{$ctrl.page.currency}}
+          </th>
+
+          <th class="material-item-cell cell-input">QTD</th>
+
+        </tr>
+      </thead>
+      <tbody
+        class="flicker"
+        originalfluid-height="350"
+        fluid-height="310"
+        vs-repeat="{scrollMargin: 1000, scrolledToEnd: $ctrl.loadMore, scrolledToEndOffset: 500 }"
+      >
+        <tr
+          ng-repeat="material in $ctrl.renderModel track by material.MaterialCodeTrack"
+          class="new-line"
+          ng-class="{updated: material.Atual, national: material.StkNat}"
+          data-model-index="{{::material.debugModelIndex+1}}"
+      >
+          <th class="cell-big" id="{{'table-book-item-article-desc-' + $index}}">{{::material.viewDescMat}}</th>
+          <th class="cell-color" id="{{'table-book-item-color-desc-' + $index}}">{{::material.viewDescCor}}</th>
+          <th class="cell-sap cell-anim" id="{{'table-book-item-sap-code-' + $index}}">{{::material.viewMaterialCode}}
+            <div
+              ng-if="!material.tonalidadeRow">
+                <br>
+
+                 <!-- Tag de promoções -->
+                <i
+                  class="outlet-tag list"
+                  ng-if="material.Ipad == 'O'"
+                  id="{{'table-book-item-sap-code-outlet-' + $index}}"
+                >OUTLET</i>
+
+                <i
+                  class="promo-tag list"
+                  ng-if="material.Ipad == 'R'"
+                  id="{{'table-book-item-sap-code-promo-' + $index}}"
+                >PROMO</i>
+
+                <i
+                  class="sales-tag list"
+                  ng-if="material.Ipad == 'S'"
+                  id="{{'table-book-item-sap-code-sales-' + $index}}"
+                >SALES</i>
+
+                <!-- Tag Promo Colors Here -->
+                <i
+                  class="sales-tag list promo-tag"
+                  ng-if="material.Ipad == 'C'"
+                  id="{{'table-book-item-sap-code-sales-' + $index}}"
+                >PROMO COLORS</i>
+
+            </div>
+
+          </th>
+
+          <th class="cell-sap cell-anim" id="{{'table-book-item-nome-mercado-' + $index}}">
+            {{::material.viewNomeMercado}}</th>
+          <th class="cell-sm cell-anim" id="{{'table-book-item-multiple-' + $index}}">
+            <span class="neutral" ng-if="material.TpStockCode != 'C'">{{material.QtdeMultiplo}} {{ material.UnidMed
+              }}</span>
+          </th>
+          <th class="cell-img cell-anim" id="{{'table-book-item-min-' + $index}}">
+            <span class="neutral" ng-if="material.TpStockCode != 'C'">{{material.CorteMin | number:0}} {{
+              material.UnidMed }}</span>
+          </th>
+          <th class="cell-bar"></th>
+          <td class="material-item-cell cell-mn" id="{{'table-book-item-seg-qual-' + $index}}">
+            <span class="neutral" ng-if="material.TpStockCode != 'C'">
+              {{ $ctrl.replaceSegmentView(material.SegView) }}
+            </span>
+          </td>
+          <td class="material-item-cell cell-mn" id="{{'table-book-item-tonality-' + $index}}"><span class="neutral"
+              ng-if="material.TpStockCode != 'C'">{{material.Tonalidade}}</span>
+          </td>
+          <!-- <div class="material-item-cell cell-sm">{{material.Stock.Deposito}}</div> -->
+          <td class="material-item-cell cell-med centro-button cell-value">
+            <div class="neutral" ng-if="material.TpStockCode != 'C'">
+              <span class="text-value" id="{{'table-book-item-PE-' + $index}}">{{ material.QtdPETotal | number:0}}
+              </span>
+              <stockpe-button
+                model=""
+                items="material"
+                kart="$ctrl.kart"
+                id="{{'table-book-stockpe-btn-' + $index}}"
+                ></stockpe-button>
+            </div>
+          </td>
+          <td class="material-item-cell cell-btn cell-value">
+            <div class="neutral" ng-if="material.TpStockCode != 'C'">
+              <span ng-if="material.isATCStock" class="text-value" id="{{'table-book-item-ATC-' + $index}}">
+                <!--{{ material.Stock[material.TomIndex][material.CentroSelecionado].QtdEstApos | number:0 }}-->
+                {{material.QtdEstApos | number:0 }}
+              </span>
+
+              <span ng-if="!material.isATCStock" class="text-value" id="{{'table-book-item-ATC2-' + $index}}">
+                {{ material.QtdEstApos | number:0 }}
+              </span>
+              <stock-button
+                ng-if="!!material.Disp[material.Segmento].ListDisp.length"
+                model="material"
+                code="::material.MaterialCode"
+                kart="$ctrl.kart"
+                items="material.TAAtcStock && material.Stock[material.TomIndex][material.CentroSelecionado].SegmentoEstoque.substring(2, 4) === 'TA' ? material.TAAtcStock : material.Disp[material.Segmento].ListDisp"
+                id="{{'table-book-stock-btn-' + $index}}"></stock-button>
+            </div>
+          </td>
+          <td class="material-item-cell cell-btn cell-value">
+            <div class="neutral" ng-if="material.TpStockCode != 'C'">
+              <span class="text-value" id="{{'table-book-item-price-' + $index}}">
+                {{material.Price[material.Segmento].Price90[$ctrl.page.currency]}}
+              </span>
+              <currency-button
+              price="material.Price[material.Segmento].Price"
+              params="$ctrl.params"
+              currency="$ctrl.page.currency"
+              promo="material.PrecoPromo"
+              material="material"
+              kart="$ctrl.kart"
+              is-ce-client="$ctrl.client && $ctrl.client.Master && $ctrl.client.Master.Address ? $ctrl.client.Master.Address[0].UfCliAdr === 'CE' : false;">
+              </currency-button>
+            </div>
+          </td>
+          <td class="material-item-cell cell-input">
+            <quantity-input ng-model="material.QtdMaterial"
+              material="material" kart="$ctrl.kart" currency="$ctrl.page.currency" limits="$ctrl.params.StockLimits"
+              finance="$ctrl.params.FinancyFactor" id="{{'table-book-quantity-' + $index}}"></quantity-input>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

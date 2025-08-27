@@ -1,0 +1,9 @@
+<div class="search-content">
+    <form action="." class="search-form" ng-submit="::ctrl.send({$event})">
+      <div class="form-group search-group">
+        <input type="search" class="form-control" ng-model="ctrl.model" placeholder="{{ctrl.info}}" ng-focus="::ctrl.focus()">
+        <button type="button" class="btn-clear" ng-show="ctrl.model" ng-click="::ctrl.clear()"> <span class="icon icon-blocked"></span> </button>
+      </div>
+      <ng-transclude-replace></ng-transclude-replace>
+    </form>
+  </div>

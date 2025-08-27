@@ -1,0 +1,25 @@
+<ul class="pend-list" ng-class="{'pend-open': $ctrl.open}">
+  <li ng-repeat="item in $ctrl.items" ng-click="$ctrl.selectPend(item)" id="{{'pendencies-item-' + $index}}">
+    <span ng-if="!item.reproved"> {{item.Message}} </span>
+    <span ng-if="item.reproved" class="row-reproved"> <b> {{item.Message}} </b> </span>
+
+
+    <!-- <img class="pend-list-image" ng-src="../images/{{ item.St24Ho ? '24h' : 'Outlet'}}.png" alt="24h" ng-if="item.St24Ho || item.Outlet" /> -->
+    <span class="row-logo outlet" alt="Outlet" ng-if="item.Outlet"></span>
+    <span class="row-logo thour" alt="24 Horas" ng-if="item.St24Ho"></span>
+    <b>{{item.CodePv}}</b>
+    <span ng-if="item.CodeOv && !item.reproved">da ordem
+      <b>{{item.CodeOv}}</b>
+    </span>
+
+    <span ng-if="item.CodeOv && item.reproved">
+      <b>{{item.CodeOv}}</b>
+    </span>
+
+    <span ng-if="item.NomeCli">para o cliente “<b>{{item.NomeCli}}</b>”</span>
+
+    <span class='row-reproved' ng-if="item.isReprovedMessage"> - <b>{{item.isReprovedMessage}}</b></span>
+
+    <span class="icon icon-tag-right"></span>
+  </li>
+</ul>

@@ -1,0 +1,514 @@
+// RESPONSIVE
+
+@media (max-width: 380px) {
+  .home-buttons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 380px){
+  .home-buttons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  } 
+}
+
+@media (min-width: 420px) {
+  .home-buttons {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 740px){
+.home-buttons {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 520px){
+  .ra-left,.ra-right{
+    width: 100%;
+    input,textarea{
+      width: 300px;
+    }
+    .form-group-nb{
+      width: 100%;
+    }
+    .attach{
+        margin: 10px 0 0 0;
+    }
+  }
+  .attached-files{
+    width: 300px;
+  }
+  .order-form-content {
+  &.ra-responsive-height{
+    position: absolute;
+    height: 60%;
+  }
+}
+  .form-box{
+  .form-col{
+    &.ra-form-col{
+      width: 70%;
+      margin:0;
+      left: 0;
+    }
+    .form-end,.form-group-ct,.form-group-nb{
+      width: 80%;
+    }
+  }
+}
+}
+
+// ORDER CELLS RESPONSIVE
+
+.table-scroll thead.thead-sm{display: block;}
+.table-scroll thead.thead-lg{display: none;}
+.d-sm{display: table-cell;}
+.d-lg{display: none;}
+@media(min-width:1024px){
+  .table-scroll thead.thead-sm{display: none;}
+  .table-scroll thead.thead-lg{display: block;}
+  .table-scroll .cell-des{width: 200px;}
+  .d-sm{display: none;}
+  .d-lg{display: table-cell;}
+}
+@media(min-width:1200px){
+  .table-scroll .cell-des{width: 300px;}
+}
+// @media(max-width:1024px){
+//   thead th.ton,tbody td.ton{
+//     width: 30px;
+//     padding-left:15px;
+//   }
+// }
+
+// @media (max-width: 1100px) {
+//   .accordion-content {
+//     .form-box.active {
+//       .form-box-content {
+//         &.selling-order{
+//           height: 1110px;
+//           max-height: 1110px;
+//         }
+//         div, table{
+//           &.item{
+//             // width:100%;
+//             thead{
+//               // display: none;
+//             }
+//             td{
+//               // width: 50%;
+//               line-height: 20px;
+//               height: 30px;
+//               float: left;
+//               border-bottom:none;
+//               input{height: 20px;}
+//               .ra-checkbox{
+//                 width: 20px;
+//                 height: 20px;
+//                 span{
+//                   width: 12px;
+//                   height: 12px;
+//                   background-size:12px 10px; 
+//                 }
+//               }
+//               .ra-checkbox{
+//                 margin-left: 60px;
+//                 margin-top:-20px;
+//               }
+//               &.cell-img{height: 50px;}
+//               // &::before{font-weight: 600;}
+//               // &.mat::before{content:"Código do Artigo: ";}
+//               // &.des::before{content:"Descrição do Artigo: ";}
+//               // &.com::before{content:"Comissão: ";}
+//               // &.uni::before{content:"Unidade Multiplo: ";}
+//               // &.ori::before{content:"Qtd. Original: ";}
+//               // &.acr::before{content:"Qtd. Acrescida: ";}
+//               // &.not::before{content:"Qtd. Notificada: ";}
+//               // &.can::before{content:"Qtd. Cancelada: ";}
+//               // &.ent::before{content:"Qtd. a Entregar: ";}
+//               // &.brl::before{content:"Preço BRL: ";}
+//               // &.tot::before{content:"Sub Total: ";}
+//               // &.sel::before{content:"Selecione: ";}
+//               // &.ton::before{content:"Ton: ";}
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+// @media (max-width: 850px){ 
+// .accordion-content {
+//     .form-box.active {
+//       .form-box-content {
+//         div, table{
+//           width: 250px;
+//           &.item{
+//             td{
+//               width: 100%;
+//             }
+//           }
+//           &.total-sum{
+//             position: absolute;
+//             bottom: 0;
+//             height: 150px;
+//             left: 20px;
+//           }
+//         }
+//       }
+//     }
+//   }
+//   .modal-bkg{
+//     .modal-box{
+//       .table-holder{
+//         height: 60%;
+//       }
+//       .client-search{
+//         width: 75%;
+//       }
+//     }
+//     thead{
+//      margin-top: -40px;
+//     }
+//     table{
+//       margin-top: initial;
+//       tr{
+//         &.even{
+//         background-image: linear-gradient(to bottom, #ffffff 0%, #e8e8e8 4px, #f0f0f0 60%, #f8f8f8 100%);
+//           td{background: none;}
+//         }
+//         &.odd{background-image: linear-gradient(to bottom, #efefef 0%, #e2e2e2 10%, #d8d8d8 60%, #dadada 100%);
+//           td{background: none;}
+//         }
+//         th,td{
+//           width: 100%;
+//           position: relative;
+//           float: left;
+//           line-height: 20px;
+//           p{
+//             &.nfe::before{content: "NFE";}
+//             &.series::before{content: "SERIES";}
+//             &.data::before{content: "DATA";}
+//             &.pedido::before{content: "PEDIDO";}
+//             &.emissor::before{content: "EMISSOR";}
+//             &.descricao::before{content: "DESCRICAO";}
+//             &.negoc::before{content: "PARC. NEGÓC.";}
+//             &::before{
+//               font-weight: 600;
+//               margin:0 5px;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+//   .nfe-search-box{
+//     height: 180px;
+//     span{
+//       width: 17%;
+//     }
+//     input{
+//       width: 75%;
+//     }
+//   }
+//   .client-search-box{
+
+//     // height: 40px;
+//   }
+//   .resp-filter{
+//       // background: lightyellow;
+//     width: 275px;
+//     position: relative;
+//     margin:5px;
+//     .form-group.form-date{
+//       width: 273px;
+//     }
+//     .label-date{
+//       text-align: left;
+//       width: 60px;
+//     }
+//   }
+//   // .new-ra{
+//   //   right: 70px;
+//   // }
+//  .table {
+//     th,
+//     td {
+//       &.responsive-cell{
+//         width: 100%;
+//         float: left;
+//         position: relative;
+//         &::before{
+//           width: 100%;
+//           float: left;
+//           font-weight: 600;
+//           margin-bottom: 5px;
+//         }
+//         .row-logo{
+//           margin-top: 10px;
+//         }
+//         &.resp-cod::before {
+//             content: "Código Pedido";
+//         }
+//         &.resp-emi::before {
+//             content: "Data de Emissão";
+//         }
+//         &.resp-ord::before {
+//             content: "Código Ordem";
+//         }
+//         &.resp-cli::before {
+//             content: "Nome Cliente";
+//         }
+//         &.resp-cli-cod::before {
+//             content: "Código Cliente";
+//         }
+//         &.resp-sta::before {
+//             content: "Status Pedido";
+//         }
+//         &.resp-cod-ord::before {
+//             content: "Código Ordem";
+//         }
+//         &.resp-fil::before {
+//             content: "Filial Focus";
+//         }
+//         &.resp-nfe::before {
+//             content: "NFe";
+//         }
+//         &.resp-nfe-date::before {
+//             content: "Data NFe";
+//         }
+//       }
+//       &.responsive-cell-btn{
+//         position: absolute;
+//         bottom: 0;
+//         right:0;
+//         &.resend{
+//           right: 80px;
+//         }
+//         &.detail{
+//           right: 40px;
+//         }
+//         &.status{
+//           right: 120px;
+//         }
+//         &.cell-new-ra{
+//           right:190px
+//         }
+//         &.action{
+//           right: 300px
+//         }
+//       }
+//     }
+//   }
+
+// }
+@media (min-width: 850px){
+  tr.top-table-screen{ display:table; }
+}
+
+@media (min-width: 1024px){
+  .table-holder{
+    height: 395px;
+  }
+  .home-buttons {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    max-height: 450px;
+  } 
+  .user-pane-container{
+    width: auto;
+    height:200px;
+    position: relative;
+    float: left;
+  }
+  .user-pane{
+    left:0;
+    margin-left: -5px;
+    margin-top: 0;
+    margin-bottom:10px;
+  }
+  .home__box {
+    width: auto;
+  }
+  .tax-pane{
+    max-width:390px;
+  }
+} 
+// busca clients
+@media (max-width: 1024px){
+  footer{
+      a{
+        xdisplay: none;
+        &.home{
+          display: inline-block;
+        }
+      }
+    
+  }
+//   .commission-resp{
+//   thead{
+//     display: none;
+//   }
+//   tr{
+//     border: none;
+//     td.cell-cod,th.cell-cod{
+//       width: 50%; 
+//       height:25px;
+//       &::before{font-weight: bold;}
+//       &.tip::before{content:"Tipo: ";}
+//       &.nfe::before{content:"NF-e: ";}
+//       &.ges::before{content:"Gestor: ";}
+//       &.cli::before{content:"Cliente: ";}
+//       &.ped::before{content:"Pedido: ";}
+//       &.ser::before{content:"Série: ";}
+//       &.cat::before{content:"Categoria: ";}
+//       &.dat::before{content:"Data Doc: ";}
+//       &.doc::before{content:"Qtde: ";}
+//        &.um::before{content:"UM: ";}
+//       &.ven::before{content:"Val Venda: ";}
+//       &.qua::before{content:"Val Qualid: ";}
+//       &.des::before{content:"Desc %: ";}
+//       &.com::before{content:"Com %: ";}
+//       &.tot::before{content:"Tot. Comissão: ";}
+//     }
+//   }
+// }
+  .modal-bkg{
+    .modal-box{
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      top:0;
+      left: 0;
+      margin:0;
+    }
+  }
+
+.form-box{
+  .form-col{
+    &.ra-form-col{
+      margin:0;
+      left: 0;
+    }
+    .form-end{
+      width: 100%;
+    }
+  }
+}
+.open-close-ra{
+  display: block;
+}
+.ra-search-container{
+  // position: absolute;
+  transition: .8s;
+  .bread-crumb{
+    width: 100%;
+    position: relative;
+    float: left;
+    // height: 40px;
+    display:none;
+    background-color: #e6e6e6;
+    p{
+      // position: relative;
+      float: left;
+      margin: 0px 5px;
+      line-height: 40px;
+    }
+  }
+  &.closed{
+  transition: .8s;
+  position: relative;
+    top: -160px;
+    z-index: 0;
+    .bread-crumb{
+      display:block;
+    }
+  }
+  .search-content{
+    // &.ng-isolate-scope{
+      width: 50%;
+      height: 40px;
+      padding: 5px 10px ;
+      form{
+        h2{
+          width: 85px;
+        }
+      }
+    // }
+    &.commission-btn{
+      width: 50%
+    }
+  }
+
+}
+.rep-search{
+  width: 50%;
+  height: 40px;
+ 
+  select{
+  // width: 100%;
+  width: 170px;
+  position: relative;
+  }
+}
+ .open-close-ra{
+    margin:5px;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    float: right;
+    border:none;
+    cursor: pointer;
+    display: block;
+    // .red;
+    &.up{
+      background: url(../images/arrow-up.svg)no-repeat;
+    }
+    &.down{
+      margin:10px;
+      background: url(../images/arrow-down.svg)no-repeat;
+    }
+  }
+}
+@media (max-width: 650px){   
+
+  .commission-resp{
+    tr{
+      td.cell-cod,th.cell-cod{
+        width: 100%; 
+      }
+    }
+  } 
+
+  .ra-search-container{
+   
+    &.closed{
+        top: -320px;
+      }
+    .search-content{
+      // &.ng-isolate-scope{
+        width: 100%;
+      // }  
+      &.commission-btn{
+        width: 100%
+      }
+    }
+  }   
+
+  .rep-search,{
+    width: 100%;
+  } 
+  .table{
+    td{
+      &.responsive-cell-btn{
+        &.cell-new-ra{
+          right: 0px;
+          bottom:44px;
+        }
+        &.action{
+          right: 110px;
+          bottom:44px;}
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+<div class="btn-home-box">
+  <a ng-if="link" ui-sref="{{link}}" class="btn-pane" ng-class="{disabled: unable, 'texted-pane': !!text}">
+    <span ng-if="icon" ng-class="'icon icon-' + icon"></span>
+    <span ng-if="text" class="button-text">{{ text }}</span>
+  </a>
+  <a ng-if="alink && icon" href="{{alink}}" class="btn-pane" ng-class="{disabled: unable, 'texted-pane': !!text}">
+    <span ng-if="icon" ng-class="'icon icon-' + icon" ></span>
+    <span ng-if="text" class="button-text">{{ text }}</span>
+  </a>
+  <a ng-if="alink && image" href="{{alink}}" target="_blank" rel="noopener noreferrer" class="btn-pane" ng-class="{disabled: unable, 'texted-pane': !!text}">
+    <img ng-if="image" ng-class="'icon icon-' + icon" style="width: 100%; height: auto; border-radius: 4px;"
+      src="{{image}}" />
+    <span ng-if="text" class="button-text">{{ text }}</span>
+  </a>
+  <span class="btn-label">
+    <ng-transclude-replace></ng-transclude-replace>
+  </span>
+</div>

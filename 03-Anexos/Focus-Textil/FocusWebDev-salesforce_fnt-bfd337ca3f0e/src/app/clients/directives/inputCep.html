@@ -1,0 +1,7 @@
+<div class="form-group form-group-ct">
+  <label for="{{name}}">CEP*</label>
+  <input type="tel" name="{{name}}" ng-model="model[name]" class="form-control form-control-btn" ng-disabled="disabled" ui-br-cep-mask required>
+  <button type="button" class="btn btn-sm" ng-click="getZip(model)" ng-disabled="!formCtrl[name].$valid || disabled">
+    <span class="icon icon-search"></span>
+  </button>
+</div>

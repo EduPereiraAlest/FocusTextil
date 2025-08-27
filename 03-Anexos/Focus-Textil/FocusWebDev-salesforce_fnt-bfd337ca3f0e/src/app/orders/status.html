@@ -1,0 +1,75 @@
+<search-box title="pedidos" model="vm.page.search" send="vm.submitForm($event)" info="Buscar" clear="vm.clearForm()">
+</search-box>
+<div class="table-content simple-content" ng-show="vm.orders.length">
+  <table class="table table-scroll">
+    <thead ng-if="vm.orders.length">
+      <tr>
+        <th class="cell-cod">
+          <sort-button collumn="Master.CodePv" id="status-sort-code">
+            Código <br>
+            Pedido
+          </sort-button>
+        </th>
+        <th class="cell-med">
+          <sort-button collumn="Master.EditDate" id="status-sort-date">
+            Data de <br> Emissão
+          </sort-button>
+        </th>
+        <th class="cell-sap">Código
+        <br> Ordem</th>
+        <th>
+          <sort-button collumn="Master._NomeCli" id="status-sort-client-name">
+            Nome <br> Cliente
+          </sort-button>
+        </th>
+        <th class="cell-btn">
+          <sort-button collumn="Master.CodeCli" id="status-sort-request">
+            Pedido <br> e-Focus
+          </sort-button>
+        </th>
+        <th class="cell-btn">
+          <sort-button collumn="Master.CodeCli" id="status-sort-client-code">
+            Código <br> Cliente
+          </sort-button>
+        </th>
+        <th class="cell-big">
+          <sort-button collumn="Master.StatusProcess" id="status-sort-status">
+            Status <br> Pedido
+          </sort-button>
+        </th>
+        <th class="cell-btn"></th>
+        <th class="cell-btn"></th>
+      </tr>
+    </thead>
+    <tbody scroll-ends="vm.loadMore()" class="even-body" offset="208">
+      <tr ng-repeat="order in vm.orders track by order.CodePv">
+        <td class="cell-cod" id="{{'status-item-code-' + $index}}">{{order.CodePv}}</td>
+        <td class="cell-med" id="{{'status-item-date-' + $index}}">{{vm.parseDate(order.DateProcess)}}</td>
+        <td class="cell-sap" id="{{'status-item-order-code-' + $index}}">{{order.OrderNum}}</td>
+        <td id="{{'status-item-client-name-' + $index}}">{{order.NomeCli}}</td>
+        <td class="cell-btn" id="{{'status-item-img-' + $index}}"><img ng-if="order.Efocus === true" src="images/efocus.png"></td>
+        <td class="cell-btn" id="{{'status-item-client-code-' + $index}}">{{order.CodeCli}}</td>
+        <td class="cell-big" id="{{'status-item-status-' + $index}}">{{order.Status}}</td>
+        <td class="cell-btn">
+          <button type="button" class="btn" ng-click="vm.reSend(order)" ng-if="order.Status === 'ERRO NO PROCESSAMENTO'" id="{{'status-resend-item-' + $index}}">Reenviar</button>
+          <!-- (DISABLED RECRIAR) button type="button" class="btn" ng-click="order.Status === 'ERRO NO PROCESSAMENTO' ? vm.reSend(order) : vm.reCreate(order)">{{ order.Status === 'ERRO NO PROCESSAMENTO' ? "Reenviar" : "Recriar" }} </button -->
+
+         <!-- botao com bloqueio por perfil <button 
+          type="button" 
+          class="btn" 
+          ng-disabled="vm.profileBlocked" 
+          ng-click="order.Status === 'ERRO NO PROCESSAMENTO' ? vm.reSend(order) : vm.reCreate(order)">
+          {{ order.Status === 'ERRO NO PROCESSAMENTO' ? "Reenviar" : "Recriar" }} 
+        </button>   -->     
+        </td>
+        <td class="cell-btn">
+          <button type="button" class="btn" ng-click="vm.setDetail(order.CodePv)" id="{{'status-details-item-' + $index}}">Detalhes</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="empty-content" ng-show="!vm.orders.length">
+  <span class="icon icon-status"></span>
+</div>
+<div class="pedidos-loader"></div>

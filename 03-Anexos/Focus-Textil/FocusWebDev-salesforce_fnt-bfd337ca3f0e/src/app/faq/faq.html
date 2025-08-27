@@ -1,0 +1,35 @@
+<div class="search-content-faq">
+  <div class="container-text-search-faq">
+    <div class="search-input-faq">
+      <div class="btn-icon-search-faq">
+        <button class="remove-search-faq" ng-click="onCleanSearch()" id="faq-close-btn"> X </button>
+        <span class="icon icon-search"></span>
+      </div>
+      <input class="input-search-text-faq" ng-model="FaqController" placeholder="Pesquisar" name="search" ng-keypress="myFunct($event)" ng-change="onButtonClean(FaqController)" id="faq-search" />
+    </div>
+    <div class="search-description-faq">
+      <p> Sua pesquisa irá filtrar todas as respostas que contenham o termo pesquisado </p>
+    </div>
+  </div>
+
+  <div class="title-faq">Dúvidas mais frequentes - FAQ</div>
+</div>
+
+<div id="container-faq">
+
+	<div class="items-faq webrep-faq" ng-repeat="item in vm.faqs">
+    <div class="container-item-faq" ng-keyup="vm.setSearchTextFAQ">
+
+      <div class="item-header-faq" ng-click="item.open = !item.open">
+        <a ng-if="!isEfocusCustomer" ui-sref="faq" class=".icon-file-text  btn-menu" id="faq-">
+          <span class="icon icon-file-text"></span>
+        </a>
+        <p  class="item-question-faq webrep-faq" id="faq-question" >{{item.question}}</p>
+      </div>
+      <div class="item-answer-faq" ng-if="!item.hidden" ng-hide="!item.open" id="faq-answer">
+        <p>{{item.answer}}</p>
+      </div>
+
+    </div>
+	</div>
+</div>

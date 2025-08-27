@@ -1,0 +1,61 @@
+
+  <search-box title="CLIENTES" info="Buscar" model="vm.page.search" send="vm.submitForm($event)" clear="vm.clearForm()">
+    <button type="button" class="btn btn-icon" ng-class="{active: onlyFav}" ng-click="vm.toggleOnlyFav($event)" id="clients-favorite-btn">
+      <span class="icon" ng-class="{'icon-star-full': onlyFav, 'icon-star-empty': !onlyFav}"></span> Favoritos
+    </button>
+  </search-box>
+
+<div class="table-content simple-content" ng-show=vm.clients>
+  <table class="table table-scroll">
+    <thead>
+      <tr>
+        <th class="cell-cod">Código</th>
+        <th class="cell-xtra">Nome</th>
+        <th>CNPJ</th>
+        <th>Cidade</th>
+        <th class="cell-cod">Status</th>
+        <th class="cell-cod">Data de Atualização</th>
+        <th class="cell-btn"></th>
+        <th class="cell-btn-gd"></th>
+        <th class="cell-min"></th>
+      </tr>
+    </thead>
+    <tbody fluid-height="200" class="even-body">
+      <tr ng-repeat="client in vm.clients">
+        <td class="cell-cod" id="{{'clients-item-code-' + $index}}">{{client.CodeCli}}</td>
+        <td class="cell-xtra" id="{{'clients-item-name-' + $index}}">{{client.Razao01Cli}}</td>
+        <td id="{{'clients-item-cnpj-' + $index}}">{{client.CnpjCli}}</td>
+        <td id="{{'clients-item-city-uf-' + $index}}">{{ vm.formatCityUf(client.CityUf) }}</td>
+        <td class="cell-cod" id="{{'clients-item-status-' + $index}}">{{client.Status}}</td>
+        <td class="cell-cod" id="{{'clients-item-date-' + $index}}">{{vm.parseDate(client.DateProcess)}}</td>
+        <td class="cell-btn">
+          <a class="btn" ng-class="{disabled: !client.CodeCli}" ng-href="#!/clients-det/{{client.CodeCli}}" id="{{'clients-list-details-btn-' + $index}}">Detalhes</a>
+        </td>
+
+
+<!-- Botão com bloqueio por perfil
+        <td class="cell-btn-gd">
+          <button class="btn" ng-click="vm.selectClient(client)" ng-disabled="
+          (vm.profileBlocked && !client.CodeCli) ||
+          (vm.profileBlocked || !client.CodeCli)
+          ">Selecionar</button>
+        </td> -->
+
+        <td class="cell-btn-gd">
+          <button class="btn"
+          ng-click="vm.selectClient(client)"
+          ng-disabled="!client.CodeCli" id="{{'clients-list-select-btn-' + $index}}">Selecionar</button>
+        </td>
+
+        <td class="cell-min">
+          <button client-favorite ng-model="client" class="btn btn-grid" ng-disabled="!client.CodeCli" id="{{'clients-list-favorite-btn-' + $index}}">
+            <span class="icon" ng-class="client.Favorito ? 'icon-star-full' : 'icon-star-empty'"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="empty-content" ng-show=!vm.clients>
+  <span class="icon icon-user-search"></span>
+</div>

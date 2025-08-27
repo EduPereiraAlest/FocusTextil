@@ -1,0 +1,145 @@
+<div class="search-content">
+    <h2 class="form-title">RA {{vm.ra.CodeRa}}</h2> <span class="ra-status" id="ra-details-status">Status: {{ vm.ra.Status }}</span>
+    <div class="btn-group-right">
+        <button type="button" class="btn btn-icon" ng-if="vm.ra.QtdRa" ng-click="vm.setOrder()" id="ra-details-ra-for-order"> <span class="icon icon-clipboard"></span>{{vm.ra.QtdRa}} RA para o Pedido</button>
+        <button type="button" class="btn btn-icon" onclick="history.back()"> <span class="icon icon-tag-left" id="ra-details-back-btn"></span> Voltar </button>
+    </div>
+</div>
+<!-- FORM -->
+<div class="order-form-content form-box" style="height:140px">
+    <div class="form-col">
+        <div class="form-row">
+            <div class="form-group form-group-dt">
+                <label for="orderCode">Nº Pedido</label>
+                <input type="text" name="orderCode" class="form-control" ng-model="vm.ra.CodePv" disabled="disabled" id="ra-details-order-number"> </div>
+            <div class="form-group form-group-dt">
+                <label for="nfenum">Nota Fiscal</label>
+                <input type="text" name="payCondDesc" class="form-control" ng-model="vm.ra.CodeNF" disabled="disabled" id="ra-details-nf"> </div>
+            <div class="form-group form-group-dt">
+                <label for="vsartDesc">Data</label>
+                <input type="text" name="vsartDesc" class="form-control" ng-model="vm.ra.RaDate" disabled="disabled" id="ra-details-date"> </div>
+            <div class="form-group form-group-dt">
+                <label for="diasCorridos">Dias Corridos</label>
+                <input type="text" name="diasCorridos" class="form-control" ng-model="vm.ra.diasCorridos" disabled="disabled" id="ra-details-calendar-days"> </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group form-group-dt">
+                <label for="CNPJ">CNPJ*</label>
+                <input type="text" name="CNPJ" class="form-control" ng-model="vm.ra.CnpjCli" ui-br-cnpj-mask disabled id="ra-details-cnpj">
+            </div>
+            <div class="form-group form-group-db">
+                <label for="nomeCli">Cliente</label>
+                <input type="text" name="nomeCli" class="form-control" ng-model="vm.ra.NomeCli" disabled="disabled" id="ra-details-client">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group form-group-ft" ng-if="vm.ra.ObsPv">
+                <label for="obsPv">Observações</label>
+                <input type="text" name="obsPv" class="form-control" ng-model="vm.ra.ObsPv" disabled="disabled" id="ra-details-obs"> </div>
+            <div class="form-group form-group-ft" ng-if="vm.ra.Msg">
+                <label for="obsPv">Mensagem</label>
+                <textarea rows="4" type="text" name="obsPv" class="form-control" ng-model="vm.ra.Msg" disabled="disabled" id="ra-details-msg"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="order-detail-content detalhe-ra-accordion" fluid-height="320" simple-accordion>
+    <div class="form-box active flicker">
+        <h3 class="form-box-title" id="ra-details-order-items-title">
+            <span class="icon icon-tag-down"></span>
+            <span class="icon icon-tag-up"></span>
+            Itens do Pedido
+            <div class="fright ra-motivo">
+                <strong>MOTIVO:</strong> <span>{{ vm.ra.Motivo }}</span>
+            </div>
+        </h3>
+        <div class="form-box-content flicker form-box-clean">
+            <table class="table table-scroll form-box-table">
+                <thead>
+                    <tr>
+                        <th class="cell-big"> Código do
+                            <br> Artigo </th>
+                        <th class="cell-uber">Descrição do
+                            <br> Artigo</th>
+                        <th class="cell-disp">Unidade
+                            <br>Multiplo</th>
+                        <th class="cell-btn-gd">Qtd Notificada</th>
+                        <th class="cell-btn-gd">Qtd Autorizada</th>
+                        <th class="cell-btn-gd">Qtd Devolvida</th>
+                        <!--       <th class="cell-disp">Qtd.
+                      <br>Declarada</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.ra.Items">
+                        <td class="cell-big" id="{{'ra-details-order-items-item-material-code-' + $index}}">{{item.MaterialCode}}</td>
+                        <td class="cell-uber" id="{{'ra-details-order-items-item-desc-' + $index}}">{{item.DescMat}}</td>
+                        <td class="cell-disp" id="{{'ra-details-order-items-item-multiple-' + $index}}">{{vm.parseCurr(item.QtdeMultiplo)}} {{item.UnidMed}}</td>
+                        <td class="cell-btn-gd" id="{{'ra-details-order-items-item-notified-' + $index}}">
+                            {{ item.QtdNotificada }}
+                        </td>
+                        <td class="cell-btn-gd" id="{{'ra-details-order-items-item-authorized-' + $index}}">
+                            {{ item.QtdAutorizada }}
+                        </td>
+                        <td class="cell-btn-gd" id="{{'ra-details-order-items-item-returned-' + $index}}">
+                            {{ item.QtdDevolvida }}
+                        </td>
+                        <!-- <td class="cell-disp">{{item.QtdMaterial}}</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="form-box flicker">
+        <h3 class="form-box-title" id="ra-details-feedback-title">
+            <span class="icon icon-tag-down"></span>
+            <span class="icon icon-tag-up"></span>
+            Feedback
+        </h3>
+        <div class="form-box-content flicker">
+            <div class="form-group">
+                <div class="ra-board">
+                    <div class="ra-board-exp">Expectativa: <span id="ra-details-feedback-expectation">{{ vm.page.expectativa }}</span></div>
+                    <div class="ra-board-list">
+                        <div ng-repeat="raItem in vm.page.feedbackList" class="ra-board-item" ng-class="{mine: raItem.sender == userLogged}">
+                            <div class="ra-board-name" id="ra-details-feedback-name">{{ raItem.name }} ({{ raItem.sender }}) <span class="ra-board-date">{{ raItem.date }}</span></div>
+                            <div class="ra-board-desc" id="ra-details-feedback-desc">{{ raItem.message }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-box flicker">
+        <h3 class="form-box-title" id="ra-details-upload-title">
+            <span class="icon icon-tag-down"></span>
+            <span class="icon icon-tag-up"></span>
+            Upload
+        </h3>
+        <div class="form-box-content flicker accordion-upload-content">
+            <div class="form-row abertura-ra">
+                <div class="ra-right">
+                    <div class="left-panel">
+                      
+                      <div class="form-group">
+                          <label for="fileName">Nome</label>
+                          <input type="text" id="fileName" disabled="disabled" ng-model="vm.page.currentFileName">
+                      </div>
+                      <div class="form-group">
+                          <label for="fileDesc">Descrição</label>
+                          <input type="text" id="fileDesc" class="fileDesc" disabled="disabled" ng-model="vm.page.currentFileDesc" ng-change="vm.page.fileDescChange()">
+                      </div>
+                      <div class="form-group">
+                          <label type="file" for="up-ra" class="upload-ra">Escolha o arquivo</label>
+                          <input type="file" id="up-ra">
+                          <button class="btn attach" ng-click="vm.page.attachFile()" disabled="disabled" id="ra-details-upload-attach-btn">Anexar</button>
+                      </div>
+                    </div>
+                    <ul class="right-panel attached-files">
+                        <li ng-repeat="file in vm.page.files"><a href="{{ file.url }}">{{ file.name }}</a> "<span>{{ file.desc }}</span>"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

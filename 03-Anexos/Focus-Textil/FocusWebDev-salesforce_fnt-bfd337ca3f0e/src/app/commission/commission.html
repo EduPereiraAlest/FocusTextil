@@ -1,0 +1,150 @@
+<div class="modal-bkg">
+  <div class="modal-box modal-nfe">
+    <h3>Pesquisa NF-e</h3>
+    <button class="modal-close" ng-click="closeModal('nfe')" id="commission-nf-search-close-btn"></button>
+    <div class="nfe-search-box ">
+      <span>Nº DA NFE</span>
+      <input type="text" ng-model="vm.modalnfe.nfe" class="nfe-number" id="commission-nf-search-nf-number">
+      <span>DATA</span>
+      <input type="date" ng-model="vm.modalnfe.data" class="nfe-date" id="commission-nf-search-date">
+      <span>PEDIDO</span>
+      <input type="text" ng-model="vm.modalnfe.pedido" class="nfe-order" id="commission-nf-search-order">
+
+
+      <button class="btn fright" ng-click="vm.modalnfe.loadNF()" id="commission-nf-search-search-btn">Pesquisar</button>
+    </div>
+    <div class="table-holder">
+      <table class="">
+        <thead>
+          <tr>
+            <th><p>Nº DA NFE </p></th>
+            <th><p>SÉRIES</p></th>
+            <th><p>DATA</p></th>
+            <th><p>PEDIDO</p></th>
+            <th><p>EMISSOR</p></th>
+            <th><p>DESCRIÇÃO</p></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="nf-item" ng-repeat="nf in vm.modalnfe.filtered" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="vm.modalnfe.selectNF(nf.Nota)" id="{{'commission-nf-search-item-select-' + $index}}">
+            <td><p class="nfe" id="{{'commission-nf-search-item-nf-' + $index}}">{{ nf.Nota }}</p></td>
+            <td><p class="series" id="{{'commission-nf-search-item-serie-' + $index}}">{{ nf.Series }}</p></td>
+            <td><p class="data" id="{{'commission-nf-search-item-date-' + $index}}">{{ nf.Data }}</p></td>
+            <td><p class="pedido" id="{{'commission-nf-search-item-order-' + $index}}">{{ nf.Pedido }}</p></td>
+            <td><p class="emissor" id="{{'commission-nf-search-item-issuer-' + $index}}">{{ nf.EmissorOrdem }}</p></td>
+            <td><p class="descricao" id="{{'commission-nf-search-item-desc-' + $index}}">{{ nf.Descricao }}</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-box modal-cliente">
+    <h3>Pesquisa Clientes</h3>
+    <button class="modal-close" ng-click="closeModal('cliente')" id="commission-client-search-close-btn"></button>
+    <div class="client-search-box ">
+      <span>CLIENTE</span>
+      <input type="text" ng-model="vm.modalcliente.filter" ng-change="vm.modalcliente.filterChange()" class="client-search" id="commission-client-search-filter">
+    </div>
+    <div class="table-holder">
+      <table id="NFE" class="">
+        <thead>
+          <tr>
+            <th><p >PARC. NEGÓC.</p></th>
+            <th><p >DESCRIÇÃO</p></th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr class="cliente-item" ng-repeat="cliente in vm.modalcliente.filtered" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="vm.modalcliente.selectCliente(cliente.CodeCli)" id="{{'commission-client-search-item-select-' + $index}}">
+          <td><p class="negoc" id="{{'commission-client-search-item-code-' + $index}}">{{ cliente.CodeCli }}</p></td>
+          <td><p class="descricao" id="{{'commission-client-search-item-desc-' + $index}}">{{ cliente.Razao01Cli }}</p></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="ra-search-container">
+  <!-- datepicker -->
+  <div class="search-content ng-isolate-scope">
+    <form action="." class="search-form" ng-submit="vm.submitForm($event)">
+      <h2 class="form-title">Data Doc</h2>
+      <div class="form-group search-group date-filter">
+        <input
+          title="Data Doc"
+          type="date"
+          name="dataDoc"
+          class="form-control date commission-date"
+          ng-model="vm.page.dataDoc"
+          id="commission-filter-date-start"
+          min="{{ vm.getOneYearAgo() | date:'yyyy-MM-dd' }}"
+          oninput="this.setCustomValidity('')"
+        >
+      </div>
+      <input type="submit" class="hidden-submit" />
+    </form>
+  </div> <!-- datepicker -->
+  <div class="search-content ng-isolate-scope">
+    <form action="." class="search-form" ng-submit="vm.submitForm($event)">
+      <h2 class="form-title">até</h2>
+      <div class="form-group search-group date-filter">
+        <input
+          title="ATÉ"
+          type="date"
+          name="ate"
+          class="form-control date commission-date"
+          ng-model="vm.page.ate"
+          id="commission-filter-date-end"
+          min="{{ vm.getOneYearAgo() | date:'yyyy-MM-dd' }}"
+          oninput="this.setCustomValidity('')"
+        >
+      </div>
+      <input type="submit" class="hidden-submit" />
+    </form>
+  </div>
+  <search-box title="NF-E" info="Buscar" model="vm.page.nfe" send="vm.submitForm($event)" clear="vm.clearForm()" focus="showModal('nfe')" id="commission-filter-nf"></search-box>
+  <search-box title="CLIENTE" info="Buscar" model="vm.page.cliente" send="vm.submitForm($event)" clear="vm.clearForm()" focus="showModal('cliente')" id="commission-filter-client"></search-box>
+  <search-box title="PEDIDO" info="Buscar" model="vm.page.pedido" send="vm.submitForm($event)" clear="vm.clearForm()" id="commission-filter-order"></search-box>
+
+  <div class="rep-search search-content commission-btn ng-isolate-scope">
+     <div class="fright commission-btn-holder">
+       <button class="btn fright" ng-click="vm.submitForm($event)" id="commission-filter-search-btn">Pesquisar</button>
+       <button class="btn fright" ng-click="vm.exportExcel($event)" ng-if="vm.page.itensExtrato && vm.page.itensExtrato.length > 0" id="commission-filter-export-btn">Exportar</button>
+     </div>
+  </div>
+</div>
+<div class="filter-content" style="width: 100%; display: flex; flex-direction: column; align-items: end;">
+  <div style="width: 25%; margin-right: -90px">
+    <p class="label-sum t-com" id="commission-total"><strong>Tot. Comissão:</strong><br>R${{ vm.page.totalComissao | number }}{{ vm.page.totalComissaoCents }}</p>
+  </div>
+</div>
+<div class="empty-content" ng-if="!vm.page.itensExtrato.length">
+  <span class="icon icon-clipboard"></span>
+</div>
+<div class="table-content simple-content ">
+  <table class="table table-scroll "><!--commission-resp-->
+    <thead>
+      <tr>
+        <th class="">Tipo</th>
+        <th class="">NF-e</th>
+        <th class="d-lg">Gestor</th>
+        <th class="">Cliente</th>
+        <th class="">Pedido</th>
+        <th class="center d-sm">Cat</th>
+        <th class="">Data Doc</th>
+        <th class="right">Tot. Comissão</th>
+      </tr>
+    </thead>
+    <tbody class="commision-result">
+      <tr ng-repeat="item in vm.page.itensExtrato">
+        <td class="d-lg" id="{{'commission-item-type-' + $index}}">{{ item.Tipo }}</td>
+        <td class="d-sm" id="{{'commission-item-type2-' + $index}}">{{ item.Tipo[0] }}</td>
+        <td class="" id="{{'commission-item-nf-' + $index}}">{{ item.Nfe/1 }}</td>
+        <td class="d-lg" id="{{'commission-item-manager-' + $index}}">{{ item.Gestor }}</td>
+        <td class="" id="{{'commission-item-client-' + $index}}">{{ item.Cliente }}</td>
+        <td class="" id="{{'commission-item-order-' + $index}}">{{ item.Pedido/1 }}</td>
+        <td class="" id="{{'commission-item-date-doc-' + $index}}">{{ item.DataDoc }}</td>
+        <td class="right" id="{{'commission-item-total-commission-' + $index}}">{{ item.TotalComissao }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

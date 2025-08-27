@@ -1,0 +1,24 @@
+<div class="table-content table-form form-group-db">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>CNPJ</th>
+        <th>Razão Social</th>
+        <th>Cep</th>
+        <th ng-if="!$ctrl.disabled">{{ctrl.remove}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in $ctrl.list | filter: { TpAdrCli: 'REM' }">
+        <td>{{item.CnpjAdr}}</td>
+        <td>{{item.Razao01Cli}}</td>
+        <td>{{item.CepCli}}</td>
+        <td ng-if="!$ctrl.disabled">
+          <button type="button" class="badge fright" ng-click="$ctrl.removeItem(item)" id="{{'address-list-remove-btn-' + $index}}">
+            <span class="icon icon-minus"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

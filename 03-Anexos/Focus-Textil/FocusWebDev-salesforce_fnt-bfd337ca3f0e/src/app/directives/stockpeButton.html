@@ -1,0 +1,18 @@
+<div class="btn btn-select" ng-class="{full: model, 'centro-unico': items.Centros.length == 1}">
+  <span ng-if="items.Centros.length == 1" class="icon icon-centro">{{ items.CentroSelecionado }}</span>
+
+  <span ng-if="items.Centros.length > 1" class="icon icon-plus"></span>
+
+  <select
+    ng-model="centerSelectedInPE"
+    class="numb-control"
+    ng-disabled="items.Centros.length == 1"
+    ng-change="updateListDisp(items)"
+    id="stockpe-button-select"
+    ng-options="item.centro as (item.centro + ' | ' + (item.QtdProntEntreg || 0)) for item in items.Tons"
+  >
+  </select>
+</div>
+
+
+

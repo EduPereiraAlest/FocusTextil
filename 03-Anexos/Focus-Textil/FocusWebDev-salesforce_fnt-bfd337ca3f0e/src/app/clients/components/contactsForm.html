@@ -1,0 +1,64 @@
+<form name="$ctrl.form" class="form-box flicker active" ng-submit="$ctrl.submitForm($event)" novalidate>
+  <h3 class="form-box-title" id="contacts-form-title">
+    <span class="icon icon-tag-down"></span>
+    <span class="icon icon-tag-up"></span>
+    Lista de Contatos
+    <span class="form-box-leg">(Obrigatório pelo menos um contato)</span>
+  </h3>
+  <div class="form-box-content flicker">
+    <div class="form-row">
+      <div class="form-group form-group-ct">
+        <label for="nameCli">Nome*</label>
+        <input type="text" name="nameCli" class="form-control" ng-model="$ctrl.model.NameCli" required id="contacts-form-name">
+      </div>
+      <div class="form-group form-group-de">
+        <label for="lastNameCli">Sobrenome*</label>
+        <input type="text" name="lastNameCli" class="form-control" ng-model="$ctrl.model.LastNameCli" required id="contacts-form-lastname">
+      </div>
+      <div class="form-group form-group-et">
+        <label for="dtNascCli">Data de Nascimento</label>
+        <input type="text" name="dtNascCli" class="form-control" ng-model="$ctrl.model.DtNascCli" ui-date-mask="DD/MM/YYYY" id="contacts-form-birthday">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-group-dt">
+        <label for="celCli">Celular*</label>
+        <input type="tel" name="celCli" class="form-control" ng-model="$ctrl.model.CelCli"  ng-pattern="/^\(\d{2}\) 9\d{4}-\d{4}$/" ui-br-phone-number required id="contacts-form-cell">
+      </div>
+      <div class="form-group form-group-et">
+        <label for="foneCli">Telefone</label>
+        <input type="tel" name="foneCli" class="form-control" ng-model="$ctrl.model.FoneCli" ui-br-phone-number id="contacts-form-phone">
+      </div>
+      <div class="form-group form-group-er">
+        <label for="ramalCli">Ramal</label>
+        <input type="tel" name="ramalCli" class="form-control" ng-model="$ctrl.model.RamalCli" only-digits id="contacts-form-branch">
+      </div>
+      <div class="form-group form-group-de">
+        <label for="celCli">Departamento</label>
+        <div class="form-select">
+          <select class="form-control" ng-model="$ctrl.model.CargoCli" ng-options="i.value as i.name for i in $ctrl.departaments" ng-change="$ctrl.getDep($ctrl.model.CargoCli)" ng-disabled="$ctrl.model.NfeCli" required id="contacts-form-department">
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group form-group-ct">
+        <label for="emailCli">Email*</label>
+        <input type="email" name="emailCli" ng-model="$ctrl.model.EmailCli" class="form-control" required id="contacts-form-email">
+      </div>
+      <div class="form-group text-bottom form-group-ct">
+        <input id="nfeCli" class="checkbox-custom" name="nfeCli" ng-model="$ctrl.model.NfeCli" type="checkbox" ng-change="$ctrl.setNfe()" id="contacts-form-nf">
+        <label for="nfeCli" class="checkbox-custom-label">
+          NFe <span class="form-leg">Enviar nota fiscal para este contato</span>
+        </label>
+      </div>
+      <!-- BUG BUTTON IE -->
+      <div class="form-group text-bottom form-group-et">
+        <button type="submit" class="btn" ng-disabled="$ctrl.form.$invalid" id="contacts-form-btn-add">Adicionar</button>
+      </div>
+    </div>
+    <div class="form-row" ng-if="$ctrl.contacts.length">
+      <ng-transclude-replace></ng-transclude-replace>
+    </div>
+  </div>
+</form>

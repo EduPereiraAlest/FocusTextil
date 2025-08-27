@@ -1,0 +1,164 @@
+<search-box title="ordens de venda" info="Buscar por cliente, número da ordem ou *" model="vm.page.search" send="vm.submitForm($event)" clear="vm.clearForm()">
+  <div class="btn-group" ng-if="vm.page.status">
+    <a class="btn btn-icon" ng-href="#!/status-det/{{vm.page.status}}">
+      <span class="icon icon-tag-left"></span> Voltar
+    </a>
+  </div>
+</search-box>
+<div class="filter-content">
+
+ <div class="btn-group-right group-w">
+
+    <div class="resp-filter">
+      <span class="label-date">Periodo</span>
+      <div class="form-group form-date">
+        <input type="date" name="dateStart" class="form-control" ng-model="vm.page.date.start" id="orders-period-from">
+      </div>
+    </div>
+
+    <div class="resp-filter">
+      <span class="label-date">até</span>
+      <div class="form-group form-date">
+        <input type="date" name="dateEnd" class="form-control" ng-model="vm.page.date.end" id="orders-period-to">
+      </div>
+    </div>
+
+
+    <div class="resp-filter">
+      <div class="form-select" ng-class="$ctrl.classes">
+        <select class="form-control" ng-model="vm.page.filters" ng-options="i.value as i.name for i in vm.filters" id="orders-filters">
+        </select>
+      </div>
+      <button class="btn" ng-click="vm.submitForm($event)" id="orders-filter-btn">Filtrar</button>
+      <button class="btn" ng-click="vm.clearFilters()" id="orders-clean-btn">Limpar</button>
+    </div>
+  </div>
+
+
+
+</div>
+<div class="bread-content">
+  <h2 ng-show="vm.orders.length">Encontrados <b>{{vm.page.info.TotalRecords}}</b> resultados.</h2>
+  <div class="btn-group-right">
+    <div class="form-group form-group-filter">
+      <input id="radio-1" class="radio-custom" ng-model="vm.page.tfour" value="24" name="radio-1" type="checkbox">
+      <label for="radio-1" class="radio-custom-label" id="orders-e-focus">e-Focus</label>
+    </div>
+    <div class="form-group form-group-filter">
+      <input id="radio-2" class="radio-custom" ng-model="vm.page.outlet" value="outlet" name="radio-2" type="checkbox">
+      <label for="radio-2" class="radio-custom-label" id="orders-outlet">Outlet</label>
+    </div>
+  </div>
+</div>
+<div class="table-content simple-content flicker" ng-show="vm.orders.length">
+  <table class="table table-scroll">
+    <thead ng-if="vm.orders.length">
+      <tr class="">
+        <th class="">
+          <sort-button collumn="Master.CodeOv" id="orders-sort-code"> Código <br> Ordem </sort-button>
+        </th>
+        <th class="">
+          <sort-button collumn="Master._DateOv" id="orders-sort-date"> Data de <br> Emissão</sort-button>
+        </th>
+        <th class="">
+          <sort-button collumn="Master.CodeCentro" id="orders-sort-branch">Filial <br> Focus</sort-button>
+        </th>
+        <th class="" >Nome <br> Cliente</th>
+        <th class="center">Remessa</th>
+        <th class="center">NFe</th>
+        <th class="center">Data NFe</th>
+        <th class="center">Previsão <br> de Entrega</th>
+        <th class=""></th>
+        <th class=""></th>
+        <th class=""></th>
+        <th class=""></th>
+        <th class="center">Baixar NFe</th>
+         <th class=""></th>
+      </tr>
+    </thead>
+    <tbody scroll-ends="vm.loadMore()" class="even-body" offset="308">
+      <tr class="" ng-repeat-start="order in vm.orders track by order.CodeOv" ng-class="{statusBlock: order.Cancelada === 'true'}">
+        <td class=" " id="{{'orders-code-item-' + $index}}">{{order.OvView}}</td>
+
+        <td class="" id="{{'orders-date-item-' + $index}}">{{vm.parseDate(order.DateProcess)}}</td>
+
+        <td class="" id="{{'orders-code-center-item-' + $index}}">{{order.CodeCentro}}</td>
+
+        <td class="overflowHidden" id="{{'orders-client-name-item-' + $index}}">{{order.NomeCli}}</td>
+
+        <td class="center" id="{{'orders-shipping-view-item-' + $index}}">{{order.remessaView}}</td>
+
+        <td class="center" id="{{'orders-nf-number-item-' + $index}}">{{order.Nfenum}}</td>
+
+        <td class="center" id="{{'orders-date-emi-item-' + $index}}">{{vm.parseDate(order.DateEmiFat)}}</td>
+
+        <td class="center" >{{ order.Status.PREV_ENTREGA ? order.Status.PREV_ENTREGA : ' - ' }}</td>
+
+        <td class=" ">
+          <span class="row-logo outlet" alt="Outlet" ng-if="order.Outlet"></span>
+          <span class="row-logo thour " alt="e-focus" ng-if="order.St24Ho"></span>
+        </td>
+        <!-- <td class=""></td> -->
+        <td class=" ">
+          <button type="button" class="btn edit" ng-if="order.Nfenum && !order.Editavel" ng-click="vm.setDetail(order, order.Nfenum)" id="{{'orders-new-ra-item-' + $index}}">
+            Nova RA
+          </button>
+
+<!--  BOTÃO COM BLOQUEIO POR PERFIL
+        <button type="button"
+        class="btn"
+        ng-disabled="vm.profileBlocked"
+        ng-if="order.Nfenum && !order.Editavel"
+        ng-click="vm.setDetail(order, order.Nfenum)"
+        >
+        Nova RA
+      </button> -->
+
+
+        <button type="button" class="btn edit" ng-disabled="vm.profileBlocked" ng-if="(!order.Nfenum && order.Editavel && order.TipoOrdem !== 'ZCSC') && !isEfocusCustomer" ng-click="vm.editOrder(order.CodeOv)" id="{{'orders-edit-item-' + $index}}">
+        <span class="icon icon-clipboard"></span> Editar
+      </button>
+
+        </td>
+        <td class=" status">
+          <button class="btn" ng-click="vm.getStatus(order)" ng-class="{active: order.StatusList}" id="{{'orders-status-item-' + $index}}">Status</button>
+        </td>
+        <td class="">
+          <button type="button" class="btn" ng-click="vm.setDetail(order)" ng-class="{ 'btn-orange': order.Acao, 'order-visited': vm.visitedOrders[order.CodeOv] }" id="{{'orders-details-item-' + $index}}">Detalhes</button>
+        </td>
+        <td  class="">
+          <div ng-if="order.Nfenum" class="p-1 text-center nfe-download">
+              <span class="icon icon-pdf" ng-click="vm.downloadNFe('pdf', order.Nfenum, order.CodeCentro)"></span>
+              <span class="icon icon-xml" ng-click="vm.downloadNFe('xml', order.Nfenum, order.CodeCentro)"></span>
+              <!-- <span class="icon icon-zip" ng-click="vm.downloadNFe('zip', order.Nfenum, order.CodeCentro)"></span> -->
+          </div>
+        </td>
+        <td class="">
+          <button class="btn btn-grid mail-btn" ng-click="vm.sendOrder(order.CodeOv)" id="{{'orders-send-item-' + $index}}">
+            <span class="icon icon-envelop"></span>
+          </button>
+        </td>
+        
+      </tr  ng-class="{statusBlock: order.statusBlock}">
+      <tr class="status-line" ng-if="order.StatusList" ng-repeat-end="">
+        <td colspan="8">
+          <ul class="status-list">
+            <li ng-repeat="status in order.StatusList track by status.idx" ng-class="status.style" id="{{'orders-status-name-item-' + $index}}">{{status.name}}</li>
+          </ul>
+          <ul class="status-leg">
+            <li class="blank">Não se aplica / Não Iniciou</li>
+            <li class="success">Aprovado / Concluido</li>
+            <li class="warning">Aguardando Aprovacão / Em Aberto</li>
+            <li class="fail">Reprovado / Cancelado</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="empty-content" ng-show="!vm.orders.length">
+  <span class="icon icon-check-empty"></span>
+</div>
+<div class="generic-loader-container">
+  <div class="ordens-loader"></div>
+</div>

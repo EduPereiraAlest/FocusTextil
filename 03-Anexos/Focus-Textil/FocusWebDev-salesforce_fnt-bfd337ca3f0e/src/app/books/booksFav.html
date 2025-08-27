@@ -1,0 +1,34 @@
+<div class="search-content">
+  <h2 class="form-title">ARTIGOS FAVORITOS - {{vm.kart.Master.NomeCli}}</h2>
+</div>
+<div class="empty-content" ng-show=!vm.materials.length>
+  <span class="icon icon-fav-book"></span>
+</div>
+<div class="table-content simple-content" ng-show=vm.materials.length>
+  <table class="table table-scroll">
+    <thead>
+      <tr>
+        <th class="cell-sap">Código SAP</th>
+        <th class="cell-sap">Código Antigo</th>
+        <th>Descrição do Artigo</th>
+        <th class="cell-btn">Qtd Multiplo</th>
+        <td class="cell-btn-gd"></td>
+        <th class="cell-min"></th>
+      </tr>
+    </thead>
+    <tbody scroll-ends offset="200">
+      <tr ng-repeat="material in vm.materials | filter : { Favorito: true }">
+        <td class="cell-sap">{{material.MaterialCode}}</td>
+        <td class="cell-sap">{{material.MaterialCodOld}}</td>
+        <td>{{material.DescMat}}</td>
+        <td class="cell-btn">{{material.QtdeMultiplo}}</td>
+        <td class="cell-btn-gd">
+          <button class="btn" ng-click="vm.selectMaterial(material)">Selecionar</button>
+        </td>
+        <td class="cell-min">
+          <favorite-button model="material"></favorite-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

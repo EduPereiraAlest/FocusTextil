@@ -1,0 +1,68 @@
+<div class="search-content">
+  <h2 class="form-title">ABERTURA RA</h2>
+  <button type="button" class="btn btn-icon fright" ui-sref="ras" id="ra-feed-back-btn">
+    <span class="icon icon-tag-left"></span> Voltar
+  </button>
+</div>
+<div class="filter-content">
+  <div class="cart-menu">
+    <input type="radio" id="chk1" name="wzd-step" class="wzd-step" disabled="disabled">
+    <label for="chk1">1. Pedido</label>
+    <input type="radio" id="chk2" name="wzd-step" class="wzd-step" disabled="disabled">
+    <label for="chk2">2. Itens do Pedido</label>
+    <input type="radio" id="chk3" name="wzd-step" class="wzd-step" checked="checked">
+    <label for="chk3">3. Feedback</label>
+  </div>
+</div>
+<!-- FORM -->
+<div class="order-form-content form-box">
+  <div class="form-col" style="margin-left: 250px">
+    <div class="form-row">
+      <div class="form-group form-group-nb">
+        <label for="razao01Cli">Detalhes</label>
+        <textarea rows="4" name="obsPv" ng-model="vm.ra.ObvsRa" class="form-control" disabled="disabled" id="ra-feed-details"></textarea>
+      </div>
+      <div class="form-group form-group-nb">
+        <label for="descMagazine">Expectativa Cliente</label>
+        
+      </div>
+    </div>
+    <div class="form-col-ind">
+      <div class="form-row form-group-nb">
+        <div class="form-group form-group-ct">
+          <input id="cm" class="checkbox-custom" name="cm" ng-model="vm.segcom.ConfModa" value="Orientado para Moda" type="checkbox" ng-disabled="!vm.flagcom.ConfModa" id="ra-feed-informative">
+          <label for="cm" class="checkbox-custom-label">RA Informativa</label>
+        </div>
+        <div class="form-group form-group-ct">
+          <input id="cm2" class="checkbox-custom" name="cm2" ng-model="vm.segcom.ConfModa" value="Basico" type="checkbox" ng-disabled="!vm.flagcom.ConfModa" id="ra-feed-expectation-1">
+          <label for="cm2" class="checkbox-custom-label">Expectativa 1</label>
+        </div>
+        <div class="form-group form-group-ct">
+          <input id="cm3" class="checkbox-custom" name="cm3" ng-model="vm.segcom.ConfModa" value="Competitiva" type="checkbox" ng-disabled="!vm.flagcom.ConfModa" id="ra-feed-expectation-2">
+          <label for="cm3" class="checkbox-custom-label">Expectativa 2</label>
+        </div>
+        <div class="form-group form-group-ct">
+          <input id="cm4" class="checkbox-custom" name="cm4" ng-model="vm.segcom.ConfModa" value="Preco" type="checkbox" ng-disabled="!vm.flagcom.ConfModa" id="ra-feed-expectation-3">
+          <label for="cm4" class="checkbox-custom-label">Expectativa 3</label>
+        </div>
+        <div class="form-group form-group-de">
+          <input id="cm5" class="checkbox-custom" name="cm5" ng-model="vm.segcom.ConfModa" value="Private Label" type="checkbox" ng-disabled="!vm.flagcom.ConfModa" id="ra-feed-expectation-4">
+          <label for="cm5" class="checkbox-custom-label">Expectativa 4</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+<div class="form-end">
+  <div class="btn-group-right">
+    <button class="btn btn-icon" onclick="history.back()" id="ra-feed-previous-btn">
+      Passo Anterior
+      <span class="icon icon-tag-left"></span>
+    </button>
+    <button class="btn btn-icon-right" ui-sref="ras" id="ra-feed-finish-btn">
+      Concluir
+      <span class="icon icon-tag-right"></span>
+    </button>
+  </div>
+</div>
+</div>

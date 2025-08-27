@@ -1,0 +1,34 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Lunch Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src/app",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///./~/*": "${workspaceFolder}/node_modules/*",
+        "webpack:///./src/*": "${workspaceFolder}/src/*"
+      },
+      "userDataDir": "${workspaceFolder}/.vscode/chrome",
+      "runtimeArgs": [
+        "--disable-session-crashed-bubble"
+      ]
+    },
+    {
+      "name": "Attach Chrome",
+      "type": "chrome",
+      "request": "attach",
+      "url": "http://localhost:3000",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}/src/app",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///./~/*": "${workspaceFolder}/node_modules/*",
+        "webpack:///./src/*": "${workspaceFolder}/src/*"
+      }
+    }
+  ]
+}

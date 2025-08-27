@@ -1,0 +1,15 @@
+<div class="btn btn-select" ng-class="{full: selectedDateAtcDelv}">
+  <span class="icon icon-plus"></span>
+  <select
+    ng-model="selectedDateAtcDelv"
+    ng-change="saveChange(code, selectedDateAtcDelv, model)"
+    class="numb-control"
+    id="stock-button-select"
+  >
+  <option value="">Nenhum</option>
+  <option
+    ng-repeat="item in items track by $index"
+    value="{{item.Date + ',' + item.Centro}}"
+  >{{::item.Centro}} | {{::item.Date}} | {{::parseStock(item.Qtde)}}</option>
+</select>
+</div>

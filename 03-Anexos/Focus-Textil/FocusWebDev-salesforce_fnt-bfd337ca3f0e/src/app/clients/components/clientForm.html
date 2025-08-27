@@ -1,0 +1,101 @@
+<form name="{{$ctrl.formName}}" class="form-box flicker">
+  <h3 class="form-box-title" id="client-form-data-title">
+    <span class="icon icon-tag-down"></span>
+    <span class="icon icon-tag-up"></span>
+    Dados do Cliente
+  </h3>
+  <fieldset class="form-box-content flicker" ng-disabled="$ctrl.disabled">
+    <div class="form-row">
+      <div class="form-group form-group-bb">
+        <label for="CNPJ">CNPJ*</label>
+        <input type="tel" pattern="[0-9]+([\.,-/\][0-9]+)?" name="Cnpj" class="form-control" ng-model="$ctrl.model.CnpjCli" check-cnpj ui-br-cnpj-mask required id="client-form-cnpj">
+      </div>
+      <div class="form-group form-group-dt">
+        <label for="cndistCli">Setor Industrial*</label>
+        <div class="form-select">
+          <select
+           class="form-control"
+           ng-model="$ctrl.model.CndistCli"
+           ng-options="i.value as i.name for i in $ctrl.sectors"
+           required
+           id="client-form-industrial-sector"
+          >
+            <option value="">Selecione</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group form-group-dt">
+        <label for="Segment">Segmento*</label>
+        <div class="form-select">
+          <select
+            class="form-control"
+            ng-model="$ctrl.model.Segment"
+            ng-options="i.value as i.name for i in $parent.vm.segments"
+            required
+            id="client-form-segments-segment"
+            ng-change="onChangeSegment($ctrl.model.Segment)"
+            ng-disabled="$ctrl.disabled"
+
+          >
+            <option value="">Selecione</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-dt">
+        <label for="SubSegment">Sub Segmento*</label>
+        <div class="form-select">
+          <select
+            class="form-control"
+            ng-model="$ctrl.model.SubSegment"
+            ng-options="i.value as i.name for i in $parent.vm.subsegments"
+            id="client-form-segments-subsegment"
+            ng-change="onChangeSubSegment($ctrl.model.SubSegment)"
+            ng-disabled="$ctrl.disabled"
+          >
+            <option value="">Selecione</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group form-group-ct">
+        <label for="Manager">Gerente*</label>
+        <div class="form-select">
+          <select
+            class="form-control"
+            ng-model="$ctrl.model.Manager"
+            ng-options="i.value as i.name for i in $parent.vm.managers"
+            required
+            id="client-form-segments-manager"
+          >
+            <option value="">Selecione</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group form-group-ct">
+        <label for="NomeCli">Nome do Cliente*</label>
+        <input type="text" name="NomeCli" class="form-control" ng-model="$ctrl.model.NomeCli" required id="client-form-name">
+      </div>
+      <div class="form-group form-group-ct">
+        <label for="razao">Razão Social*</label>
+        <input type="text" name="razao" class="form-control" ng-model="$ctrl.model.Razao01Cli" required id="client-form-company-name">
+      </div>
+      <div class="form-group form-group-cb">
+        <label for="nomefan">Nome Fantasia*</label>
+        <input type="text" name="nomefan" class="form-control" ng-model="$ctrl.model.Nfant01Cli" required id="client-form-fantasy-name">
+      </div>
+      <div class="form-group form-group-ct">
+        <label for="email">E-Mail*</label>
+        <input type="email" name="email" class="form-control" ng-model="$ctrl.model.EmailCli" required id="client-form-email">
+      </div>
+      <div class="form-group form-group-ct">
+        <label for="site">Site</label>
+        <input type="text" name="site" class="form-control" ng-model="$ctrl.model.SiteCli" id="client-form-site">
+      </div>
+    </div>
+  </fieldset>
+</form>

@@ -1,0 +1,43 @@
+<div>
+  <div class="filter-content">
+    <div class="btn-group-left">
+      <span class="badge badge-float main-filter-count" ng-show="$ctrl.activeFiltersCount > 0">{{ $ctrl.activeFiltersCount }}</span>
+      <!-- remover ng-disabled do filtro assim que a funcionalidade for normalizada -->
+      <button class="btn-text btn-icon-right" style="margin-right: 10px;" ng-class="{active: $ctrl.filterMenuOpen }" ng-click="$ctrl.toggleMenuFilter()" id="filter-menu-filters-btn">
+          Filtros <span class="icon icon-tag-down"></span>
+      </button>
+      <button class="btn" ng-click="$ctrl.applyFilters()" ng-disabled="$ctrl.filterMenuEmpty" id="filter-menu-filter-btn"> Filtrar </button>
+      <button class="btn" ng-click="$ctrl.clearMenu()" ng-disabled="$ctrl.filterMenuEmpty" id="filter-menu-clean-btn"> Limpar </button>
+    </div>
+    <ng-transclude-replace></ng-transclude-replace>
+  </div>
+  <div ng-if="$ctrl.filterMenuOpen">
+    <div class="filter-box">
+      <div class="filter-menu" ng-repeat="menu in $ctrl.filters track by menu.att" ng-class="{ active: $ctrl.menuActive === menu.att }">
+        <button class="filter-menu-button" ng-click="$ctrl.menuOpen(menu.att)" id="filter-menu-filter-name" >{{::menu.name}}
+          <span class="badge badge-float" ng-show="$ctrl.countItems(menu.values)">{{$ctrl.countItems(menu.values)}}</span>
+        </button>
+        <ul class="filter-menu-content">
+          <li class="filter-menu-item" ng-repeat="item in menu.values track by item.name">
+            <button ng-class="{active: item.active}" ng-click="$ctrl.toggleFilter(item)" id="{{'filter-menu-filter-item-' + $index}}">{{::item.name}}</button>
+          </li>
+        </ul>
+      </div>
+      <!-- div class="filter-menu" ng-class="{ active: $ctrl.menuActive === 'grama' }">
+        <button class="filter-menu-button" ng-click="$ctrl.menuOpen('grama')">Gramatura
+          <span class="badge badge-float" ng-show="$ctrl.checkSlider()">1</span>
+        </button>
+        <div class="filter-menu-content filter-slider-content">
+          GRAMATURA
+          <div class="filter-slider-box" ng-if="$ctrl.sliderControl">
+            <rzslider
+            rz-slider-model="$ctrl.slider.min"
+            rz-slider-high="$ctrl.slider.max"
+            rz-slider-options="$ctrl.slider.options"></rzslider>
+          </div>
+        </div>
+      </div -->
+    </div>
+    <div class="filter-mask" ng-click="$ctrl.menuActive = ''"></div>
+  </div>
+</div>

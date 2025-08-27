@@ -1,0 +1,11 @@
+<div class="cart-content">
+  <a ui-sref="carts" class="btn btn-icon fright" ng-class="{disabled : !total.length}">
+    <span class="icon icon-cart"></span> Carrinho
+  </a>
+  <p class="cart-total fright">Total
+    <span ng-if="!total.length">0</span>
+    <span ng-repeat="tot in total">
+      <b>{{tot.UniMed}}</b> {{tot.QtdMaterial}}
+    </span>
+  </p>
+</div>

@@ -1,0 +1,42 @@
+<div class="search-content">
+  <h2 class="form-title">Detalhes do Cliente - {{vm.client.Master.NomeCli}}</h2>
+  <button type="button" class="btn btn-icon fright" onclick="history.back()" id="clients-det-back">
+    <span class="icon icon-tag-left"></span> Voltar
+  </button>
+</div>
+<div class="client-detail-content" fluid-height="168">
+  <ul class="form-tabs">
+    <li ng-class="{active: vm.tab === 1}" ng-click="vm.tab = 1" id="clients-det-basics">Dados Básicos</li>
+    <li ng-class="{active: vm.tab === 2}" ng-click="vm.tab = 2" id="clients-det-addresses">Endereços</li>
+    <li ng-class="{active: vm.tab === 3}" ng-click="vm.tab = 3" id="clients-det-complements">Complementos</li>
+  </ul>
+  <div class="client-form-content" simple-accordion ng-show="vm.tab === 1">
+    <client-form form-name="vm.clientForm" model="vm.client.Master" ng-class="{active: true}" title="Dados do Cliente" disabled></client-form>
+  </div>
+  <div class="client-form-content" fluid-height="242" simple-accordion ng-show="vm.tab === 2">
+    <address-form form-ctrl="vm.addcliForm" model="vm.address.cli" ng-class="{active: vm.address.cli}" type="cli" title="Endereço do Cliente" disabled></address-form>
+    <div class="form-box" ng-class="{ disabled: !vm.rem}">
+      <h3 class="form-box-title" id="client-det-delivery-address-title">
+        <span class="icon icon-tag-down"></span>
+        <span class="icon icon-tag-up"></span>
+        Endereços de Entrega
+      </h3>
+      <div class="form-box-content">
+        <div class="form-row flicker" ng-if="vm.rem">
+          <address-list list="vm.addres" disabled></address-list>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="client-form-content" fluid-height="248" simple-accordion ng-show="vm.tab === 3">
+    <div class="form-box active">
+      <accordion-title id="client-det-contact-list-title">Lista de Contatos</accordion-title>
+      <div class="form-box-content">
+        <div class="form-row flicker" ng-if="vm.client.Master.ContatoNavig.length">
+          <contacts-list list="vm.client.Master.ContatoNavig" disabled></contacts-list>
+        </div>
+      </div>
+    </div>
+    <files-form files='vm.client.Master.DocClienteListNavig' remove="vm.removeItem(item, list)" submit="vm.openUpload(event)"></files-form>
+  </div>
+</div>

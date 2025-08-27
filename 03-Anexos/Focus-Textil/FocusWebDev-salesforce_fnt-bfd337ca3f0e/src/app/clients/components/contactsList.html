@@ -1,0 +1,21 @@
+<div class="table-content table-form form-group-tb">
+  <table class="table">
+    <tbody>
+      <tr ng-repeat="contact in $ctrl.list">
+        <td>{{contact.NameCli}} {{contact.LastNameCli}}</td>
+        <td>{{contact.EmailCli}}</td>
+        <td>{{contact.CargoDesc}}</td>
+        <td ng-if="!contact.NfeCli"></td>
+        <td ng-if="contact.NfeCli">
+          NF-e
+          <span class="icon icon-nfe icon-checkmark"></span>
+        </td>
+        <td ng-if="!$ctrl.disabled">
+          <button type="button" class="badge fright" ng-click="$ctrl.removeItem(contact)" id="{{'contacts-list-remove-btn-' + $index}}">
+            <span class="icon icon-minus"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,132 @@
+<div class="cart-title-content"></div>
+<div class="table-content overflow-x-scrol" ng-show="$ctrl.model.length">
+  <table class="table table-scroll " class="flicker" ng-class="table-open">
+    <thead>
+      <tr>
+        <th class="cell-info cell-big">Descrição
+          <br> do Artigo
+        </th>
+        <th class="cell-info cell-sap cell-anim">Código
+          <br> SAP
+        </th>
+        <th class="cell-info cell-cod cell-anim" ng-if="!(count === 0 || !!(count && !(count%2)));">Código
+        </th>
+        <th class="cell-info cell-min cell-anim" ng-if="!(count === 0 || !!(count && !(count%2)));">Seq.
+          <br>
+        </th>
+        <th class="cell-info cell-bar open-close-cell" ng-click="count = count + 1" ng-init="count=0"
+          id="table-cart-expand">
+          <span class="open" ng-if="count === 0 || !!(count && !(count%2));"></span>
+          <span class="close" ng-if="!(count === 0 || !!(count && !(count%2)));"></span>
+        </th>
+        <th ng-if="$ctrl.kart.Master.Editavel" class="cell-min cell-hide center">Centro</th>
+        <th class="cell-min cell-hide center">Tipo</th>
+        <th class="cell-min cell-hide center">Ton</th>
+        <th class="cell-btn-gd cell-hide cell-pequena center">Estoq</th>
+        <!-- <th class="cell-med cell-hide">Inicio
+        <br> Fim</th> -->
+        <th class="cell-btn cell-hide center" ng-if="$ctrl.page.atc">ATC</th>
+        <th class="cell-med cell-hide center">IPI (%)
+        </th>
+        <th class="cell-btn">Preço <br> {{$ctrl.page.currency}}</th>
+        <th class="cell-sml">Unificar
+          <br> Preço
+        </th>
+        <th class="cell-input">Preço
+          <br> Venda
+        </th>
+        <th class="cell-input">QTD</th>
+        <th class="cell-sml center">Corte Min.</th>
+        <th class="cell-sml center">Multiplo</th>
+        <th class="cell-min">Desc (%)</th>
+        <th class="cell-min">Subtotal</th>
+        <th class="cell-min"></th>
+      </tr>
+    </thead>
+    <tbody class="cart-table-body" fluid-height="460">
+      <tr ng-repeat="material in $ctrl.model">
+        <th class="cell-big">{{::material.DescMat}}</th>
+        <th class="cell-sap cell-anim">{{::material.MaterialCode}} <br><i class="outlet-tag list"
+            ng-if="material.Ipad == 'O'">OUTLET</i><i class="promo-tag list" ng-if="material.Ipad == 'R'">PROMO</i><i
+            class="sales-tag list" ng-if="material.Ipad == 'S'">SALES</i></th>
+        <th class="cell-cod cell-anim" ng-if="!(count === 0 || !!(count && !(count%2)));">{{::material.MaterialCodOld}}
+        </th>
+
+        <th class="cell-min cell-anim" ng-if="!(count === 0 || !!(count && !(count%2)))">
+          <div class="tool-tip  slideIn right ">O campo deve ter no máximo 6 digítos</div>
+          <input type="number" class="form-item-posex-itemov form-control" ng-model="material.Posex"
+            onKeyPress="if(this.value.length==6) return false;" ng-keydown="$ctrl.regexInputNumber($event)">
+        </th>
+        <th class="cell-bar"></th>
+        <td ng-if="$ctrl.kart.Master.Editavel" class="cell-min cell-hide center"
+          id="{{'table-cart-item-center-' + $index}}">{{::material.Centro}}</td>
+        <td class="cell-min cell-hide center" id="{{'table-cart-item-type-' + $index}}">
+          {{::material.MaterialCode.substring(3, 0)}}</td>
+        <td class="cell-min cell-hide center" id="{{'table-cart-item-ton-' + $index}}">{{ $ctrl.replaceSegmentView(material.Segmento.slice(0, 4)) }}
+        </td>
+        <td class="cell-btn-gd cell-value cell-pequena center">
+          <span class="text-value" id="{{'table-cart-item-stock-' + $index}}">
+            {{::material.TpStockCode}}
+          </span>
+          <stock-button ng-if="!!material.Stock.Disp.length" model="material.DateAtcDelv" code="::material.MaterialCode"
+            kart="$ctrl.kart" items="::material.Stock.Disp" id="{{'table-cart-item-stock-btn-' + $index}}">
+          </stock-button>
+        </td>
+        <!--  <td class="cell-med cell-hide">
+          {{::material.Stock[material.TpStockCode].DateInVend || '-'}}<br>
+          {{::material.Stock[material.TpStockCode].DateOutVend || '-'}}
+        </td> -->
+        <td class="cell-btn cell-hide center" ng-if="$ctrl.page.atc"
+          ng-class="{'cell-value' : material.StockDetail[material.TpStockCode]}">
+          <span class="text-value"
+            id="{{'table-cart-item-atc-' + $index}}">{{::$ctrl.parseStock(material.Stock[material.TpStockCode].QtdEstApos)}}</span>
+          <stock-button model="material.DateAtcDelv" items="material.StockDetail[material.TpStockCode]"
+            id="{{'table-cart-item-atc-stock-btn-' + $index}}"></stock-button>
+        </td>
+        <td class="cell-med cell-hide center" id="{{'table-cart-item-ipi-' + $index}}">{{::material.PercIpi}}
+        </td>
+        <td class="cell-btn cell-value">
+          <span class="text-value" ng-if="!material.Price[material.Segmento].SegmentPrice && $ctrl.page.currency === 'BRL'" id="{{'table-cart-item-price-brl-' + $index}}">
+            {{material.Price[material.Segmento].PrcMat.PrecoBrl90}}
+          </span>
+          <span class="text-value" ng-if="!material.Price[material.Segmento].SegmentPrice && $ctrl.page.currency === 'USD'" id="{{'table-cart-item-price-usd-' + $index}}">
+            {{material.Price[material.Segmento].PrcMat.PrecoUsd90}}
+          </span>
+          <currency-button price="material.Price[material.Segmento].Price" params="$ctrl.params"
+            currency="$ctrl.page.currency" promo="material.PrecoPromo"
+              material="material" is-ce-client="$ctrl.isCeClient || $ctrl.client && $ctrl.client.Master && $ctrl.client.Master.Address ? $ctrl.client.Master.Address[0].UfCliAdr === 'CE' : false;"
+            id="{{'table-cart-item-price-currency-btn-' + $index}}"></currency-button>
+        </td>
+        <td class="cell-sml">
+          <button class="btn btn-grid" ng-click="$ctrl.uniqPrice(material)"
+            id="{{'table-cart-item-unify-btn-' + $index}}">
+            <span class="icon icon-refresh-value"></span>
+          </button>
+        </td>
+        <td class="cell-input">
+          <input type="tel" ui-number-mask="{{ material.MaterialZipper ? 4 : 2}}" custom-validate="overPrice"
+            class="form-control" ng-model="material['Prc' + $ctrl.page.currency.capitalize()]" placeholder="0"
+            ng-disabled="material.Abgru !='' || isEfocusCustomer" id="{{'table-cart-item-sale-price-' + $index}}">
+        </td>
+        <td class="cell-input">
+          <input type="text" only-digits input-qtd class="form-control" ng-model="material.Stock.QtdMaterial"
+            placeholder="0" ng-disabled="material.Abgru != ''" id="{{'table-cart-item-amount-' + $index}}">
+        </td>
+        <td class="cell-sml center" id="{{'table-cart-item-desc-min-cut' + $index}}"> {{::material.CorteMin *1}}
+          {{::material.UnidMed}}</td>
+
+        <td class="cell-sml center" id="{{'table-cart-item-multiple-' + $index}}"> {{::material.QtdeMultiplo}}
+          {{::material.UnidMed}}</td>
+        <td class="cell-min" id="{{'table-cart-item-discount-' + $index}}">{{$ctrl.getDiscount(material, $ctrl.page,
+          $ctrl.kart.Master.isSufr)}}</td>
+        <td class="cell-min" id="{{'table-cart-item-subtotal-' + $index}}">{{$ctrl.subTotal(material)}}</td>
+        <td class="cell-min">
+          <button ng-model="material" class="badge" ng-click="$ctrl.removeItem(material)"
+            id="{{'table-cart-item-remove-btn-' + $index}}">
+            <span class="icon icon-minus"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

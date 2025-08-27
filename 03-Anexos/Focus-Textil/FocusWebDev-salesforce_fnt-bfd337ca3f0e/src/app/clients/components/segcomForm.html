@@ -1,0 +1,108 @@
+<form name="$ctrl.modelForm" class="form-box flicker active" novalidate>
+  <h3 class="form-box-title" id="segcom-form-title">
+    <span class="icon icon-tag-down"></span>
+    <span class="icon icon-tag-up"></span>
+    Segmento Comercial
+  </h3>
+  <div class="form-box-content flicker">
+    <div class="form-col-ind">
+      <div class="form-row row-color-odd">
+        <div class="form-group form-group-ct">
+          <input id="newBusinss" class="checkbox-custom" name="newBusinss" ng-model="$ctrl.checkbox.NewBusinss" type="checkbox">
+          <label for="newBusinss" class="checkbox-custom-label" id="segcom-form-new-business">Novos Negócios</label>
+        </div>
+        <div class="form-group form-group-ct">
+          <input id="nb" class="radio-custom" name="nb" ng-model="$ctrl.model.NewBusinss" value="Acessorios" type="radio" ng-disabled="!$ctrl.checkbox.NewBusinss">
+          <label for="nb" class="radio-custom-label" id="segcom-form-accessories">Acessórios</label>
+        </div>
+        <div class="form-group form-group-ct">
+          <input id="nb2" class="radio-custom" name="nb" ng-model="$ctrl.model.NewBusinss" value="Nao Texteis" type="radio" ng-disabled="!$ctrl.checkbox.NewBusinss">
+          <label for="nb2" class="radio-custom-label" id="segcom-form-non-textile">Não Têxteis</label>
+        </div>
+      </div>
+      <div class="form-row row-color-even">
+        <div class="form-group form-group-ct">
+          <input id="workWear" class="checkbox-custom" name="workWear" ng-model="$ctrl.checkbox.WorkWear" type="checkbox">
+          <label for="workWear" class="checkbox-custom-label" id="segcom-form-workwear">WorkWear</label>
+        </div>
+        <div class="form-group form-group-ct">
+          <input id="ww" class="radio-custom" name="ww" ng-model="$ctrl.model.WorkWear" value="Confeccao" type="radio" ng-disabled="!$ctrl.checkbox.WorkWear">
+          <label for="ww" class="radio-custom-label" id="segcom-form-confection">Confecção</label>
+        </div>
+        <div class="form-group form-group-ct">
+          <input id="ww2" class="radio-custom" name="ww2" ng-model="$ctrl.model.WorkWear" value="Empresa Usuaria" type="radio" ng-disabled="!$ctrl.checkbox.WorkWear">
+          <label for="ww2" class="radio-custom-label" id="segcom-form-company-user">Empresa Usuária</label>
+        </div>
+      </div>
+      <div class="form-row row-color-odd">
+        <div class="form-group form-group-ct">
+          <input id="confModa" class="checkbox-custom" name="confModa" ng-model="$ctrl.checkbox.ConfModa" type="checkbox">
+          <label for="confModa" class="checkbox-custom-label checkbox-custom-block" id="segcom-form-confection-fashion">Confecção de Moda</label>
+        </div>
+        <div class="form-group form-group-ct">
+          <input id="cm" class="radio-custom" name="cm" ng-model="$ctrl.model.ConfModa" value="Orientado para Moda" type="radio" ng-disabled="!$ctrl.checkbox.ConfModa">
+          <label for="cm" class="radio-custom-label" id="segcom-form-fashion-oriented">Orientado para Moda</label>
+        </div>
+        <div class="form-group form-group-de">
+          <input id="cm2" class="radio-custom" name="cm2" ng-model="$ctrl.model.ConfModa" value="Basico" type="radio" ng-disabled="!$ctrl.checkbox.ConfModa">
+          <label for="cm2" class="radio-custom-label" id="segcom-form-basic">Básico</label>
+        </div>
+        <div class="form-group form-group-ct"></div>
+        <div class="form-group form-group-ct">
+          <input id="cm3" class="radio-custom" name="cm3" ng-model="$ctrl.model.ConfModa" value="Competitiva" type="radio" ng-disabled="!$ctrl.checkbox.ConfModa">
+          <label for="cm3" class="radio-custom-label" id="segcom-form-coorporative-oriented">Orientado para Moda Competitiva</label>
+        </div>
+        <div class="form-group form-group-de">
+          <input id="cm4" class="radio-custom" name="cm4" ng-model="$ctrl.model.ConfModa" value="Preco" type="radio" ng-disabled="!$ctrl.checkbox.ConfModa">
+          <label for="cm4" class="radio-custom-label" id="segcom-form-price-oriented">Orientado para Preço</label>
+        </div>
+        <div class="form-group form-group-ct">
+        </div>
+        <div class="form-group form-group-de">
+          <input id="cm5" class="radio-custom" name="cm5" ng-model="$ctrl.model.ConfModa" value="Private Label" type="radio" ng-disabled="!$ctrl.checkbox.ConfModa">
+          <label for="cm5" class="radio-custom-label" id="segcom-form-private-label">Private Label</label>
+        </div>
+      </div>
+      <div class="form-row row-color-even">
+        <div class="form-group form-group-ct">
+          <input id="lar" class="checkbox-custom" name="lar" ng-model="$ctrl.checkbox.Lar" type="checkbox">
+          <label for="lar" class="checkbox-custom-label" id="segcom-form-home">Lar</label>
+        </div>
+      </div>
+      <div class="form-row"></div>
+    </div>
+    <div class="form-col-dist">
+      <div class="form-row row-color-even">
+        <div class="form-group form-group-bb">
+          <input id="atacado" class="checkbox-custom" name="atacado" ng-model="$ctrl.checkbox.Atacado" type="checkbox">
+          <label for="atacado" class="checkbox-custom-label" id="segcom-form-whosale">Atacado</label>
+        </div>
+        <div class="form-group form-group-bb">
+          <input id="varejo" class="checkbox-custom" name="varejo" ng-model="$ctrl.checkbox.Varejo" type="checkbox">
+          <label for="varejo" class="checkbox-custom-label" id="segcom-form-retail">Varejo</label>
+        </div>
+        <div class="form-group form-group-ft"></div>
+        <div class="form-group form-group-ft">
+          <input id="atac1" class="radio-custom" name="atac1" ng-model="$ctrl.model.Atacado" value="Novos Negocios" type="radio" ng-disabled="!$ctrl.checkbox.Atacado">
+          <label for="atac1" class="radio-custom-label" id="segcom-form-new-business2">Novos Negócios</label>
+        </div>
+        <div class="form-group form-group-ft">
+          <input id="atac2" class="radio-custom" name="atac2" ng-model="$ctrl.model.Atacado" value="Workwear" type="radio" ng-disabled="!$ctrl.checkbox.Atacado">
+          <label for="atac2" class="radio-custom-label" id="segcom-form-workwear2">Workwear</label>
+        </div>
+        <div class="form-group form-group-ft">
+          <input id="atac3" class="radio-custom" name="atac3" ng-model="$ctrl.model.Atacado" value="Lar" type="radio" ng-disabled="!$ctrl.checkbox.Atacado">
+          <label for="atac3" class="radio-custom-label" id="segcom-form-home2">Lar</label>
+        </div>
+        <div class="form-group form-group-ft">
+          <input id="atac4" class="radio-custom" name="atac4" ng-model="$ctrl.model.Atacado" value="Confeccao de Moda" type="radio" ng-disabled="!$ctrl.checkbox.Atacado">
+          <label for="atac4" class="radio-custom-label" id="segcom-form-confection-fashion2">Confecção de Moda</label>
+        </div>
+        <div class="form-group form-group-ft">
+          <input id="atac5" class="radio-custom" name="atac5" ng-model="$ctrl.model.Atacado" value="Todos" type="radio" ng-disabled="!$ctrl.checkbox.Atacado">
+          <label for="atac5" class="radio-custom-label" id="segcom-form-all-segments">Todos os Segmentos</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

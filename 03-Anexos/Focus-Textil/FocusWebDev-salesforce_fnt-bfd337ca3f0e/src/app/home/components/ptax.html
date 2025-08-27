@@ -1,0 +1,14 @@
+<div class="tax-pane">
+  <div class="tax-title">
+    <h3>PTAX</h3>
+  </div>
+  <div class="tax-holder" ng-if="$ctrl.items">
+    <ul class="tax-list">
+      <li ng-repeat="item in $ctrl.items">
+        <span class="tax-date">{{item.DateCot}}</span>
+        <span class="tax-val">R$ {{item.ValueCot}}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="ptax-loader"></div>
+</div>

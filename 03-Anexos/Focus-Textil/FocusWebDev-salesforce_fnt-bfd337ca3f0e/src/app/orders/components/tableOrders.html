@@ -1,0 +1,81 @@
+<table class="table table-scroll form-box-table order">
+  <thead class="thead-lg">
+    <tr>
+      <th class="cell-img"></th>
+      <th class="cell-bas">Código do Artigo</th>
+      <th class="cell-des">Descrição do Artigo</th>
+      <th class="ton center">Ton</th>
+      <th class="center">Unidade Medida</th>
+      <th class="title-ov">Qtd. Original (OV)</th>
+      <th class="title-ov">Preço {{::$ctrl.items[0] ? $ctrl.items[0].Waers : ""}} (OV)</th>
+      <th class="title-ov">Sub Total (OV)</th>
+      <th class="title-nf">Qtd. Acrescida (NF)</th>
+      <th class="title-nf" ng-if="$ctrl.ra">Qtd. Notificada</th>
+      <th class="title-nf">Qtd. Cancelada (NF) </th>
+      <th class="title-nf">Qtd. a Entregar (NF)</th>
+      <th class="title-nf">Preço BRL (NF)</th>
+      <th class="title-nf">Sub Total (NF)</th>
+      <th class="title-nf">Comissão</th>
+      <th class="title-nf center" ng-if="$ctrl.ra" id="table-orders-select-all-lg-th"><input type="checkbox" class="checkbox-space" ng-model="$ctrl.checkSelectAll" ng-click="$ctrl.selectAll(this)" id="table-orders-select-all-lg"></th>
+    </tr>
+  </thead>
+
+  <thead class="thead-sm">
+    <tr>
+      <th class="cell-img"></th>
+      <th class="cell-bas">Cód<br> Art</th>
+      <th class="cell-des">Desc <br>do Art</th>
+      <th class="ton center">Ton</th>
+      <th class="center">Unid <br>Med</th>
+      <th class="title-ov">Qtd. <br>Orig <br>(OV)</th>
+      <th class="title-ov">Prç <br>{{::$ctrl.items[0] ? $ctrl.items[0].Waers : ""}} <br>(OV)</th>
+      <th class="title-nf">Sub<br> Tot <br>(OV)</th>
+      <th class="title-nf">Qtd.<br> Acres<br> (NF)</th>
+      <th class="title-nf" ng-if="$ctrl.ra">Qtd.<br> Not</th>
+      <th class="title-nf">Qtd.<br> Canc <br>(NF) </th>
+      <th class="title-nf">Qtd.<br> a Ent <br>(NF)</th>
+      <th class="title-nf">Preço <br>BRL<br> (NF)</th>
+      <th class="title-nf">Sub <br>Tot<br> (NF)</th>
+      <th class="title-nf">Com</th>
+      <th class="title-nf center" ng-if="$ctrl.ra"><input type="checkbox" class="checkbox-space" ng-model="$ctrl.checkSelectAll" ng-click="$ctrl.selectAll(this)" id="table-orders-select-all-sm"></th>
+    </tr>
+  </thead>
+
+  <tbody fluid-height="490">
+    <tr ng-repeat="item in $ctrl.items">
+      <td class="cell-img"><span class="thumb-image" background-image="{{::item.MaterialCode}}"></span></td>
+      <td class="cell-bas">{{::item.MaterialCode}}</td>
+      <td class="cell-des">{{::item.DescMat}}</td>
+      <td class="ton center">{{::item.Segmento.slice(0, 4)}}</td>
+      <td class="center">{{::item.UnidMed}}</td>
+      <td class="right">{{::item.ovQtdOriginal}}</td>
+      <td class="right">{{::item.ovPreco}}</td>
+      <td class="right">{{::item.ovSubtotal}}</td>
+      <td class="right">{{::item.nfQtdAcrescida}}</td>
+      <!-- TO:DO check Legado == true -->
+      <td class="right" ng-if="$ctrl.ra"><input class="qnt-not-input" type="text" ng-model="item.raQtd" ng-change="$ctrl.qtdChanged(item)" ng-disabled="item.Abgru !== ''" id="{{'table-orders-ra-item-' + $index}}"></td>
+
+
+      <td class="right">{{::item.nfQtdCancelada}}</td>
+      <td class="right">{{::item.nfQtdAentregar}}</td>
+      <td class="right">{{::$ctrl.parseCurr(item.nfPreco, 2)}}</td>
+      <td class="right">{{::$ctrl.parseCurr(item.nfSubtotal, 2)}}</td>
+      <td class="">{{::item.Comissao}}</td>
+
+      <!-- TO:DO check Legado == true -->
+      <div ng-if="$ctrl.isLegado">
+        <td class="center" ng-if="$ctrl.ra">
+          <label for="select-order" class="" >
+            <input type="checkbox" readonly="readonly" ng-model="item.raSelected" ng-checked="item.raQtd > 0 || item.raSelected">
+          </label>
+        </td>
+      </div>
+
+      <td class="center" ng-if="$ctrl.ra">
+        <label for="select-order" class="" >
+          <input type="checkbox" readonly="readonly" ng-model="item.raSelected" ng-checked="item.raQtd > 0 || item.raSelected" ng-if="item.Abgru == ''" id="{{'table-orders-select-item-' + $index}}">
+        </label>
+      </td>
+    </tr>
+  </tbody>
+</table>

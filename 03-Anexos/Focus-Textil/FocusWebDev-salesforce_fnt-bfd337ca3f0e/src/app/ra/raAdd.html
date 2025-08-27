@@ -1,0 +1,73 @@
+<div class="search-content">
+    <h2 class="form-title">ABERTURA RA</h2>
+    <button type="button" class="btn btn-icon fright" ui-sref="orders" id="ra-add-back-btn">
+        <span class="icon icon-tag-left"></span> Voltar
+    </button>
+</div>
+
+<div class="ra-reasons">
+  <div class="form-select" ng-class="$ctrl.classes">
+    <select class="form-control" ng-model="vm.page.motivo" ng-change="vm.page.validate()" id="ra-add-reason">
+      <option value="" selected="selected">Selecione o Motivo</option>
+      <option ng-repeat="motivo in vm.page.motivos" value="{{::motivo.value}}">{{::motivo.name}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="abertura-ra order-form-content form-box ra-responsive-height">
+  <div class="form-col ra-form-col">
+    <div class="ra-left">
+      <div class="form-row">
+        <div class="form-group form-group-nb">
+          <label for="ObvsRa">Detalhes</label>
+          <textarea rows="4" name="ObvsRa" ng-model="vm.page.ObvsRa" class="form-control" ng-change="vm.page.validate()" id="ra-add-details"></textarea>
+        </div>
+        <div class="form-group form-group-nb">
+          <label>Expectativa Cliente</label>
+        </div>
+      </div>
+      <div class="form-col-ind">
+        <div class="form-row form-group-nb expectativas">
+          <div class="form-group form-group-ct" ng-repeat="expectativa in vm.page.expectativas">
+            <input id="{{ expectativa.id }}" class="checkbox-custom expectativa" name="expectativa[]" ng-model="expectativa.selected" value="{{ expectativa.id }}" type="checkbox" ng-change="vm.page.uniqueSelectExpectativa(expectativa)">
+            <label for="{{ expectativa.id }}" class="checkbox-custom-label" id="{{'ra-add-client-expectation-item-' + $index}}">{{ expectativa.desc }}</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-group-nb">
+        <label for="descExpectativa">Detalhes da Expectativa</label>
+        <input type="text" name="descExpectativa" class="descExpectativa" maxlength="40" ng-model="vm.page.detalheExpectativa" ng-change="vm.page.validate()" id="ra-add-expectation-details">
+      </div>
+    </div>
+    <div class="ra-right">
+     <div class="form-group form-group-nb">
+        <label for="fileName">Nome</label>
+        <input type="text" id="fileName" disabled="disabled" ng-model="vm.page.currentFileName" id="ra-add-name">
+      </div>
+      <div class="form-group form-group-nb">
+        <label for="fileDesc">Descrição</label>
+        <input type="text" id="fileDesc" class="fileDesc" disabled="disabled" ng-model="vm.page.currentFileDesc" ng-change="vm.page.fileDescChange()" id="ra-add-desc">
+      </div>
+      <div class="form-group form-group-nb">
+        <label type="file" for="up-ra" class="upload-ra">Escolha o arquivo</label>
+        <input type="file" id="up-ra" id="ra-add-choose-file">
+        <button class="btn attach" ng-click="vm.page.attachFile()" disabled="disabled" id="ra-add-attach-btn">Anexar</button>
+      </div>
+      <ul class="attached-files">
+          <li ng-repeat="file in vm.page.files">{{ file.name }} "<span>{{ file.desc }}</span>"</li>
+      </ul>
+    </div>
+    <div class="form-end">
+      <div class="btn-group-right">
+        <button class="btn btn-icon" ng-click="vm.page.backToDet()" id="ra-add-previous-btn">
+          Passo Anterior
+          <span class="icon icon-tag-left"></span>
+        </button>
+        <button class="btn btn-icon-right concluir-ra" disabled="disabled" ng-click="vm.page.createRA()" id="ra-add-done-btn">
+          Concluir
+          <span class="icon icon-tag-right"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

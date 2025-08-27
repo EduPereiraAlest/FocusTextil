@@ -1,0 +1,101 @@
+<div class="gallery-content">
+  <!-- <span class="page-counter">{{$ctrl.pageCount}}</span> -->
+  <div class="gallery-scroll" ng-style="$ctrl.track" ng-swipe-disable-mouse ng-swipe-left="$ctrl.next()" ng-swipe-right="$ctrl.prev()">
+    <div class="material-item" ng-repeat="material in $ctrl.fragmentedModel track by material.MaterialCode">
+
+      <i
+        class="outlet-tag slide"
+        ng-if="material.Ipad == 'O'"
+        id="slides-book-outlet-tag"
+      >OUTLET</i>
+
+      <i
+        class="promo-tag slide"
+        ng-if="material.Ipad == 'R'"
+      >PROMO</i>
+
+      <i
+        class="sales-tag slide"
+        ng-if="material.Ipad == 'S'"
+      >SALES</i>
+
+      <!-- Tag Promo Colors Here -->
+      <i
+        class="sales-tag slide promo-tag"
+        ng-if="material.Ipad == 'C'"
+      >PROMO COLORS</i>
+
+      <a class="material-image" background-image="{{::material.MaterialCode}}" ng-click="$ctrl.setDetail(material, $ctrl.track)" id="{{'slides-book-material-image-' + $index }}"></a>
+      <div class="material-info">
+        <favorite-button model="material" ng-if="$ctrl.kart" id="slides-book-favorite-btn">
+        </favorite-button>
+        <h3 class="material-title" ng-class="{'title-full': !$ctrl.kart}">{{ ::material.DescMat }}</h3>
+        <!--
+        <div class="btn btn-select btn-centros-slides" ng-class="{full: material.CentroSelecionado, 'centro-unico': material.Centros.length == 1}">
+          <span class="icon icon-centro">{{ material.CentroSelecionado }}</span>
+          <select ng-model="material.CentroSelecionado" class="numb-control" ng-disabled="material.Centros.length == 1">
+            <option ng-repeat="item in material.Tons" value="{{item.centro}}">{{::item.centro}} | {{::item.QtdProntEntreg | number:0}}</option>
+          </select>
+        </div>
+        -->
+        <div class="btn-centros-slides">
+        <!--
+        <stockpe-button model="" items="material"></stockpe-button>
+        -->
+        </div>
+
+        <p class="material-code" id="{{'slides-book-item-code-' + $index}}">{{ ::material.MaterialCode }}</p>
+        <p class="material-code" id="{{'slides-book-item-color-desc-' + $index}}">{{ ::material.DescCor}}</p>
+        <p class="material-code" id="{{'slides-book-item-nome-mercado-' + $index}}"><span ng-if="::material.PntCode">N. Mercado:</span> {{ ::material.NomeMercado || 'Indefinido' }}</p>
+        <p class="material-code" id="{{'slides-book-item-pnt-code-' + $index}}"><span ng-if="::material.PntCode">Pantone:</span> {{ ::material.PntCode }}</p>
+        <!--
+        <p class="material-disp line-tall"> Disp PE
+          <span ng-if="material.Centros.length == 1">{{ $ctrl.getTomProp(material, "QtdProntEntreg", material.selectedTom) }}</span>
+          <span ng-if="material.Centros.length > 1 && material.QtdPETotal">{{ material.QtdPETotal | number:0 }}</span>
+        </p>
+        -->
+        <div class="material-disp disp-container" ng-if="material.TpStockCode != 'C'">
+          Disp PE
+          <span ng-if="!material.tonalidadeRow" class="material-disp" id="{{'slides-book-item-PE-' + $index}}">{{ material.QtdPETotal | number:0}} </span>
+          <span ng-if="material.tonalidadeRow" class="material-disp" id="{{'slides-book-item-PE2-' + $index}}">{{ material.Stock[material.TomIndex][material.CentroSelecionado].QtdProntEntreg | number:0 }} </span>
+          <stockpe-button model="" items="material" id="{{'slides-book-stockpe-btn-' + $index }}"></stockpe-button>
+        </div>
+
+        <p class="material-tax line-tall" id="{{'slides-book-item-IPI-' + $index}}">IPI(%) <span>{{ ::material.PercIpi }}</span></p>
+        <!--
+        <p class="material-disp"> Disp ATC <span>{{ $ctrl.getTomProp(material, "QtdEstApos", material.selectedTom) }}</span></p>
+        -->
+        <div class="material-disp disp-container" ng-if="material.TpStockCode != 'C'">
+          Disp ATC
+          <span ng-if="material.isATCStock" class="material-disp" id="{{'slides-book-item-ATC-' + $index}}">
+            {{material.Disp[material.Stock[material.TomIndex][material.CentroSelecionado].SegmentoEstoque].QtdEstApos | number:0 }}
+          </span>
+
+          <span ng-if="!material.isATCStock" class="material-disp" id="{{'slides-book-item-ATC2-' + $index}}">
+            {{ material.Stock[material.TomIndex][material.CentroSelecionado].QtdEstApos | number:0 }}
+          </span>
+
+          <stock-button ng-if="!!material.Disp[material.Stock[material.TomIndex][material.CentroSelecionado].SegmentoEstoque].ListDispView.length" model="material.DateAtcDelv" code="::material.MaterialCode" kart="$ctrl.kart" items="material.Disp[material.Stock[material.TomIndex][material.CentroSelecionado].SegmentoEstoque].ListDispView" id="slides-book-stock-btn"></stock-button>
+        </div>
+        <p class="material-tax" id="{{'slides-book-item-NCM-' + $index}}">NCM <span>{{ ::material.NcmCode }}</span></p>
+      </div>
+      <div class="material-input">
+        <div class="tom-selector"><selects model="material.selectedTom" items="material.tonalidadeKeys" on-change="$ctrl.centroUpdater(material)" id="{{'slides-book-tom-select-' + $index }}"></selects></div>
+        <div class="form-group material-qtd-input"> Qtd.:
+          <quantity-input ng-model="material.Stock[material.selectedTom][material.CentroSelecionado].QtdMaterial" material="material" kart="$ctrl.kart" currency="$ctrl.page.currency" limits="::$ctrl.params.StockLimits" stock="material.Stock[material.selectedTom]" id="{{'slides-book-quantity-' + $index }}">
+          </quantity-input>
+          <currency-button ng-if="$ctrl.page.type !== 'C'" price="material.Price[material.Stock[material.selectedTom][material.CentroSelecionado].SegmentoEstoque].Price" params="$ctrl.params" currency="$ctrl.page.currency" promo="material.PrecoPromo" id="{{'slides-book-currency-btn-' + $index }}"></currency-button>
+          <!-- currency-button ng-if="$ctrl.page.type !== 'C'" price="::material.Price" params="::$ctrl.params" currency="$ctrl.page.currency"></currency-button -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="$ctrl.model.length > 4 && !$ctrl.ipad">
+    <button class="btn btn-gallery btn-next" ng-if="$ctrl.showNext" ng-click="$ctrl.next()" id="slides-book-next-btn">
+      <span class="icon icon-tag-right"></span>
+    </button>
+    <button class="btn btn-gallery btn-prev" ng-if="$ctrl.showPrev" ng-click="$ctrl.prev()" id="slides-book-previous-btn">
+      <span class="icon icon-tag-left"></span>
+    </button>
+  </div>
+</div>

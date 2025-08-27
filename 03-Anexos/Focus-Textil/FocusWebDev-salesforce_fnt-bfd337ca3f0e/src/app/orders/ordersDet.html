@@ -1,0 +1,366 @@
+<div class="search-content">
+  <h2 class="form-title" ng-if="!isRA">ORDEM DE VENDA: {{  vm.ovMask  }} &nbsp;&nbsp;&nbsp;&nbsp;
+
+    <span class="order-cart-title font-14">Pedido: {{ vm.pdMask }}</span>
+
+  </h2>
+
+
+  <h2 class="form-title" ng-if="isRA">DADOS DA NF</h2>
+ 
+  <button type="button" class="btn btn-icon fright" ui-sref="orders" id="orders-det-back-btn">
+    <span class="icon icon-tag-left"></span> Voltar
+  </button>
+
+  <a ng-if="vm.order.Master.CodePv !== 'PEDIDO_SAP'" ng-href="#!/status-det/{{ vm.order.Master.CodePv }}">
+  <button type="button" class="btn btn-icon fright btn-space-right" id="orders-det-view-order-btn">
+    <span class="icon icon-check-empty"></span> Visualizar Pedido
+  </button>
+  </a>
+</div>
+<!-- ACCORDEON -->
+<div class="order-detail-content" ng-if="vm.order.Master" fluid-height="172" simple-accordion>
+  <div class="form-box active" ng-if="vm.actionScope.order.Acao">
+    <h3 class="form-box-title" id="orders-det-order-action-title">
+      <span class="icon icon-tag-down"></span>
+      <span class="icon icon-tag-up"></span>
+      Ação da Ordem
+    </h3>
+    <fieldset class="form-box-content">
+      <div class="form-row">
+        <form class="form-box-content send-action-form" name="formact" ng-submit="vm.actionScope.sendAction($event)"
+          novalidate>
+          <div class="form-col">
+            <div class="form-row">
+              <div class="form-group form-group-ct">
+                <label>Ação</label>
+                <div class="form-select">
+                  <select class="form-control" ng-model="vm.actionScope.data.Kvgr4" required id="orders-det-action">
+                    <option value="">Selecione</option>
+                    <option ng-repeat="action in vm.actionScope.actions" value="{{action.Cod}}">{{action.Desc}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group form-group-dq" ng-if="vm.actionScope.data.Kvgr4 === '04'">
+                <label>Data</label>
+                <div class="form-select">
+                  <select class="form-control" ng-model="vm.actionScope.data.DateAtc" required id="orders-det-action-date">
+                    <option value="">Selecione</option>
+                    <option ng-repeat="date in vm.actionScope.dates">{{date}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group form-group-fl">
+                <label for="actionObs">Observações</label>
+                <textarea rows="4" name="actionObs" ng-model="vm.actionScope.data.Text" class="form-control" id="orders-det-action-obs"></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group form-group-fl">
+                <button class="btn fright" name='upload' ng-disabled="formact.$invalid" id="orders-det-action-confirm-btn">Confirmar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </fieldset>
+  </div>
+  <div class="form-box">
+    <h3 class="form-box-title" id="orders-det-order-data-title">
+      <span class="icon icon-tag-down"></span>
+      <span class="icon icon-tag-up"></span>
+      Dados da Ordem
+      <span class="title-data order-number no-click">{{ vm.ovMask }} &nbsp;&nbsp;&nbsp;</span>
+      <span class="title-data order-nf no-click orange-text" ng-if="vm.order.Master.Nfenum">NF: {{ vm.order.Master.NfenumPrint }}  &nbsp;&nbsp;&nbsp;</span>
+      <span
+        class="title-data order-client no-click">{{ vm.order.Master.CodeCli + ' - ' + vm.order.Master.Razao01Cli }}</span>
+    </h3>
+    <fieldset class="form-box-content selling-order" disabled="disabled">
+      <div class="form-col auto-height" disabled="disabled">
+        <div class="form-row">
+          <div class="form-group form-group-dt">
+            <label for="orderCode">Ordem de Venda</label>
+            <input type="text" name="orderCode" class="form-control" ng-model="vm.order.Master.CodeOv" id="orders-det-order-data-sale">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="nfenum">Nota Fiscal</label>
+            <input type="text" name="nfenum" class="form-control" ng-model="vm.order.Master.Nfenum" id="orders-det-order-data-nf">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="remessa">Remessa</label>
+            <input type="text" name="remessa" class="form-control" ng-model="vm.order.Master.Remessa" id="orders-det-order-data-shipping">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="payCondDesc">Forma de Pagamento</label>
+            <input type="text" name="payCondDesc" class="form-control" value="{{vm.order.Master.PayCondDesc}}" id="orders-det-order-data-payment-method">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-dt">
+            <label for="dateOv">Data da Ordem</label>
+            <input type="text" name="dateOv" class="form-control" parse-date ng-model="vm.order.Master.DateOv" id="orders-det-order-data-date-order">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="dateEmiFat">Data Nota Fiscal</label>
+            <input type="text" name="dateEmiFat" class="form-control" parse-date ng-model="vm.order.Master.DateEmiFat" id="orders-det-order-data-date-nf">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="dateRemessa">Data Remessa</label>
+            <input type="text" name="dateRemessa" class="form-control" parse-date
+              ng-model="vm.order.Master.DateRemessa" id="orders-det-order-data-date-shipping">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="dateFT">Data FT</label>
+            <input type="text" name="dateFT" class="form-control" parse-date ng-model="vm.order.Master.DateFT" id="orders-det-order-data-date-ft">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-dt">
+            <label for="descBloqueioRem">Desc. Blq Rem.</label>
+            <input type="text" name="descBloqueioRem" class="form-control" ng-model="vm.order.Master.DescBloqueioRem" id="orders-det-order-data-block-shipping">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="descBloqueioFat">Desc. Blq Fat.</label>
+            <input type="text" name="descBloqueioFat" class="form-control" ng-model="vm.order.Master.DescBloqueioFat" id="orders-det-order-data-block-fat">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="acaoDesc">Ação Representante</label>
+            <input type="text" name="acaoDesc" class="form-control" ng-model="vm.order.Master.AcaoDesc" id="orders-det-order-data-action">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="sedexCode">Sedex</label>
+            <input type="text" name="sedexCode" class="form-control" ng-model="vm.order.Master.SedexCode" id="orders-det-order-data-sedex">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-bt">
+            <label for="codeCli">Cliente</label>
+            <input type="text" name="codeCli" class="form-control"
+              value="{{vm.order.Master.CodeCli + ' - ' + vm.order.Master.Razao01Cli}}" id="orders-det-order-data-client">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="codeCentro">Filial</label>
+            <input type="text" name="codeCentro" class="form-control" ng-model="vm.order.Master.CodeCentro" id="orders-det-order-data-branch">
+          </div>
+          <div class="form-group form-group-dt">
+            <label for="augru">Tipo</label>
+            <input type="text" name="augru" class="form-control" ng-model="vm.order.Master.Augru" id="orders-det-order-data-type">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-bt">
+            <label for="numPedidoCliente">Número Pedido Cliente</label>
+            <input type="text" name="numPedidoCliente" class="form-control"
+              value="{{vm.order.Master.NumPedidoCliente}}" id="orders-det-order-data-number-client-order">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-ft">
+            <label for="obsOv">Observações</label>
+            <textarea rows="3" type="text" name="obsOv" class="form-control"
+              ng-model="vm.order.Master.ObsOv"></textarea id="orders-det-order-data-obs">
+          </div>
+        </div>
+      </div>
+      <div class="form-col form-col-total total-sum" ng-if="vm.order">
+        <div class="form-row text-center">
+          <div class="form-group form-group-de form-group-total fright grad-color-white">
+            <label class="label-margin font-12">TOTAL ORDEM DE VENDA</label>
+            <br>
+            <span>{{::vm.order.Master.CodeCurr}} {{::vm.parseCurr(vm.ValorOV)}}</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-de form-group-total fright text-center">
+            <label class="label-margin">TOTAL FATURADO</label>
+            <br>
+            <span>R$ {{::vm.parseCurr(vm.ValorFaturada)}}</span>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="form-box">
+    <h3 class="form-box-title" id="orders-det-delivery-data-tile">
+      <span class="icon icon-tag-down"></span>
+      <span class="icon icon-tag-up"></span>
+      Dados de Entrega
+    </h3>
+    <fieldset class="form-box-content" disabled="disabled">
+      <div class="form-row">
+        <div class="form-group form-group-at">
+          <label for="razao01Cli">Local de Entrega</label>
+          <input type="text" name="razao01Cli" class="form-control" ng-model="vm.delivery.Razao01Cli" id="orders-det-delivery-data-delivery">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-bt">
+          <label for="logr">Logradouro</label>
+          <input type="text" name="logr" class="form-control" ng-model="vm.delivery.LogrCli" id="orders-det-delivery-data-street">
+        </div>
+        <div class="form-group form-group-et">
+          <label for="num">Numero</label>
+          <input type="text" name="num" class="form-control" ng-model="vm.delivery.NumHouseCli" id="orders-det-delivery-data-number">
+        </div>
+        <div class="form-group form-group-et">
+          <label for="comp">Complemento</label>
+          <input type="text" name="comp" class="form-control" ng-model="vm.delivery.ComplCli" id="orders-det-delivery-data-complement">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-ct">
+          <label for="bairro">Bairro</label>
+          <input type="text" name="bairro" class="form-control" ng-model="vm.delivery.BairroCli" id="orders-det-delivery-data-district">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="cidade">Cidade</label>
+          <input type="text" name="cidade" class="form-control" ng-model="vm.delivery.CityCli" id="orders-det-delivery-data-city">
+        </div>
+        <div class="form-group form-group-et">
+          <label for="uf">UF</label>
+          <input type="text" name="uf" class="form-control" ng-model="vm.delivery.UfCliAdr" id="orders-det-delivery-data-state">
+        </div>
+      </div>
+      <div class="form-row" ng-if="vm.delivery.Transportadora">
+        <div class="form-group form-group-bb">
+          <label for="transportadora">Transportadora</label>
+          <input type="text" name="transportadora" class="form-control" ng-model="vm.delivery.Transportadora" id="orders-det-delivery-data-company">
+        </div>
+        <div class="form-group form-group-bb">
+          <label for="ordemTransporte">Ordem de Transporte</label>
+          <input type="text" name="ordemTransporte" class="form-control" ng-model="vm.delivery.OrdemTransporte" id="orders-det-delivery-data-order">
+        </div>
+      </div>
+      <div class="form-row" ng-if="vm.delivery.Transportadora">
+        <div class="form-group form-group-ed">
+          <label for="dateOrdemTransp">Data Ordem Trans.</label>
+          <input type="text" name="dateOrdemTransp" class="form-control" parse-date
+            ng-model="vm.delivery.DateOrdemTransp" id="orders-det-delivery-data-date-transport">
+        </div>
+        <div class="form-group form-group-ed">
+          <label for="dtDelivery">Data Entrega</label>
+          <input type="text" name="dtDelivery" class="form-control" parse-date ng-model="vm.delivery.DtDelivery" id="orders-det-delivery-data-date-delivery">
+        </div>
+        <div class="form-group form-group-ed">
+          <label for="dtConfDelivery">Data Conf. Entrega</label>
+          <input type="text" name="dtConfDelivery" class="form-control" parse-date
+            ng-model="vm.delivery.DtConfDelivery" id="orders-det-delivery-data-date-delivery-conf">
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="form-box" ng-if="vm.isRedesp">
+    <h3 class="form-box-title" id="orders-det-redispatch-title">
+      <span class="icon icon-tag-down"></span>
+      <span class="icon icon-tag-up"></span>
+      Redespacho
+    </h3>
+    <fieldset class="form-box-content" disabled="disabled">
+      <div class="form-row">
+        <div class="form-group form-group-bt">
+          <label for="razao01Cli">Transportadora Redespacho</label>
+          <input type="text" name="razao01Cli" class="form-control" ng-model="vm.redespacho.Razao01Cli" id="orders-det-redispatch-company-redispatch">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="cnpj">CNPJ</label>
+          <input type="text" name="cnpj" class="form-control" ng-model="vm.redespacho.CnpjAdr" id="orders-det-redispatch-cnpj">
+        </div>
+      </div>
+      <!-- PostCodRedisp -->
+      <div class="form-row">
+        <div class="form-group form-group-et">
+          <label for="logr">CEP</label>
+          <input type="text" name="logr" class="form-control" ng-model="vm.redespacho.CepCli" id="orders-det-redispatch-zipcode">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="inscricaoestadual">Inscrição Estadual</label>
+          <input type="text" name="inscricaoestadual" class="form-control" ng-model="vm.redespacho.InscEstAdrCli" id="orders-det-redispatch-state-registration">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="inscricaoestadual">Suframa</label>
+          <input type="text" name="suf" class="form-control" ng-model="vm.redespacho.Suframa" id="orders-det-redispatch-suframa">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-ct">
+          <label for="logr">Logradouro</label>
+          <input type="text" name="logr" class="form-control" ng-model="vm.redespacho.LogrCli" id="orders-det-redispatch-street">
+        </div>
+        <div class="form-group form-group-et">
+          <label for="num">Numero</label>
+          <input type="text" name="num" class="form-control" ng-model="vm.redespacho.NumHouseCli" id="orders-det-redispatch-number">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="comp">Complemento</label>
+          <input type="text" name="comp" class="form-control" ng-model="vm.redespacho.ComplCli" id="orders-det-redispatch-complement">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-ct">
+          <label for="bairro">Bairro</label>
+          <input type="text" name="bairro" class="form-control" ng-model="vm.redespacho.BairroCli" id="orders-det-redispatch-district">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="cidade">Cidade</label>
+          <input type="text" name="cidade" class="form-control" ng-model="vm.redespacho.CityCli" id="orders-det-redispatch-city">
+        </div>
+        <div class="form-group form-group-et">
+          <label for="uf">UF</label>
+          <input type="text" name="uf" class="form-control" ng-model="vm.redespacho.UfCliAdr" id="orders-det-redispatch-state">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group form-group-bt">
+          <label for="razao01Cli">E-mail</label>
+          <input type="email" name="email" class="form-control" ng-model="vm.redespacho.Email" id="orders-det-redispatch-email">
+        </div>
+        <div class="form-group form-group-ct">
+          <label for="cnpj">Telefone</label>
+          <input type="text" name="fone" class="form-control" ng-model="vm.redespacho.FoneAdr" id="orders-det-redispatch-phone">
+        </div>
+      </div>
+      <div class="form-row" ng-if="vm.redespacho.Transportadora">
+        <div class="form-group form-group-bb">
+          <label for="transportadora">Transportadora</label>
+          <input type="text" name="transportadora" class="form-control" ng-model="vm.redespacho.Transportadora" id="orders-det-redispatch-company">
+        </div>
+        <div class="form-group form-group-bb">
+          <label for="ordemTransporte">Ordem de Transporte</label>
+          <input type="text" name="ordemTransporte" class="form-control" ng-model="vm.redespacho.OrdemTransporte" id="orders-det-redispatch-shipping-order">
+        </div>
+      </div>
+      <div class="form-row" ng-if="vm.redespacho.Transportadora">
+        <div class="form-group form-group-ed">
+          <label for="dateOrdemTransp">Data Ordem Trans.</label>
+          <input type="text" name="dateOrdemTransp" class="form-control" parse-date
+            ng-model="vm.redespacho.DateOrdemTransp" id="orders-det-redispatch-date-order">
+        </div>
+        <div class="form-group form-group-ed">
+          <label for="dtDelivery">Data Entrega</label>
+          <input type="text" name="dtDelivery" class="form-control" parse-date ng-model="vm.redespacho.DtDelivery" id="orders-det-redispatch-date-delivery">
+        </div>
+        <div class="form-group form-group-ed">
+          <label for="dtConfDelivery">Data Conf. Entrega</label>
+          <input type="text" name="dtConfDelivery" class="form-control" parse-date
+            ng-model="vm.redespacho.DtConfDelivery" id="orders-det-redispatch-date-delivery-conf">
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="form-box active">
+    <h3 class="form-box-title" id="orders-det-order-item-title">
+      <span class="icon icon-tag-down"></span>
+      <span class="icon icon-tag-up"></span>
+      Item do Pedido
+    </h3>
+    <div class="form-box-content form-box-clean">
+      <table-orders items="tableOrderItems" ra="isRA" isLegado="vm.order.Master.Legado">
+      </table-orders>
+    </div>
+  </div>
+  <a ng-if="isRA" ng-click="goToRaAdd()">
+    <div class="btn fright next-step">Próximo Passo <span class="icon-tag-right-after"></span></div>
+  </a>
+</div>

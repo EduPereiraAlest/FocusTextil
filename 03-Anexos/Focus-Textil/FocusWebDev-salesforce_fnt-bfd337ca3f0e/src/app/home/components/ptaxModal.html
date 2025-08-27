@@ -1,0 +1,14 @@
+<div class="modal-ptax-pane">
+  <div class="modal-ptax-title">
+    <h3>PTAX</h3>
+  </div>
+  <div class="modal-ptax-holder" ng-if="ptaxList">
+    <ul class="modal-ptax-list">
+      <li ng-repeat="item in ptaxList">
+        <span class="modal-ptax-date" id="{{'ptax-modal-item-date-' + $index}}">{{item.DateCot}}</span>
+        <span class="modal-ptax-val" id="{{'ptax-modal-item-value-' + $index}}">R$ {{item.ValueCot}}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="modal-ptax-loader"></div>
+</div>

@@ -1,0 +1,90 @@
+<div class="home">
+  <div class="home__top--content" ng-if="!isEfocusCustomer">
+    <h2 class="heading-primary" ng-if="vm.pends.length">Suas Pendências</h2>
+    <h2 class="heading-primary" ng-if="!vm.ptax.length">Carregando Pacotes</h2>
+    <div class="btn-group-right">
+      <!-- <button class="btn" ng-click="vm.openPends()" ng-if="vm.pends.length > 3"> Ver Todos </button> -->
+    </div>
+  </div>
+  <pend-list ng-if="!isEfocusCustomer && vm.pends.length" open="vm.pendPanel" items="::vm.pends" on-click="vm.selectPend(pend)"></pend-list>
+  <div class="home__content" fluid-height="vm.pends.length ? 230 : 100" ng-class="{'customer-login': isEfocusCustomer}">
+    <div class="home__box" ng-if="!isEfocusCustomer && vm.ptax.length">
+      <div class="home__box--holder">
+        <h2 class="home__heading" ng-if="!isEfocusCustomer">{{vm.kart ? "Cliente" : "Definir cliente"}} > <span ng-if="!vm.kart">É necessário definir um cliente. Clique em “Buscar Cliente” ou “Cadastrar Cliente”</span> {{vm.kart.Master.NomeCli}}</h2>
+        <div class="home-buttons">
+          <home-button link="clients" icon="user-search" id="home-search-clients-btn">buscar<br>clientes</home-button>
+          <home-button link="books" icon="book" id="home-catalog-btn">catálogo<br></home-button>
+          <home-button link="status" icon="status" id="home-status-order-btn">pedidos<br>status</home-button>
+          <home-button link="orders" icon="check-empty" id="home-sale-order-btn">ordens<br>de venda</home-button>
+          <home-button link="carts" icon="cart" unable="!vm.kart || !vm.kart.Master.Item902.length" id="home-cart-btn">carrinho de compras</home-button>
+          <home-button alink="#!/clients-add/" icon="user-add" id="home-register-clients-btn">cadastrar<br>cliente</home-button>
+          <home-button ng-if="!isEfocusCustomer" link="contact" icon="chat-focus" unable="vm.profileBlocked" id="home-representative-channel-btn">canal do representante</home-button>
+          <home-button ng-if="!isEfocusCustomer" link="ras" icon="clipboard" unable="" id="home-search-ra-btn">busca<br> de ra</home-button>
+          <home-button ng-if="!isEfocusCustomer" alink="https://my359386-sso.crm.ondemand.com/" image="/images/crm-logo.png" id="home-search-ra-btn">CRM</home-button>
+          <home-button ng-if="!isEfocusCustomer" alink="https://app.peoplefy.com.br/login" image="/images/peoplefy-logo.png" id="home-search-ra-btn">peoplefy</home-button>
+          <home-button ng-if="!isEfocusCustomer" link="commission" icon="dollar" unable="vm.profileBlocked" id="home-search-comission-btn">pesquisa<br> comissão</home-button>
+          <div ng-if="!isEfocusCustomer" class="btn-home-box">
+            <a ng-click="vm.customerPtax()" class="btn-pane texted-pane" id="home-ptax-btn">
+              <span class="button-text">{{ vm.ptaxText }}</span>
+            </a>
+            <span class="btn-label">Ptax</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="white-container" ng-if="isEfocusCustomer">
+      <div class="photo-buttons">
+        <button ui-sref="books" id="home-customer-ebook"><span>EBOOK / ESTOQUES</span></button>
+        <button ui-sref="status" id="home-customer-orders"><span>PEDIDOS</span></button>
+        <button ui-sref="orders" id="home-customer-sale-orders"><span>ORDENS DE VENDA</span></button>
+        <button ng-click="goToCarts()" ng-class="{ disabled: !vm.kart || !vm.kart.Master.Item902.length }" id="home-customer-cart"><span>CARRINHO DE COMPRA</span><div class="jewel" ng-if="vm.kart && vm.kart.Master.Item902.length">{{ vm.kart && vm.kart.Master.Item902.length && vm.kart.Master.Item902.length}}</div></button>
+      </div>
+      <div ng-if="isEfocusCustomer" class="banner-itens">
+        <div class="destaque"></div>
+        <div class="itens">
+          <button class="item" ng-click="materialImageSearch('20130527')" id="home-customer-item-0"><label>alfaiatarias</label></button>
+          <button class="item" ng-click="materialImageSearch('20130526')" id="home-customer-item-1"><label>aspectos de linho</label></button>
+          <button class="item" ng-click="materialImageSearch('20130523')" id="home-customer-item-2"><label>acetinados</label></button>
+          <button class="item" ng-click="materialImageSearch('20130534')" id="home-customer-item-3"><label>tafetas</label></button>
+          <button class="item" ng-click="materialImageSearch('20130530')" id="home-customer-item-4"><label>rendas</label></button>
+          <button class="item" ng-click="materialImageSearch('20130529')" id="home-customer-item-5"><label>tules</label></button>
+          <button class="item" ng-click="materialImageSearch('20130533')" id="home-customer-item-6"><label>denim</label></button>
+          <button class="item" ng-click="materialImageSearch('20130532')" id="home-customer-item-7"><label>estampados</label></button>
+          <button class="item" ng-click="materialImageSearch('20130528')" id="home-customer-item-8"><label>couro</label></button>
+          <button class="item" ng-click="materialImageSearch('20130525')" id="home-customer-item-9"><label>malhas</label></button>
+          <button class="item" ng-click="materialImageSearch('20130524')" id="home-customer-item-10"><label>transparências</label></button>
+          
+        </div>
+      </div>
+      <div ng-if="isEfocusCustomer" class="banner-itens inverted">
+        <div class="destaque"></div>
+        <div class="itens">
+          <button class="item" ng-click="materialImageSearch('20130527')" id="home-customer-item-inverted-0"><label>alfaiatarias</label></button>
+          <button class="item" ng-click="materialImageSearch('20130526')" id="home-customer-item-inverted-1"><label>aspectos de linho</label></button>
+          <button class="item" ng-click="materialImageSearch('20130523')" id="home-customer-item-inverted-2"><label>acetinados</label></button>
+          <button class="item" ng-click="materialImageSearch('20130534')" id="home-customer-item-inverted-3"><label>tafetas</label></button>
+          <button class="item" ng-click="materialImageSearch('20130530')" id="home-customer-item-inverted-4"><label>rendas</label></button>
+          <button class="item" ng-click="materialImageSearch('20130529')" id="home-customer-item-inverted-5"><label>tules</label></button>
+          <button class="item" ng-click="materialImageSearch('20130533')" id="home-customer-item-inverted-6"><label>denim</label></button>
+          <button class="item" ng-click="materialImageSearch('20130532')" id="home-customer-item-inverted-7"><label>estampados</label></button>
+          <button class="item" ng-click="materialImageSearch('20130528')" id="home-customer-item-inverted-8"><label>couro</label></button>
+          <button class="item" ng-click="materialImageSearch('20130525')" id="home-customer-item-inverted-9"><label>malhas</label></button>
+          <button class="item" ng-click="materialImageSearch('20130524')" id="home-customer-item-inverted-10"><label>transparências</label></button>
+          <button class="item" ng-click="materialImageSearch('20130526')" id="home-customer-item-inverted-11"><label>linho</label></button>
+        </div>
+      </div>
+      <div ng-if="isEfocusCustomer" class="banner-itens two-rows">
+        <div class="destaque"></div>
+        <div class="itens">
+          <button class="item" ng-click="materialImageSearch('20130527')" id="home-customer-item-two-rows-0"><label>alfaiatarias</label></button>
+          <button class="item" ng-click="materialImageSearch('20130526')" id="home-customer-item-two-rows-1"><label>aspectos de linho</label></button>
+          <button class="item" ng-click="materialImageSearch('20130523')" id="home-customer-item-two-rows-2"><label>acetinados</label></button>
+          <button class="item" ng-click="materialImageSearch('20130534')" id="home-customer-item-two-rows-3"><label>tafeta</label></button>
+          <button class="item" ng-click="materialImageSearch('20130530')" id="home-customer-item-two-rows-4"><label>rendas</label></button>
+          <button class="item" ng-click="materialImageSearch('20130529')" id="home-customer-item-two-rows-5"><label>tules</label></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pendencias-loader"></div>
+</div>

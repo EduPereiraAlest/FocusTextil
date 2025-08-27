@@ -1,0 +1,543 @@
+<div class="search-content">
+  <h2 class="form-title">ADICIONAR CLIENTE</h2>
+</div>
+<div class="add-filter-content">
+  <form name="tabform" class="add-menu">
+    <input type="radio" id="chk1" ng-checked="vm.tab == 1" class="wzd-step" name="breadcrumb" onclick="return false">
+    <label for="chk1">1. Dados Básicos</label>
+    <input type="radio" id="chk2" ng-checked="vm.tab == 2" class="wzd-step" name="breadcrumb" onclick="return false">
+    <label for="chk2">2. Endereços</label>
+    <input type="radio" id="chk3" ng-checked="vm.tab == 3" class="wzd-step" name="breadcrumb" onclick="return false">
+    <label for="chk3">3. Complementos</label>
+    <input type="radio" id="chk4" ng-checked="vm.tab == 4" class="wzd-step" name="breadcrumb" onclick="return false" ng-disabled="vm.sugest.PgAntCli">
+    <label for="chk4">4. Segmentação</label>
+    <input type="radio" id="chk5" ng-checked="vm.tab == 5" class="wzd-step" name="breadcrumb" onclick="return false" ng-disabled="vm.sugest.PgAntCli">
+    <label for="chk5">5. Perfil</label>
+  </form>
+</div>
+<div class="client-add-content" fluid-height="228">
+  <!-- 1. DADOS BASICOS -->
+  <div class="add-form-content" simple-accordion ng-if="vm.tab == 1">
+    <client-form form-name="vm.clientForm" model="vm.client" ng-class="{active: true}" title="Dados do Cliente"></client-form>
+  </div>
+  <!-- 2. ENDEREÇOS -->
+  <div class="add-form-content" simple-accordion ng-if="vm.tab == 2">
+    <address-form form-ctrl="vm.addcliForm" model="vm.address.cli" ng-class="{active: true}" type="cli" title="Endereço do Cliente">
+    </address-form>
+    <!-- address-form form-ctrl="vm.addfatForm" model="vm.address.fat" title="Endereço do Faturamento" type="fat" ng-class="{ disabled: vm.equal.fat }">
+      <check-equal type="fat" model="vm.equal.fat" click="vm.checkEqual(type, flag)"></check-equal>
+    </address-form>
+    <address-form form-ctrl="vm.addcobForm" model="vm.address.cob" title="Endereço de Cobrança" type="cob" ng-class="{ disabled: vm.equal.cob }">
+      <check-equal type="cob" model="vm.equal.cob" click="vm.checkEqual(type, flag)"></check-equal>
+    </address-form -->
+    <!-- 2. ENDEREÇO ENTREGA -->
+    <form name="vm.addremForm" class="form-box flicker" ng-submit="vm.addItem('addrem', 'addres', $event)" novalidate>
+      <h3 class="form-box-title">
+        <span class="icon icon-tag-down"></span>
+        <span class="icon icon-tag-up"></span>
+        Endereço de Entrega
+      </h3>
+      <div class="form-box-content flicker no-max-height">
+        <div class="form-row">
+          <div class="form-group form-group-bt">
+            <label for="razao">Razão Social*</label>
+            <input type="text" name="razao" class="form-control" ng-disabled="vm.addrem.Exist" ng-model="vm.addrem.Razao01Cli" required id="clients-add-delivery-company-name">
+            <input type="hidden" ng-model="vm.addrem.TpAdrCli" id="clients-add-delivery-company-name-hidden">
+          </div>
+          <input-cnpj-address name="CnpjAdrRem" ng-model="vm.addrem" id="clients-add-delivery-cnpj"></input-cnpj-address>
+        </div>
+        <fieldset ng-disabled="vm.addrem.Exist">
+          <div class="form-row">
+            <div class="form-group form-group-bb">
+              <label for="PaisCli">Pais*</label>
+              <div class="form-select control-default form-group-dt">
+                <select name="PaisCli" ng-model="vm.addrem.PaisCli" autocomplete="new-password" class="form-control" id="clients-add-delivery-country">
+                  <option value="">Selecione</option>
+                  <option value="BR">Brasil</option>
+                  <option value="BO">Bolivia</option>
+                  <option value="CA">Canada</option>
+                </select>
+              </div>
+            </div>
+            <input-cep model="vm.addrem" form-ctrl="vm.addremForm" id="clients-add-cep"></input-cep>
+          </div>
+          <div class="form-row">
+            <div class="form-group form-group-bb">
+              <label for="logr">Logradouro*</label>
+              <input type="text" name="logr" class="form-control" ng-model="vm.addrem.LogrCli" ng-disabled="vm.addrem.ZipBlock.Rua" required id="clients-add-delivery-street">
+            </div>
+            <div class="form-group form-group-et">
+              <label for="num">Numero*</label>
+              <input type="text" name="num" class="form-control" ng-model="vm.addrem.NumHouseCli" required id="clients-add-delivery-number">
+            </div>
+            <div class="form-group form-group-et">
+              <label for="comp">Complemento</label>
+              <input type="text" name="comp" class="form-control" ng-model="vm.addrem.ComplCli" id="clients-add-delivery-complement">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group form-group-de">
+              <label for="BairroCli">Bairro*</label>
+              <input type="text" name="BairroCli" class="form-control" ng-model="vm.addrem.BairroCli" ng-disabled="vm.addrem.ZipBlock.Bairro" required id="clients-add-delivery-district">
+            </div>
+            <div class="form-group form-group-de">
+              <label for="CityCli">Cidade*</label>
+              <input type="text" name="CityCli" class="form-control" ng-model="vm.addrem.CityCli" ng-disabled="vm.addrem.ZipBlock.Cidade" required id="clients-add-delivery-city">
+            </div>
+            <div class="form-group form-group-et">
+              <label for="UfCliAdr">UF*</label>
+              <input type="text" name="UfCliAdr" class="form-control" ng-model="vm.addrem.UfCliAdr" ng-disabled="vm.addrem.ZipBlock.Estado" maxlength="2" ng-pattern="/[A-Z]+/" required id="clients-add-delivery-state">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group form-group-dd">
+              <label for="insc">Inscrição Estadual*</label>
+              <input type="tel" name="insc" class="form-control" ng-model="vm.addrem.InscEstAdrCli" ng-if="!vm.addrem.Isento" ui-br-ie-mask="vm.addrem.UfCliAdr" required id="clients-add-delivery-state-registration">
+              <input type="text" name="insc" class="form-control" ng-disabled="true" ng-if="vm.addrem.Isento">
+            </div>
+            <div class="form-group text-bottom form-group-ef">
+              <input id="isenRem" class="checkbox-custom" name="isenRem" ng-model="vm.addrem.Isento" type="checkbox" id="clients-add-delivery-free">
+              <label for="isenRem" class="checkbox-custom-label">Isento</label>
+            </div>
+            <div class="form-group form-group-dr">
+              <label for="sufr">Suframa</label>
+              <input type="tel" pattern="[0-9]+([\.,-][0-9]+)?" name="sufr" class="form-control" ng-model="vm.addrem.SufrCli" id="clients-add-delivery-suframa">
+            </div>
+            <div class="form-group form-group-et">
+              <label for="FoneAdr">Telefone*</label>
+              <input type="tel" name="FoneAdr" class="form-control" ng-model="vm.addrem.FoneAdr" ui-br-phone-number required id="clients-add-delivery-phone">
+            </div>
+            <div class="form-group form-group-er">
+              <label for="RamalAdr">Ramal</label>
+              <input type="tel" name="RamalAdr" class="form-control" ng-model="vm.addrem.RamalAdr" ui-number-mask="0" ui-hide-group-sep id="clients-add-delivery-branch">
+            </div>
+          </div>
+        </fieldset>
+        <div class="form-group-btn form-group-db">
+          <div class="btn-group-right">
+            <button class="btn form-group-et" ng-disabled="!vm.addremForm.$valid" id="clients-add-delivery-add-btn">Adicionar</button>
+          </div>
+        </div>
+        <div class="form-row" ng-if="vm.checkRem()">
+          <address-list list="vm.addres" remove="vm.removeItem(item, list)">
+          </address-list>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- 3. COMPLEMENTOS -->
+  <div class="add-form-content" simple-accordion ng-if="vm.tab == 3">
+    <contacts-form contacts="vm.contacs" save="vm.saveClient()" ng-class="{active: true}">
+      <contacts-list list="vm.contacs" remove="vm.removeItem(item, list)"></contacts-list>
+    </contacts-form>
+    <sugest-form form-ctrl="vm.sugestForm" model="vm.sugest"></sugest-form>
+    <files-form files="vm.page.files" remove="vm.removeItem(item, list)" submit="vm.openUpload(event)"></files-form>
+  </div>
+  <!-- 4. SEGMENTAÇÃO -->
+  <div class="client-form-content" simple-accordion ng-if="vm.tab == 4">
+    <segcom-form model="vm.segcom" checkbox="vm.flagcom"></segcom-form>
+  </div>
+  <!-- 5. PERFIL -->
+  <div class="add-form-content" simple-accordion ng-if="vm.tab == 5">
+    <form name="vm.respemForm" class="form-box active" novalidate>
+      <h3 class="form-box-title" id="clients-add-profile-responsible-title">
+        <span class="icon icon-tag-down"></span>
+        <span class="icon icon-tag-up"></span>
+        Dados do Responsável Pela Empresa
+      </h3>
+      <div class="form-box-content">
+        <div class="form-row">
+          <div class="form-group form-group-bb">
+            <label for="razaoCli">Nome do Admistrador / Responsável pela Empresa</label>
+            <input type="text" name="razaoCli" class="form-control" ng-model="vm.respem.RazaoCli" required id="clients-add-profile-responsible-name">
+          </div>
+          <div class="form-group form-group-ct">
+            <label for="cpf">CPF</label>
+            <input type="text" name="cpf" class="form-control" ng-model="vm.respem.Cpf" ui-br-cpf-mask required id="clients-add-profile-responsible-cpf">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-bb">
+            <label for="atvAnterior">Atividade Anterior</label>
+            <input type="text" name="atvAnterior" class="form-control" ng-model="vm.respem.AtvAnterior" required id="clients-add-profile-responsible-previous-activity">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-dt">
+            <label>Participação em Empresas?</label>
+          </div>
+          <div class="form-group form-group-er">
+            <input id="pe" class="radio-custom" name="pe" ng-model="vm.respem.PartcEmp" value="Sim" type="radio" id="clients-add-profile-responsible-participation-yes">
+            <label for="pe" class="radio-custom-label">Sim</label>
+          </div>
+          <div class="form-group form-group-er">
+            <input id="pe2" class="radio-custom" name="pe2" ng-model="vm.respem.PartcEmp" value="Não" type="radio" id="clients-add-profile-responsible-participation-no">
+            <label for="pe2" class="radio-custom-label">Não</label>
+          </div>
+        </div>
+        <div class="form-row" ng-if="vm.respem.PartcEmp === 'Sim'">
+          <div class="form-group form-group-bb">
+            <input type="text" name="razao" class="form-control" ng-model="vm.respem.Cnpj" placeholder="CNPJ" ui-br-cnpj-mask ng-required="vm.respem.PartcEmp === 'Sim'" id="clients-add-profile-responsible-participation-cnpj">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-dt">
+            <label>Investimento em outro Ramo?</label>
+          </div>
+          <div class="form-group form-group-er">
+            <input id="or" class="radio-custom" name="or" ng-model="vm.respem.InvOther" value="Sim" type="radio" id="clients-add-profile-responsible-investment-yes">
+            <label for="or" class="radio-custom-label">Sim</label>
+          </div>
+          <div class="form-group form-group-er">
+            <input id="or2" class="radio-custom" name="or" ng-model="vm.respem.InvOther" value="Não" type="radio" id="clients-add-profile-responsible-investment-no">
+            <label for="or2" class="radio-custom-label">Não</label>
+          </div>
+        </div>
+        <div class="form-row" ng-if="vm.respem.InvOther === 'Sim'">
+          <div class="form-group form-group-bb">
+            <input type="text" name="razao" class="form-control" ng-model="vm.respem.RamAct" placeholder="Ramo de Atividade" ng-required="vm.respem.InvOther === 'Sim'" id="clients-add-profile-responsible-investment-name">
+          </div>
+        </div>
+      </div>
+    </form>
+    <form name="vm.funcimForm" class="form-box" novalidate>
+      <h3 class="form-box-title" id="clients-add-profile-employees-title">
+        <span class="icon icon-tag-down"></span>
+        <span class="icon icon-tag-up"></span>
+        Dados Funcionários e Imóveis
+      </h3>
+      <div class="form-box-content">
+        <div class="form-row">
+          <div class="form-group form-group-ft">
+            <label>Funcionários <span class="form-leg">(Quantidade)</span></label>
+          </div>
+          <div class="form-group form-group-ef">
+            <label class="form-leg" for="nroFuncPrd">Produção</label>
+            <input type="text" name="nroFuncPrd" class="form-control" ng-model="vm.funcim.NroFuncPrd" ui-number-mask="0" ui-hide-group-sep ng-change="vm.funcSum()" id="clients-add-profile-employees-production">
+          </div>
+          <div class="form-group form-group-plus">
+            +
+          </div>
+          <div class="form-group form-group-ef">
+            <label class="form-leg" for="nroFuncAdm">Administração</label>
+            <input type="text" name="nroFuncAdm" class="form-control" ng-model="vm.funcim.NroFuncAdm" ui-number-mask="0" ui-hide-group-sep ng-change="vm.funcSum()" id="clients-add-profile-employees-administration">
+          </div>
+          <div class="form-group form-group-plus">
+            +
+          </div>
+          <div class="form-group form-group-ef">
+            <label class="form-leg" for="nroFuncVend">Vendas</label>
+            <input type="text" name="nroFuncVend" class="form-control" ng-model="vm.funcim.NroFuncVend" ui-number-mask="0" ui-hide-group-sep ng-change="vm.funcSum()" id="clients-add-profile-employees-sales">
+          </div>
+          <div class="form-group form-group-plus">
+            =
+          </div>
+          <div class="form-group form-group-ef">
+            <label class="form-leg" for="nroFuncTot">Total</label>
+            <input type="text" name="nroFuncTot" class="form-control" ng-model="vm.funcim.NroFuncTot" ui-number-mask="0" ui-hide-group-sep disabled id="clients-add-profile-employees-total">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-ft">
+            <label for="logr">Imóvel Comercial</label>
+          </div>
+          <div class="form-group form-group-dr">
+            <label class="form-leg" for="terrenoM2">Terreno área m2</label>
+            <input type="text" name="terrenoM2" class="form-control" ng-model="vm.funcim.TerrenoM2" ui-number-mask="2" id="clients-add-profile-employees-land-area">
+          </div>
+          <div class="form-group form-group-dr">
+            <label class="form-leg" for="ConstM2">Construção área m2</label>
+            <input type="text" name="ConstM2" class="form-control" ng-model="vm.funcim.ConstM2" ui-number-mask="2" id="clients-add-profile-employees-construction-area">
+          </div>
+          <div class="form-group form-group-plus"></div>
+          <div class="form-group form-group-ef text-bottom">
+            <input id="tpi" class="radio-custom" name="tpi" ng-model="vm.funcim.TpImovel" value="Proprio" type="radio" id="clients-add-profile-employees-own">
+            <label for="tpi" class="radio-custom-label">Próprio</label>
+          </div>
+          <div class="form-group form-group-ef text-bottom">
+            <input id="tpi2" class="radio-custom" name="tpi2" ng-model="vm.funcim.TpImovel" value="Alugado" type="radio" id="clients-add-profile-employees-rented">
+            <label for="tpi2" class="radio-custom-label">Alugado</label>
+          </div>
+          <div class="form-group form-group-plus"></div>
+          <div class="form-group form-group-et" ng-if="vm.funcim.TpImovel === 'Alugado'">
+            <label class="form-leg" for="vlrAluguel">Valor do Aluguel</label>
+            <input type="text" name="vlrAluguel" class="form-control" ng-model="vm.funcim.VlrAluguel" ui-money-mask="2" id="clients-add-profile-employees-rent-amount">
+          </div>
+          <div class="form-group form-group-et" ng-if="vm.funcim.TpImovel === 'Alugado'">
+            <label class="form-leg" for="num">Idade do Contrato</label>
+            <input type="text" name="num" class="form-control" ng-model="vm.funcim.IddContrato" id="clients-add-profile-employees-contract-age">
+          </div>
+        </div>
+        <br>
+        <div class="form-row">
+          <div class="form-group form-group-cb">
+            <label for="razaoCli">Empresa - Bens Imoveis <span class="form-leg">(Ano / M2)</span></label>
+            <textarea rows="4" name="obsPv" ng-model="vm.funcim.EmpBensImov" class="form-control" id="clients-add-profile-employees-company-assets"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-cb">
+            <label for="razaoCli">Sócios - Bens Imoveis <span class="form-leg">(Ano / M2)</span></label>
+            <textarea rows="4" name="obsPv" ng-model="vm.funcim.SocBensImov" class="form-control" id="clients-add-profile-employees-partners-assets"></textarea>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form name="vm.insatvForm" class="form-box" novalidate>
+      <h3 class="form-box-title" id="clients-add-profile-instalation-title">
+        <span class="icon icon-tag-down"></span>
+        <span class="icon icon-tag-up"></span>
+        Instalações e Atividade
+      </h3>
+      <div class="form-box-content">
+        <div class="form-row">
+          <div class="form-group form-group-et">
+            <label for="faccaoTotal">Facção Total</label>
+            <input type="text" name="faccaoTotal" class="form-control" ng-model="vm.insatv.FaccaoTotal" only-digits id="clients-add-profile-installations-total-faction">
+          </div>
+          <div class="form-group form-group-et">
+            <label for="faccaoParcial">Facção Parcial</label>
+            <input type="text" name="faccaoParcial" class="form-control" ng-model="vm.insatv.FaccaoParcial" only-digits id="clients-add-profile-installations-partial-faction">
+          </div>
+          <div class="form-group form-group-et">
+            <label for="fabrPropria">Produção Própria</label>
+            <input type="text" name="fabrPropria" class="form-control" ng-model="vm.insatv.FabrPropria" only-digits id="clients-add-profile-installations-own-production">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-bt">
+            <label for="marcComerc">Marcas Comercializadas</label>
+            <input type="text" name="marcComerc" class="form-control" ng-model="vm.insatv.MarcComerc" required id="clients-add-profile-installations-commercialized-brands" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-bt">
+            <label for="princProd">Principais Produtos</label>
+            <input type="text" name="princProd" class="form-control" ng-model="vm.insatv.PrincProd" required id="clients-add-profile-installations-main-products" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-bt">
+            <label for="caractMaq">Características Maquinário - Modelo</label>
+            <input type="text" name="caractMaq" class="form-control" ng-model="vm.insatv.CaractMaq" required id="clients-add-profile-installations-machinery-characteristics" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-ed">
+            <label class="form-group form-group-dt">Lavanderia</label>
+            <div class="form-group form-group-ef">
+              <input id="lvd" class="radio-custom" name="lvd" ng-model="vm.insatv.Lavanceria" value="Própria" type="radio" id="clients-add-profile-installations-own-laundry">
+              <label for="lvd" class="radio-custom-label">Própria</label>
+            </div>
+            <div class="form-group form-group-ee">
+              <input id="lvd2" class="radio-custom" name="lvd2" ng-model="vm.insatv.Lavanceria" value="Terceiros" type="radio" id="clients-add-profile-installations-third-party-laundry">
+              <label for="lvd2" class="radio-custom-label">Terceiros</label>
+            </div>
+          </div>
+          <div class="form-group form-group-ed">
+            <label class="form-group form-group-dt">Tinturaria</label>
+            <div class="form-group form-group-ef">
+              <input id="tnt" class="radio-custom" name="tnt" ng-model="vm.insatv.Tinturaria" value="Própria" type="radio" id="clients-add-profile-installations-own-dry-cleaning">
+              <label for="tnt" class="radio-custom-label">Própria</label>
+            </div>
+            <div class="form-group form-group-ee">
+              <input id="tnt2" class="radio-custom" name="tnt2" ng-model="vm.insatv.Tinturaria" value="Terceiros" type="radio" id="clients-add-profile-installations-third-party-dry-cleaning">
+              <label for="tnt2" class="radio-custom-label">Terceiros</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <form name="vm.sidistForm" class="form-box" ng-submit="vm.addItem('sidist', 'sidists')" novalidate>
+      <h3 class="form-box-title" id="clients-add-profile-distribution-title">
+        <span class="icon icon-tag-down"></span>
+        <span class="icon icon-tag-up"></span>
+        Sistema de Distribuição
+      </h3>
+      <div class="form-box-content">
+        <div class="form-row">
+          <div class="form-group form-group-de">
+            <label for="classSisDist">Sistema de Distribuição</label>
+            <div class="form-select control-default">
+              <select class="form-control" ng-model="vm.sidist.ClassSisDist" required id="clients-add-profile-distribution-type">
+                <option value="">Selecione</option>
+                <option ng-repeat="dist in vm.distributors">{{dist.Desc}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-group-er">
+            <label for="qtd">Qtde.</label>
+            <input type="text" name="qtd" class="form-control" ng-model="vm.sidist.Qtd" ui-number-mask="0" ui-hide-group-sep required id="clients-add-profile-distribution-amount">
+          </div>
+          <div class="form-group form-group-bb">
+            <label for="descr">Descrição</label>
+            <input type="text" name="descr" class="form-control" ng-model="vm.sidist.Descr" required id="clients-add-profile-distribution-description">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-ct">
+          </div>
+          <div class="form-group form-group-de">
+          </div>
+          <button class="btn form-group-et" ng-disabled="vm.sidistForm.$invalid" id="clients-add-profile-distribution-add-btn">Adicionar</button>
+        </div>
+        <div class="form-row" ng-if="vm.sidists.length">
+          <ul class="item-list form-group-tb">
+            <li ng-repeat="sid in vm.sidists">
+              <span class="item-cell">{{sid.ClassSisDist}}</span>
+              <span class="item-cell">{{sid.Qtd}}</span>
+              <span class="item-cell"> {{sid.Descr}}</span>
+              <button type="button" class="badge fright" ng-click="vm.removeItem(sid, 'sidists')" id="{{'clients-add-distribution-remove-btn-' + $index}}">
+                <span class="icon icon-minus"></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </form>
+    <form name="vm.sifatrForm" class="form-box" novalidate>
+      <h3 class="form-box-title" id="clients-add-profile-billing-title">
+        <span class="icon icon-tag-down"></span>
+        <span class="icon icon-tag-up"></span>
+        Sistema de Faturamento
+      </h3>
+      <div class="form-box-content">
+        <div class="form-row">
+          <div class="form-group form-group-ft">
+            <label>Volume Vendas / Mês</label>
+          </div>
+          <div class="form-group form-group-dt">
+            <label class="form-leg" for="vlConf">Confecção / Peças</label>
+            <input type="text" name="vlConf" class="form-control" ng-model="vm.sifat.VlConf" ui-number-mask="0" ui-hide-group-sep required id="clients-add-profile-billing-confection">
+          </div>
+          <div class="form-group form-group-dt">
+            <label class="form-leg" for="vlRevend">Revenda / Mil Metros ou Kilos</label>
+            <input type="text" name="vlRevend" class="form-control" ng-model="vm.sifat.VlRevend" ui-number-mask="0" ui-hide-group-sep required id="clients-add-profile-billing-resale">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-ft">
+            <label>Vendas <span class="form-leg">(Percentual)</span></label>
+          </div>
+          <div class="form-group form-group-et">
+            <label class="form-leg" for="vendVista">Á Vista</label>
+            <input type="text" name="vendVista" class="form-control" ng-model="vm.sifat.VendVista" maxlength="4" ng-keydown="vm.checkSalesPercentage($event, 1)" ui-percentage-mask="0" id="clients-add-profile-billing-in-cash">
+          </div>
+          <div class="form-group form-group-et">
+            <label class="form-leg" for="vendCheque">Cheque</label>
+            <input type="text" name="vendCheque" class="form-control" ng-model="vm.sifat.VendCheque" maxlength="4" ng-keydown="vm.checkSalesPercentage($event, 2)" ui-percentage-mask="0" id="clients-add-profile-billing-check">
+          </div>
+          <div class="form-group form-group-et">
+            <label class="form-leg" for="vendPrazo">Á Prazo</label>
+            <input type="text" name="vendPrazo" class="form-control" ng-model="vm.sifat.VendPrazo" maxlength="4" ng-keydown="vm.checkSalesPercentage($event, 3)" ui-percentage-mask="0" id="clients-add-profile-billing-on-deadline">
+          </div>
+          <div class="form-group form-group-et">
+            <label class="form-leg" for="vendOutr">Outros</label>
+            <input type="text" name="vendOutr" class="form-control" ng-model="vm.sifat.VendOutr" maxlength="4" ng-keydown="vm.checkSalesPercentage($event, 4)" ui-percentage-mask="0" id="clients-add-profile-billing-others">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-ft">
+            <label>Consumo</label>
+          </div>
+          <div class="form-group form-group-dt">
+            <label class="form-leg" for="consMens">Consumo Mensal Metros Kilos</label>
+            <input type="text" name="consMens" class="form-control" ng-model="vm.sifat.ConsMens" ui-number-mask="0" ui-hide-group-sep id="clients-add-profile-billing-monthly-consumption">
+          </div>
+          <div class="form-group form-group-dt">
+            <label class="form-leg" for="prinArt">Principal Artigo</label>
+            <input type="text" name="prinArt" class="form-control" ng-model="vm.sifat.PrinArt" id="clients-add-profile-billing-main-article">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-ft">
+            <label>Participação da Focus nas Estações <span class="form-leg">(Percentual)</span></label>
+          </div>
+          <div class="form-group form-group-dt">
+            <label class="form-leg" for="PartFocInv">Inverno</label>
+            <input type="text" name="PartFocInv" class="form-control" ng-model="vm.sifat.PartFocInv" maxlength="4" ng-keydown="vm.checkParticipationPercentage($event, 1)" ui-percentage-mask="0" id="clients-add-profile-billing-winter">
+          </div>
+          <div class="form-group form-group-dt">
+            <label class="form-leg" for="PartFocVer">Verão</label>
+            <input type="text" name="PartFocVer" class="form-control" ng-model="vm.sifat.PartFocVer" maxlength="4" ng-keydown="vm.checkParticipationPercentage($event, 2)" ui-percentage-mask="0" id="clients-add-profile-billing-summer">
+          </div>
+        </div>
+      </div>
+    </form>
+    <form name="vm.fornecForm" class="form-box" ng-submit="vm.addItem('fornec', 'fornecs')" novalidate>
+      <h3 class="form-box-title" id="clients-add-profile-suppliers-title">
+        <span class="icon icon-tag-down"></span>
+        <span class="icon icon-tag-up"></span>
+        Fornecedores
+      </h3>
+      <div class="form-box-content">
+        <div class="form-row">
+          <div class="form-group form-group-bt">
+            <label for="pfEmpRazao">Empresa / Razão Social</label>
+            <input type="text" name="pfEmpRazao" class="form-control" ng-model="vm.fornec.PfEmpRazao" required id="clients-add-profile-suppliers-name">
+          </div>
+          <div class="form-group form-group-de">
+            <label for="cnpjForn">CNPJ</label>
+            <input type="text" name="cnpjForn" class="form-control" ng-model="vm.fornec.CnpjForn" ui-br-cnpj-mask required id="clients-add-profile-suppliers-cnpj">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group form-group-dr">
+            <label for="vlMens">Valor Mensal R$</label>
+            <input type="text" name="vlMens" class="form-control" ng-model="vm.fornec.VlMens" ui-money-mask="2" id="clients-add-profile-suppliers-monthly-value">
+          </div>
+          <div class="form-group form-group-dr">
+            <label for="prazo">Prazo</label>
+            <input type="text" name="prazo" class="form-control" ng-model="vm.fornec.Prazo" id="clients-add-profile-suppliers-deadline">
+          </div>
+          <div class="form-group form-group-dr">
+            <label for="fone">Telefone</label>
+            <input type="text" name="fone" class="form-control" ng-model="vm.fornec.Fone" ui-br-phone-number id="clients-add-profile-suppliers-phone">
+          </div>
+          <div class="form-group form-group-er">
+            <label for="ramalFone">Ramal</label>
+            <input type="text" name="ramalFone" class="form-control" ng-model="vm.fornec.RamalFone" id="clients-add-profile-suppliers-branch">
+          </div>
+          <div class="form-group form-group-et">
+            <label for="celular">Celular</label>
+            <input type="text" name="celular" class="form-control" ng-model="vm.fornec.Celular" ui-br-phone-number id="clients-add-profile-suppliers-cell">
+          </div>
+        </div>
+        <div class="form-group-btn form-group-tb">
+          <div class="btn-group-right">
+            <button class="btn form-group-et" ng-disabled="vm.fornecForm.$invalid" id="clients-add-profile-suppliers-add-btn">Adicionar</button>
+          </div>
+        </div>
+        <div class="form-row" ng-if="vm.fornecs.length">
+          <ul class="item-list form-group-tb">
+            <li ng-repeat="fornec in vm.fornecs">
+              <span class="item-cell">{{fornec.PfEmpRazao}}</span>
+              <span class="item-cell">{{fornec.CnpjForn}}</span>
+              <button type="button" class="badge fright" ng-click="vm.removeItem(fornec, 'fornecs')" id="{{'clients-add-profile-suppliers-remove-btn' + $index}}">
+                <span class="icon icon-minus"></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- BUTTONS -->
+  <div class="form-end">
+    <div class="btn-group-right">
+      <button class="btn btn-icon-left delete-button" ng-click="vm.discardClientAdd()" id="clients-add-cancel-btn">
+        Descartar Cadastro <span class="icon icon-cancel-circle"></span>
+      </button>
+    </div>
+  </div>
+  <div class="content btn-group-right no-clear" ng-if="vm.client.CnpjCli">
+    <button class="btn btn-icon" ng-if="vm.tab > 1" ng-click="vm.prevStep()" id="clients-add-previous-btn">
+      Passo Anterior
+      <span class="icon icon-tag-left"></span>
+    </button>
+    <button class="btn btn-icon-right" ng-click="vm.nextStep()" id="clients-add-next-btn">
+      {{ ( vm.tab > 2 && vm.sugest.PgAntCli || vm.tab > 4) ? 'Concluir' : 'Proximo Passo'}}
+      <span class="icon icon-tag-right"></span>
+    </button>
+  </div>
+</div>

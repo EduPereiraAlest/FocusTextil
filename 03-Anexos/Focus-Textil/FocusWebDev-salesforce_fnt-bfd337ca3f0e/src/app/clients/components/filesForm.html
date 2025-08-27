@@ -1,0 +1,55 @@
+<form name="$ctrl.filesForm" class="form-box flicker" ng-submit="$ctrl.submitForm($event)" novalidate>
+  <accordion-title id="files-form-title">Documentos</accordion-title>
+  <!--   <h3 class="form-box-title">
+    <span class="icon icon-tag-down"></span>
+    <span class="icon icon-tag-up"></span>
+    Documentos
+  </h3> -->
+  <div class="form-box-content">
+    <div class="form-row" ng-if="$ctrl.files.length">
+      <ul class="item-list form-group-tb">
+        <li ng-repeat="file in $ctrl.files">
+          <span class="item-cell">{{file.Desc}}</span>
+          <span class="item-cell"><a href="{{ file.url }}" target="_blank">{{file.Path}}</a></span>
+          <span class="item-cell">{{file.KindDesc}}</span>
+          <button ng-if="$ctrl.page.context == 'clients-add'" type="button" class="badge fright" ng-click="$ctrl.removeItem(file)"  id="{{'files-form-remove-btn-' + $index}}">
+            <span class="icon icon-minus"></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="form-row accordion-upload-content">
+      <!-- Old -->
+      <div class="form-group form-group-ct">
+        <label>Clique no botão para anexar documentos.</label>
+      </div>
+      <div class="form-group form-group-de"></div>
+      <button class="btn form-group-et" id="files-form-add-btn">Adicionar</button>
+      <!-- Attach -->
+<!--
+     <div class="left-panel cli-left">
+        <div class="form-group">
+            <label for="fileName">Nome</label>
+            <input type="text" id="fileName" disabled="disabled" ng-model="$ctrl.page.currentFileName">
+
+        </div>
+        <div class="form-group">
+            <label for="fileDesc">Descrição</label>
+            <input type="text" id="fileDesc" class="fileDesc" disabled="disabled" ng-model="$ctrl.page.currentFileDesc" ng-change="$ctrl.page.fileDescChange()">
+        </div>
+        <div class="form-group">
+            <label for="up-cli" class="upload-ra">Escolha o arquivo</label>
+            <input type="file" id="up-cli" ng-click="$ctrl.page.bindFileInputChange()">
+            <button class="btn attach" ng-click="$ctrl.page.attachFile()" disabled="disabled">Anexar</button>
+            
+        </div>
+      </div>
+-->
+      <!-- List -->
+      <!-- ul class="attached-files cli-right">
+        <li ng-repeat="file in $ctrl.page.files"><a href="{{ file.url }}" target="_blank">{{ file.name }}</a> "<span>{{ file.desc }}</span>"</li>
+      </ul -->
+   
+    </div>
+  </div>
+</form>

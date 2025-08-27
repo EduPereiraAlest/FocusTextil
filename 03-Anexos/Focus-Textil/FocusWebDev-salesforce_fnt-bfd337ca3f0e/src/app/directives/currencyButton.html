@@ -1,0 +1,17 @@
+<div class="btn btn-select {{activePrice}}">
+  <span
+    ng-class="{'icon': true, 'icon-dollar': true, 'promo-color': isPromoColor }"
+  ></span>
+
+  <select
+    class="numb-control"
+    id="currency-button-select"
+  >
+    <option
+      ng-class="{'option-view-{{item[currency]}}': true, 'option-spotlight-{{item.name}}': true, }"
+      ng-repeat="item in items"
+    >
+      <span>{{item.name}} &nbsp; {{currency}} {{item[currency]}}</span>
+    </option>
+  </select>
+</div>

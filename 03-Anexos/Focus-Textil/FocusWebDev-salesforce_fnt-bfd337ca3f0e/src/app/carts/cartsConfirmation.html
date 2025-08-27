@@ -1,0 +1,136 @@
+<div class="search-content">
+  <h2>CONFIRMAÇÃO DO CARRINHO</h2>
+</div>
+<div class="filter-content">
+  <div class="cart-menu">
+    <input type="radio" id="chk1" name="wzd-step" class="wzd-step" disabled="disabled">
+    <label for="chk1">1. Itens</label>
+    <input type="radio" id="chk2" name="wzd-step" class="wzd-step" disabled="disabled">
+    <label for="chk2">2. Dados de Entrega</label>
+    <input type="radio" id="chk3" name="wzd-step" class="wzd-step" checked="checked">
+    <label for="chk3">3. Confirmação Pedido</label>
+  </div>
+</div>
+<!-- FORM -->
+<div class="cart-form-content form-box" fluid-height="220">
+  <div class="form-row">
+    <div class="form-group form-group-dt">
+      <label for="orderCode">Nº Pedido</label>
+      <input type="text" name="orderCode" class="form-control" ng-model="vm.kart.Master.CodePv" disabled id="carts-confirmation-order-number">
+    </div>
+    <div class="form-group form-group-dt">
+      <label for="payCondDesc">Formas de Pagamento</label>
+      <input type="text" name="payCondDesc" class="form-control" ng-model="vm.kart.Master.PayCondDesc" disabled id="carts-confirmation-payment-method">
+    </div>
+    <div class="form-group form-group-dt">
+      <label for="baseDate">Data Base</label>
+      <input type="text" name="baseDate" class="form-control" disabled id="carts-confirmation-data-base">
+    </div>
+    <div class="form-group form-group-total form-group-dt">
+      <label>TOTAL</label>
+      <br>
+      <span id="carts-confirmation-code-and-total">{{vm.kart.Master.CodeCurr}} {{ vm.parseCurr(vm.kart.Master.Total)}}</span>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group form-group-dt">
+      <label for="numOrder">Nº Pedido do Cliente</label>
+      <input type="text" name="numOrder" class="form-control" ng-model="vm.kart.Master.NumPedidoCliente" maxlength="35" id="carts-confirmation-client-order-number">
+    </div>
+    <div class="form-group form-group-dt scheduleSales-date" >
+      <label for="orderCode">Data Pedido Programado</label>
+      <div class="date-picker-premiere">
+        <!-- <input type="date" name="orderCode" class="form-control date" ng-model="vm.page.date" ng-disabled="vm.validationScheduledSales()" ng-click="vm.consoleLogEvent($event)" ng-change="vm.maxAcceptSchduledSales($event)" id="carts-confirmation-month-year"> -->
+        <datepicker date-format="dd/MM/yyyy">
+          <input
+            ng-model="vm.page.date"
+            type="text"
+            class="form-control date"
+            placeholder="dd/mm/yyyy"
+            ng-disabled="vm.isEnableScheduledSale()"
+            ng-click="event = $event"
+            ng-change="vm.maxAcceptSchduledSales(event)"
+            id="carts-confirmation-month-year"/>
+        </datepicker>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group form-group-ct">
+      <label>Qualidade do Pedido</label>
+      <div class="form-select">
+        <select class="form-control" ng-model="vm.page.qaorder" ng-disabled="vm.validationQualityRequest()" id="carts-confirmation-order-quality">
+          <option value="">Selecione</option>
+          <option ng-repeat="qao in vm.options.QaOrder" value="{{qao.name}}">{{qao.value}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group form-group-ct">
+      <label>Promotor</label>
+      <div class="form-select">
+        <select class="form-control" ng-model="vm.kart.Master.NumPromotor" ng-disabled="!vm.options.Promoter.length" id="carts-confirmation-promoter">
+          <option value="">Selecione</option>
+          <option ng-repeat="prom in vm.options.Promoter" value="{{prom.value}}">{{prom.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group form-group-ct">
+      <label>Magazine</label>
+      <div class="form-select">
+        <select class="form-control" ng-model="vm.kart.Master.NumMagazine" ng-options="i.value as i.name for i in vm.options.Magazine" ng-disabled="!vm.options.Magazine.length" id="carts-confirmation-magazine">
+          <option value="">Selecione</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <!-- REDESPACHO -->
+  <div class="form-row">
+    <div class="form-group form-group-ft">
+      <label for="obsPv">Observações</label>
+      <textarea rows="4" name="obsPv" ng-model="vm.kart.Master.ObsOv" class="form-control" ng-blur="vm.backKart($event)" id="carts-confirmation-obs"></textarea>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="btn-group-right">
+      <button class="btn btn-icon" ng-class="{active: vm.page.stock}" ng-click="vm.backToDelivery()" id="carts-confirmation-previous-btn">
+        <span class="icon icon-tag-left"></span> Passo Anterior
+      </button>
+
+      <button
+        ng-if="!vm.kart.Master.Premiere || vm.kart.Master.Premiere == ''"
+        class="btn btn-icon-right ordem-concluir"
+        ng-class="{active: vm.page.stock}"        ng-click="vm.sendKart()"
+        id="carts-confirmation-done-btn"
+      >
+      >
+        <span class="icon icon-checkmark"></span> Concluir
+      </button>
+
+      <button ng-if="vm.kart.Master.Premiere == 'X'" class="btn btn-icon-right ordem-concluir" ng-class="{active: vm.page.stock}" ng-click="vm.showPremiere()" id="carts-confirmation-next-btn">
+        <span class="icon icon-tag-right"></span> Próximo
+      </button>
+
+    </div>
+
+    <div id="modalPremiere">
+      <div class="modal-content-premiere">
+        <p class="close-premiere-modal" style="color:#bbbbbb;" ng-click="vm.closeModalPremiere()" >X</p>
+        <p style="margin-bottom: 20px;">Insira a data de faturamento</p>
+        <div class='boxDatePremiere'>
+          <div id="calendar" class="calendar">
+            <span></span>
+          </div>
+        </div>
+        <input type="date" placeholder="" id="dataProgramada" onkeydown="return false">
+        <button ng-class="{active: vm.page.stock}" ng-click="vm.sendKartPremiere()" class="premiere-date-bnt">
+          <span class="icon icon-checkmark"></span>
+          Concluir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

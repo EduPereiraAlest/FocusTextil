@@ -1,0 +1,404 @@
+<div class="detail-content" ng-if="$ctrl.model">
+  <button type="button" class="btn btn-icon btn-sm btn-detail-back" ng-click="closeDetail()" id="detail-book-back">
+    <span class="icon icon-tag-left"></span> Voltar
+  </button>
+  <div class="detail-panel" ng-if="$ctrl.model" ng-class="$ctrl.panel ? 'panel-close' : 'panel-open'">
+    <i
+      class="outlet-tag detail"
+      ng-if="$ctrl.model.Ipad == 'O'"
+    >OUTLET</i>
+
+    <i
+      class="promo-tag detail"
+      ng-if="$ctrl.model.Ipad == 'R'"
+    >PROMO</i>
+
+    <i
+      class="sales-tag detail"
+      ng-if="$ctrl.model.Ipad == 'S'"
+    >SALES</i>
+
+      <div class="detail-bar" ng-click="$ctrl.panel = !$ctrl.panel">
+      <span class="icon fleft" ng-class="$ctrl.panel ? 'icon-tag-left' : 'icon-tag-right'"></span>
+    </div>
+    <div class="detail-holder">
+      <div class="detail-info">
+        <favorite-button model="$ctrl.model" ng-if="$ctrl.kart" id="detail-book-favorite-btn"></favorite-button>
+        <h3 class="detail-title" ng-class="{'title-full': !$ctrl.kart}">
+          {{::$ctrl.model.DescMat }}
+        </h3>
+        <p class="detail-code">{{::$ctrl.model.MaterialCode}}</p>
+        <!--
+        <div class="btn btn-select btn-centros-details" ng-class="{full: $ctrl.model.CentroSelecionado, 'centro-unico': $ctrl.model.Centros.length == 1}">
+          <span class="icon icon-centro">{{ $ctrl.model.CentroSelecionado }}</span>
+          <select ng-model="$ctrl.model.CentroSelecionado" class="numb-control"
+            ng-disabled="$ctrl.model.Centros.length == 1">
+            <option ng-repeat="item in $ctrl.model.Tons" value="{{item.centro}}">{{::item.centro}} | {{::item.QtdProntEntreg | number:0}}</option>
+          </select>
+        </div>
+        -->
+        <div class="btn-centros-details">
+          <!--
+          <stockpe-button model="" items="$ctrl.model"></stockpe-button>
+          -->
+        </div>
+
+        <div class="tom-selector">
+          <selects model="$ctrl.model.selectedTom" items="$ctrl.model.tonalidadeKeys"
+            on-change="$ctrl.centroUpdater($ctrl.model)" id="detail-book-tom-select"></selects>
+        </div>
+        <div class="detail-input">
+          <div class="form-group detail-group">
+            <label>{{::$ctrl.page.currency}}
+              {{::$ctrl.model.Price[$ctrl.model.Segmento].PrcMat[$ctrl.page.currency]}}</label>
+            <currency-button ng-if="$ctrl.page.type !== 'C'" price="$ctrl.model.Price[$ctrl.model.Stock[$ctrl.model.selectedTom][$ctrl.model.CentroSelecionado].SegmentoEstoque].Price" params="$ctrl.params" currency="$ctrl.page.currency" promo="$ctrl.model.PrecoPromo" id="detail-book-currency-btn"></currency-button>
+          </div>
+          <div class="form-group detail-group">
+            <label>Qtd: </label>
+            <quantity-input
+              ng-model="$ctrl.model.Stock[$ctrl.model.selectedTom][$ctrl.model.CentroSelecionado].QtdMaterial"
+              material="$ctrl.model" kart="$ctrl.kart" currency="$ctrl.page.currency" limits="$ctrl.params.StockLimits" id="detail-book-quantity">
+            </quantity-input>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="row">
+        <div class="infor-box-nw col-md-12">
+
+          <div class="info-area row">
+            <p class="info-title col-md-6">Disponibilidade PE:</p>
+            <!--
+            <p ng-if="$ctrl.model.Centros.length == 1" class="info-data col-md-6">{{ $ctrl.getTomProp($ctrl.model, "QtdProntEntreg", $ctrl.model.selectedTom) }}</p>
+            <p ng-if="$ctrl.model.Centros.length > 1 && $ctrl.model.QtdPETotal" class="info-data col-md-6">{{ $ctrl.model.QtdPETotal | number:0 }}</p>
+            -->
+            <p ng-if="!$ctrl.model.tonalidadeRow" class="info-data col-md-4" id="detail-book-PE">{{ $ctrl.model.QtdPETotal | number:0}} </p>
+            <p ng-if="$ctrl.model.tonalidadeRow" class="info-data col-md-4" id="detail-book-PE2">{{ $ctrl.model.Stock[$ctrl.model.TomIndex][$ctrl.model.CentroSelecionado].QtdProntEntreg | number:0 }} </p>
+
+            <div class="col-md-2">
+              <stockpe-button model="" items="$ctrl.model" id="detail-book-stockpe-btn"></stockpe-button>
+            </div>
+          </div>
+
+          <div class="info-area row">
+            <p class="info-title col-md-6">Disponibilidade ATC:</p>
+            <!--
+            <p class="info-data col-md-6">{{ $ctrl.getTomProp($ctrl.model, "QtdEstApos", $ctrl.model.selectedTom) }}</p>
+            -->
+              <p ng-if="$ctrl.model.isATCStock" class="info-data col-md-4" id="detail-book-ATC">
+                {{$ctrl.model.Disp[$ctrl.model.Stock[$ctrl.model.TomIndex][$ctrl.model.CentroSelecionado].SegmentoEstoque].QtdEstApos | number:0 }}
+              </p>
+
+              <p ng-if="!$ctrl.model.isATCStock" class="info-data col-md-4" id="detail-book-ATC2">
+                {{ $ctrl.model.QtdEstApos | number:0 }}
+              </p>
+              <div class="col-md-2">
+                <stock-button ng-if="!!$ctrl.model.Disp[$ctrl.model.Stock[$ctrl.model.TomIndex][$ctrl.model.CentroSelecionado].SegmentoEstoque].ListDispView.length" model="$ctrl.model.DateAtcDelv" code="::$ctrl.model.MaterialCode" kart="$ctrl.kart" items="$ctrl.model.Disp[$ctrl.model.Stock[$ctrl.model.TomIndex][$ctrl.model.CentroSelecionado].SegmentoEstoque].ListDispView" id="detail-book-stock-btn"></stock-button>
+              </div>
+          </div>
+
+          <div class="info-area row">
+            <p class="info-title col-md-6">Unidade / Multiplo:</p>
+            <p class="info-data col-md-6" id="detail-book-multiple">{{::$ctrl.model.QtdeMultiplo}} {{ ::$ctrl.model.UnidMed }}</p>
+          </div>
+
+          <div class="info-area row">
+            <p class="info-title col-md-6">Corte Mínimo:</p>
+            <p class="info-data col-md-6" id="detail-book-min-cut">{{::$ctrl.model.CorteMin | number:undefined:0 }} {{ ::$ctrl.model.UnidMed }}
+            </p>
+          </div>
+
+          <div class="info-area row">
+            <p class="info-title col-md-6"> Cor:</p>
+            <p class="info-data col-md-6" id="detail-book-color">{{::$ctrl.model.CodigoCor}} {{::$ctrl.model.DescCor}}
+            </p>
+          </div>
+
+          <div class="info-area row">
+            <p class="info-title col-md-6"> Pilling:</p>
+            <p class="info-data col-md-6" id="detail-book-pilling">{{::$ctrl.model.Pilling}}
+            </p>
+          </div>
+
+          <div class="info-area row">
+            <p class="info-title col-md-6"> Elasticidade:</p>
+            <p class="info-data col-md-6" id="detail-book-elasticity">{{::$ctrl.model.Elasticidade}}
+            </p>
+          </div>
+
+          <div class="info-area row">
+            <p class="info-title col-md-6"> Estabilidade:</p>
+            <p class="info-data col-md-6" id="detail-book-stability">{{::$ctrl.model.Estabilidade}}
+            </p>
+          </div>
+
+          <div class="info-area row">
+            <p class="info-title col-md-6"> Acabamento:</p>
+            <p class="info-data col-md-6" id="detail-book-finishing">{{::$ctrl.model.Acabamento}}
+            </p>
+          </div>
+
+
+          <div class="info-area row">
+            <p class="info-title col-md-6"> Construção:</p>
+            <p class="info-data col-md-6" id="detail-book-construction">{{::$ctrl.model.Construcao}}
+            </p>
+          </div>
+
+
+          <div class="info-area row">
+            <p class="info-title col-md-6"> Tecnologias:</p>
+            <p class="info-data col-md-6" id="detail-book-UV-protection">{{::$ctrl.model.protecaoUV}}
+            </p>
+          </div>
+
+
+          <div class="info-area row">
+            <small class="dnshow">{{::$ctrl.getBook($ctrl.model)}}</small>
+            <p class="info-title col-md-6"> Book:</p>
+            <div class="col-md-6">
+              <a ng-click="openBooksPopup()" ng-if="$ctrl.model.BookMat" id="detail-book-open-book-popup">
+                <span class="icon icon-zoom-in iconSize"></span>
+              </a>
+              <span ng-if="!$ctrl.model.BookMat">-</span>
+            </div>
+          </div>
+
+          <div class="modal-dados-bk" ng-if="modalBook" >
+            <div class="headermd">
+              <small class="title">
+                Book
+                <a ng-click="closePopups()"><span class="close-ic" id="detail-book-close-book-popup">x</span></a>
+              </small>
+            </div>
+
+            <div class="content-mdl">
+              <div class="info-area row" ng-repeat="item in $ctrl.bookPages">
+                <p class="info-data col-md-12" id="{{'detail-book-book-item-' + $index}}">{{item}}
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal-dados-bk" ng-show="modalSim">
+            <div class="headermd">
+              <small class="title">
+                Similaridades
+               <a ng-click="closePopups()"><span class="close-ic" id="detail-book-close-similarity-popup">x</span></a>
+              </small>
+            </div>
+
+            <div class="content-mdl">
+              <div class="info-area row" ng-repeat="item in $ctrl.model.Similaridade">
+                <p class="info-data col-md-12" id="{{'detail-book-similarities-item-' + $index}}">{{item}}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-dados-bk" ng-show="modalGreen">
+            <div class="headermd">
+              <small class="title">
+                🌿 Focus Green
+               <a ng-click="closePopups()"><span class="close-ic" id="detail-book-close-focus-green-popup">x</span></a>
+              </small>
+            </div>
+
+            <div class="content-mdl">
+              <div class="info-area row" ng-repeat="item in $ctrl.model.Certificados">
+                <p class="info-data col-md-12" id="{{'detail-book-focus-item-' + $index}}">{{item}}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-dados-bk" ng-show="modalProposta">
+            <div class="headermd">
+              <small class="title">
+                Proposta de Uso
+               <a ng-click="closePopups()"><span class="close-ic" id="detail-book-close-proposal-popup"> x</span></a>
+              </small>
+            </div>
+
+            <div class="content-mdl">
+              <div class="composicao-body" ng-repeat="composicao in $ctrl.model.Composition">
+                <div class="composicao-type">
+                  <h2>Mod. Top (Leves / Médios): </h2>
+                  <div class="info-area row">
+                    <p class="info-title col-md-4">Ampla:</p>
+                    <p class="info-data col-md-8" id="{{'detail-book-proposal-top-wide-item-' + $index}}">{{::$ctrl.model.Modelagem.Top.Ampla }}</p>
+                  </div>
+                  <div class="info-area row">
+                    <p class="info-title col-md-4">Regular:</p>
+                    <p class="info-data col-md-8" id="{{'detail-book-proposal-top-regular-item-' + $index}}">{{::$ctrl.model.Modelagem.Top.Regular }}</p>
+                  </div>
+                  <div class="info-area row">
+                    <p class="info-title col-md-4">Justa:</p>
+                    <p class="info-data col-md-8" id="{{'detail-book-proposal-top-fair-item-' + $index}}">{{::$ctrl.model.Modelagem.Top.Justa }}</p>
+                  </div>
+                  <br>
+                  <h2>Mod. Bottom (Médios / Pesados): </h2>
+                  <div class="info-area row">
+                    <p class="info-title col-md-4">Ampla:</p>
+                    <p class="info-data col-md-8" id="{{'detail-book-proposal-bottom-wide-item-' + $index}}">{{::$ctrl.model.Modelagem.Bottom.Ampla }}</p>
+                  </div>
+                  <div class="info-area row">
+                    <p class="info-title col-md-4">Regular:</p>
+                    <p class="info-data col-md-8" id="{{'detail-book-proposal-bottom-regular-item-' + $index}}">{{::$ctrl.model.Modelagem.Bottom.Regular }}</p>
+                  </div>
+                  <div class="info-area row">
+                    <p class="info-title col-md-4">Justa:</p>
+                    <p class="info-data col-md-8" id="{{'detail-book-proposal-bottom-fair-item-' + $index}}">{{::$ctrl.model.Modelagem.Bottom.Justa }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-dados-bk" ng-show="modalDimensoes">
+            <div class="headermd">
+              <small class="title">
+                Dimensões
+               <a ng-click="closePopups()"><span class="close-ic" id="detail-book-close-dimensions-popup"> x</span></a>
+              </small>
+            </div>
+
+            <div class="content-mdl">
+              <div class="composicao-body" ng-repeat="composicao in $ctrl.model.Composition">
+                <div class="composicao-type">
+
+                  <div class="info-area row">
+                    <p class="info-title col-md-6"> Gramatura:</p>
+                    <p class="info-data col-md-6" id="{{'detail-book-dimensions-grammage-item-' + $index}}">{{::$ctrl.getGram($ctrl.model)}}&sup2;
+                    </p>
+                  </div>
+
+                  <div class="info-area row">
+                    <p class="info-title col-md-6"> Rendimento:</p>
+                    <p class="info-data col-md-6" id="{{'detail-book-dimensions-yield-item-' + $index}}">{{::$ctrl.model.Rendimento }} m/kg</p>
+                  </div>
+
+                  <div class="info-area row">
+                    <p class="info-title col-md-6"> Onça:</p>
+                    <p class="info-data col-md-6" id="{{'detail-book-dimensions-ounces-item-' + $index}}">{{ $ctrl.model.Oncas }}</p>
+                  </div>
+
+                  <div class="info-area row">
+                    <p class="info-title col-md-6"> Largura Total:</p>
+                    <p class="info-data col-md-6" id="{{'detail-book-dimensions-total-width-item-' + $index}}">{{::$ctrl.model.LargTotal}} m</p>
+                  </div>
+
+                  <div class="info-area row">
+                    <p class="info-title col-md-6"> Largura Útil:</p>
+                    <p class="info-data col-md-6" id="{{'detail-book-dimensions-usable-width-item-' + $index}}">{{$ctrl.model.LargUtil}} m</p>
+                  </div>
+
+                  <div class="info-area row">
+                    <p class="info-title col-md-6"> Rapport (largura/comprimento):</p>
+                    <p class="info-data col-md-6" id="{{'detail-book-dimensions-rapport-item-' + $index}}">{{::$ctrl.model.LargRap}}</p>
+                  </div>
+
+                  <div class="info-area row">
+                    <p class="info-title col-md-6"> Compr. Rapport:</p>
+                    <p class="info-data col-md-6" id="{{'detail-book-dimensions-rapport-width-item-' + $index}}">{{::$ctrl.model.CompRap}}</p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="info-area row">
+            <p class="info-title col-md-6"> Dimensões:</p>
+            <div class="col-md-6">
+              <a ng-click="openDimensoesPopup()" id="detail-book-open-dimensions-popup">
+                <span class="icon icon-zoom-in iconSize"></span>
+              </a>
+            </div>
+          </div>
+
+
+          <div class="info-area row">
+            <p class="info-title col-md-6">Composição:</p>
+            <p class="info-data col-md-6">
+              <span class="icon icon-zoom-in iconSize" ng-click="openComposicaoPopup()" ng-if="$ctrl.model.Composition.length" id="detail-book-open-composition-popup"></span>
+            </p>
+          </div>
+
+          <div class="modal-dados-bk" ng-show="showModalComposicao">
+            <div class="headermd">
+              <small class="title">
+                Composição
+               <a ng-click="closePopups()"><span class="close-ic" id="detail-book-close-composition-popup"> x</span></a>
+              </small>
+            </div>
+
+            <div class="content-mdl">
+              <div class="composicao-body" ng-repeat="composicao in $ctrl.model.Composition">
+                <div class="composicao-type">
+                  <h2 id="{{'detail-book-composition-type-item-' + $index}}">{{ composicao.CompType }}</h2>
+                </div>
+                <div class="info-area row" ng-repeat="layer in composicao.Composition">
+                  <p class="info-title col-md-6" id="{{'detail-book-composition-desc-item-' + $index}}"> {{ layer.Description }}</p>
+                  <p class="info-data col-md-6" id="{{'detail-book-composition-value-item-' + $index}}">{{ layer.Value }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-area row">
+            <p class="info-title col-md-6">Similaridades:</p>
+            <div class="col-md-6">
+              <a ng-click="openSimilaridadesPopup()" ng-if="$ctrl.model.Similaridade.length" id="detail-book-open-similarity-popup">
+                <span class="icon icon-zoom-in iconSize"></span>
+              </a>
+              <span ng-if="!$ctrl.model.Similaridade.length">-</span>
+            </div>
+          </div>
+
+          <div class="info-area row">
+            <p class="info-title col-md-6"> Proposta de Uso:</p>
+            <div class="col-md-6">
+              <a ng-click="openPropostaUsoPopup()" ng-if="$ctrl.model.Similaridade.length" id="detail-book-open-proposal-popup">
+                <span class="icon icon-zoom-in iconSize"></span>
+              </a>
+              <span ng-if="!$ctrl.model.Similaridade.length">-</span>
+            </div>
+          </div>
+
+
+          <div class="info-area row">
+            <p class="info-title col-md-6">🌿 Focus Green:</p>
+            <div class="col-md-6">
+              <a ng-click="openGreenPopup()" ng-if="$ctrl.model.Similaridade.length" id="detail-book-open-focus-green-popup">
+                <span class="icon icon-zoom-in iconSize"></span>
+              </a>
+              <span ng-if="!$ctrl.model.Similaridade.length">-</span>
+            </div>
+          </div>
+
+
+          <div class="info-area row">
+            <p class="info-title col-md-6">Inst. Lavagem:</p>
+            <p class="info-data col-md-6 wash" id="detail-book-wash"> {{ ::$ctrl.model.ImgEtq }}</p>
+          </div>
+
+
+          <div class="info-area row">
+            <p class="info-title col-md-6">Ficha Técnica:</p>
+            <download-button class="col-md-6" model="$ctrl.model" id="detail-book-download-btn"></download-button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="$ctrl.model" class="detail-image" background-image="{{$ctrl.model.MaterialCode}}" page-name="DETAILS">
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="100px" height="100-x" viewBox="0 0 100 100">
+    <defs>
+<!--         <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="20%" stop-color="#CCC" />
+            <stop offset="80%" stop-color="#868686" />
+        </linearGradient> -->
+        <filter id="innershadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="blur"></feGaussianBlur>
+            <feOffset dy="1" dx="0"></feOffset>
+            <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+            <feFlood flood-color="#333333" flood-opacity="0.9"></feFlood>
+            <feComposite in2="shadowDiff" operator="in"></feComposite>
+            <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
+        </filter>
+        <filter id="dropshadow">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+          <feOffset dx="5" dy="5" result="offsetblur"/>
+          <feFlood flood-color="red" result="testcolor"/>
+          <feComposite in="testcolor" in2="offsetblur" operator="in"/>
+          <feMerge>
+            <feMergeNode/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <filter id="outerglow">
+            <!-- Thicken out the original shape -->
+            <feMorphology in="SourceAlpha" operator="dilate" radius="2"  result="thicken" />
+
+            <!-- Use a gaussian blur to create the soft blurriness of the glow -->
+            <feGaussianBlur in="thicken" stdDeviation="4" result="blurred" />
+            <feOffset dy="1" dx="0"></feOffset>
+            <!-- Change the colour -->
+            <feFlood flood-color="rgb(0,186,255)" result="glowColor" />
+
+            <!-- Color in the glows -->
+            <feComposite in="glowColor" in2="blurred" operator="in" result="softGlow_colored" />
+
+            <!--    Layer the effects together -->
+            <feMerge>
+                <feMergeNode in="softGlow_colored"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+</svg>

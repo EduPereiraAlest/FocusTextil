@@ -1,0 +1,36 @@
+<table class="table table-scroll form-box-table">
+  <thead>
+    <tr>
+      <th class="cell-img"></th>
+      <th class="cell-bas">
+        Código do
+        <br> Artigo
+      </th>
+      <th>Descrição do
+      <br> Artigo</th>
+      <th class="cell-med">Sequência</th>
+      <th class="cell-sm">Unidade
+      <br>Multiplo</th>
+      <th class="cell-med">Qtd.
+      <br>Original</th>
+      <th class="cell-btn-gd">Preço
+        <br>{{::vm.order.Master.CodeCurr}}
+      </th>
+      <th class="cell-btn">Sub
+        <br>Total
+      </th>
+    </tr>
+  </thead>
+  <tbody fluid-height="442">
+    <tr ng-repeat="item in $ctrl.items">
+      <td class="cell-img"><span class="thumb-image" background-image="{{::item.MaterialCode}}"></span></td>
+      <td class="cell-bas">{{::item.MaterialCode}}</td>
+      <td>{{::item.DescMat}}</td>
+      <td class="cell-med">{{::item.Posex}}</td>
+      <td class="cell-sm">{{::$ctrl.parseCurr(item.QtdeMultiplo)}} {{item.UnidMed}}</td>
+      <td class="cell-med">{{::$ctrl.parseCurr(item.Stock.QtdMaterial)}}</td>
+      <td class="cell-btn-gd">{{::$ctrl.parseCurr(item.PrcMaterial)}}</td>
+      <td class="cell-btn">{{::$ctrl.subTotal(item)}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,213 @@
+<div class="ra-search-container" ng-class="{closed: vm.showMiniDisplay}"><!-- para fazer a cortina dos inputs fechar adicione class="closed" -->
+  <search-box title="CLIENTE" info="Buscar" model="vm.page.cliente" send="vm.submitForm($event)" clear="vm.clearForm()" focus="showModal('cliente')" id="ra-filter-client"></search-box>
+  <div class="search-content ng-isolate-scope" title="STATUS" info="Buscar" model="vm.page.status">
+    <form action="." class="search-form ng-pristine ng-valid" ng-submit="vm.submitForm($event)">
+      <h2 class="form-title ng-binding">STATUS</h2>
+      <div class="form-group search-group">
+        <select class="form-control" ng-model="vm.page.status" ng-options="i.value as i.name for i in vm.page.statusList" id="ra-filter-status">
+          <option value=""></option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <search-box title="NUMERO NF" info="Buscar" model="vm.page.nfe" send="vm.submitForm($event)" clear="vm.clearForm()" focus="showModal('nfe')" id="ra-filter-nf-number"></search-box>
+  <!-- datepicker -->
+  <div class="search-content ng-isolate-scope">
+    <form action="." class="search-form" ng-submit="vm.submitForm($event)">
+      <h2 class="form-title">DT INICIO RA</h2>
+      <div class="form-group search-group date-filter">
+        <input title="DT INICIO RA" type="date" name="dateStart" class="form-control date" ng-model="vm.page.datainicial" id="ra-filter-start-date">
+      </div>
+      <input type="submit" class="hidden-submit" />
+    </form>
+  </div>
+  <search-box title="MATERIAL" info="Buscar" model="vm.page.material" send="vm.submitForm($event)" clear="vm.clearForm()" id="ra-filter-material"></search-box>
+  <search-box title="NUMERO RA" info="Buscar" model="vm.page.numerora" send="vm.submitForm($event)" clear="vm.clearForm()" id="ra-filter-ra-number"></search-box>
+  <div class="search-content ng-isolate-scope" title="TIPO" info="Buscar">
+    <form action="." class="search-form ng-pristine ng-valid" ng-submit="vm.submitForm($event)">
+      <h2 class="form-title ng-binding">TIPO</h2>
+      <div class="form-group search-group">
+        <select class="form-control" ng-model="vm.page.tipo" ng-options="i.value as i.name for i in vm.page.tiposList" id="ra-filter-type">
+          <option value=""></option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="search-content ng-isolate-scope" title="MOTIVO" info="Buscar">
+    <form action="." class="search-form ng-pristine ng-valid" ng-submit="vm.submitForm($event)">
+      <h2 class="form-title ng-binding">MOTIVO</h2>
+      <div class="form-group search-group">
+        <select class="form-control" ng-model="vm.page.motivo" ng-options="i.value as i.name for i in vm.page.motivosList" id="ra-filter-reason">
+          <option value=""></option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="search-content ng-isolate-scope spacer"></div>
+  <div class="search-content ng-isolate-scope spacer"></div>
+  <div class="search-content ng-isolate-scope spacer"></div>
+  <!-- representante / ra -->
+  <div class="rep-search search-content ng-isolate-scope">
+      <button class="btn fright" ng-click="vm.submitForm($event)" id="ra-filter-search-btn">Pesquisar</button>
+      <div class="form-select ra-select" ng-class="$ctrl.classes">
+        <select class="form-control" ng-model="vm.page.representante" ng-options="i.value as i.name for i in vm.page.representantes" id="ra-filter-agent">
+          <option>REPRESENTANTE</option>
+        </select>
+      </div>
+  </div>
+
+  <!-- bread cumb -->
+  <div class="bread-crumb">
+    <p>
+      <b>CLIENTE:</b> <span>{{ vm.page.cliente || "-" }}</span>
+    </p>
+    <p>
+      <b>STATUS:</b> <span>{{ vm.page.status || "-" }}</span>
+    </p>
+    <p>
+      <b>NUMERO NF:</b> <span>{{ vm.page.nfe || "-" }}</span>
+    </p>
+    <p>
+      <b>DT INICIO RA:</b> <span>{{ vm.page.datainicial || "-" }}</span>
+    </p>
+    <p>
+      <b>MATERIAL:</b> <span>{{ vm.page.material || "-" }}</span>
+    </p>
+    <p>
+      <b>TIPO:</b> <span>{{ vm.page.tipo || "-" }}</span>
+    </p>
+    <p>
+      <b>MOTIVO:</b> <span>{{ vm.page.motivo || "-" }}</span>
+    </p>
+    <p>
+      <b>REPRESENTANTE:</b> <span>{{ vm.page.representante || "-" }}</span>
+    </p>
+    <p>
+    </p>
+  </div>
+</div>
+
+
+<!-- <search-box title="RAS" info="Buscar" model="vm.page.search" send="vm.submitForm($event)" clear="vm.clearForm()">
+  <div class="btn-group-right">
+    <a href="#!/ras-add/0" class="btn btn-icon">
+      <span class="icon icon-clipboard"></span> Nova RA
+    </a>
+  </div>
+</search-box> -->
+<!-- <div class="search-content">
+  <h2 class="form-title">CLIENTES</h2>
+  <form action="." class="search-form" ng-submit="vm.submitForm()">
+    <div class="form-group search-group">
+      <input type="search" class="form-control" ng-model="vm.page.search" placeholder="Buscar">
+      <button type="button" class="btn-clear" ng-show="vm.page.search" ng-click="vm.page.search = ''; vm.ra = ''">
+        <span class="icon icon-blocked"></span>
+      </button>
+    </div>
+    <div class="form-group btn-group">
+      <a href="#!/ras-add/0" class="btn btn-icon btn-sm">
+        <span class="icon icon-clipboard"></span> Nova RA
+      </a>
+    </div>
+  </form>
+</div> -->
+
+<div class="empty-response" ng-if="!vm.ras.length">
+  Nenhum resultado
+</div>
+<div class="empty-content" ng-if="!vm.ras.length">
+  <span class="icon icon-clipboard"></span>
+</div>
+<div class="table-content simple-content" ng-if="!!vm.ras.length">
+  <table class="table table-scroll">
+    <thead>
+      <tr>
+        <th class="cell-cod">RA</th>
+        <th class="cell-cod">Data e Hora</th>
+        <th>Pedido</th>
+        <th class="cell-cod">Nota Fiscal</th>
+        <th class="cell-xtra">Cliente</th>
+        <th class="cell-cod">Status</th>
+        <th class="cell-btn-gd"></th>
+      </tr>
+    </thead>
+    <tbody class="ra-list">
+      <tr ng-repeat="ra in vm.ras">
+        <td class="cell-cod" id="{{'ra-item-code-' + $index}}">{{ra.Code}}</td>
+        <td class="cell-cod" id="{{'ra-item-date-' + $index}}">{{ra.Date}}</td>
+        <td id="{{'ra-item-order-' + $index}}">{{ra.Order}}</td>
+        <td class="cell-cod" id="{{'ra-item-nf-code-' + $index}}">{{ra.NFCode}}</td>
+        <td class="cell-xtra" id="{{'ra-item-client-' + $index}}">{{ra.Client}}</td>
+        <td class="cell-cod" id="{{'ra-item-status-' + $index}}">{{ra.Status}}</td>
+        <td class="cell-btn-gd">
+          <a class="btn btn-sm" ng-click="vm.showDetails(ra)" id="{{'ra-item-details-' + $index}}">Detalhes</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="modal-bkg">
+  <div class="modal-box modal-nfe">
+    <h3>Pesquisa NF-e</h3>
+    <button class="modal-close" ng-click="closeModal('nfe')" id="ra-nf-search-close-btn"></button>
+    <div class="nfe-search-box ">
+      <span>Nº DA NFE</span>
+      <input type="text" ng-model="vm.modalnfe.nfe" class="nfe-number" id="ra-nf-search-nf-number">
+      <span>DATA</span>
+      <input type="date" ng-model="vm.modalnfe.data" class="nfe-date" id="ra-nf-search-date">
+      <span>PEDIDO</span>
+      <input type="text" ng-model="vm.modalnfe.pedido" class="nfe-order" id="ra-nf-search-order">
+
+      
+      <button class="btn fright" ng-click="vm.modalnfe.loadNF()" id="ra-nf-search-search-btn">Pesquisar</button>
+    </div>
+    <div class="table-holder">   
+      <table class="">
+        <thead>
+          <tr>
+            <th><p>Nº DA NFE </p></th>
+            <th><p>SÉRIES</p></th>
+            <th><p>DATA</p></th>
+            <th><p>PEDIDO</p></th>
+            <th><p>EMISSOR</p></th>
+            <th><p>DESCRIÇÃO</p></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="nf-item" ng-repeat="nf in vm.modalnfe.filtered" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="vm.modalnfe.selectNF(nf.Nota)">
+            <td><p class="nfe" id="{{'ra-nf-search-item-nf-' + $index}}">{{ nf.Nota }}</p></td>
+            <td><p class="series" id="{{'ra-nf-search-item-series-' + $index}}">{{ nf.Series }}</p></td>
+            <td><p class="data" id="{{'ra-nf-search-item-date-' + $index}}">{{ nf.Data }}</p></td>
+            <td><p class="pedido" id="{{'ra-nf-search-item-order-' + $index}}">{{ nf.Pedido }}</p></td>
+            <td><p class="emissor" id="{{'ra-nf-search-item-issuer-' + $index}}">{{ nf.EmissorOrdem }}</p></td>
+            <td><p class="descricao" id="{{'ra-nf-search-item-desc-' + $index}}">{{ nf.Descricao }}</p></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-box modal-cliente">
+    <h3>Pesquisa Clientes</h3>
+    <button class="modal-close" ng-click="closeModal('cliente')" id="ra-client-search-close"></button>
+    <div class="client-search-box ">
+      <span>CLIENTE</span>
+      <input type="text" ng-model="vm.modalcliente.filter" ng-change="vm.modalcliente.filterChange()" class="client-search" id="ra-client-search-name">
+    </div>
+    <div class="table-holder">    
+      <table id="NFE" class="">
+        <thead>
+          <tr>
+            <th><p >PARC. NEGÓC.</p></th>
+            <th><p >DESCRIÇÃO</p></th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr class="cliente-item" ng-repeat="cliente in vm.modalcliente.filtered" ng-class-odd="'odd'" ng-class-even="'even'" ng-click="vm.modalcliente.selectCliente(cliente.CodeCli)">
+          <td><p class="negoc" id="{{'ra-client-search-item-code-' + $index}}">{{ cliente.CodeCli }}</p></td>
+          <td><p class="descricao" id="{{'ra-client-search-item-desc-' + $index}}">{{ cliente.Razao01Cli }}</p></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

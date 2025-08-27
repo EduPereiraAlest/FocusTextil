@@ -1,0 +1,20 @@
+<div class="ngdialog-message">
+  <form name="formage" class="form-box-modal" ng-submit="vm.uploadFile($event)" novalidate>
+    <div class="form-row">
+      <div class="form-group form-group-fl">
+        <input class="form-control" type="text" id="desc" name="desc" ng-model="vm.data.desc" placeholder="Descrição" required id="upload-modal-desc">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-image" style="background-image: url({{filepreview || ''}});">
+        <span class="icon icon-upload" ng-show="!filepreview" aria-hidden="true"></span>
+        <input type="file" fileinput="vm.data.file" filepreview="filepreview" ng-model="vm.data.file" name='file' class="hidden-upload" required id="upload-modal-upload-btn">
+      </div>
+    </div>
+    <div class="form-end">
+      <div class="form-group form-group-fl">
+        <button class="btn btn-default fright" name='upload' ng-disabled="formage.$invalid" id="upload-modal-confirm-btn">Confirmar</button>
+      </div>
+    </div>
+  </form>
+</div>

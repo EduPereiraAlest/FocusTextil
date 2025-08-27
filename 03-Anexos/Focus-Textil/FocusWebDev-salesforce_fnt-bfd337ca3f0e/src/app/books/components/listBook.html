@@ -1,0 +1,36 @@
+<div class="table-content simple-content">
+  <table class="table table-scroll table-books">
+    <thead>
+      <tr>
+        <th class="cell-num">Número</th>
+        <th>
+          <sort-button collumn="Master.EbookDesc" id="list-book-sort-name">
+            Nome do Grupo e Sigla
+          </sort-button>
+        </th>
+        <th class="cell-bas">
+          <sort-button collumn="Master.CaractValueBas" id="list-book-sort-base">
+            Base
+          </sort-button>
+        </th>
+        <th class="cell-bas">
+          <sort-button collumn="Master.CaractValueTec" id="list-book-sort-weaving">
+            Tecimento
+          </sort-button>
+        </th>
+        <th class="cell-btn-sp"></th>
+      </tr>
+    </thead>
+    <tbody fluid-height="208">
+      <tr ng-repeat="book in $ctrl.model track by book.Master.Code">
+        <td class="cell-num" id="{{'list-book-code-item-' + $index}}">{{book.Master.EbookCode}}</td>
+        <td id="{{'list-book-desc-item-' + $index}}">{{book.Master.EbookDesc}}</td>
+        <td class="cell-bas" id="{{'list-book-value-bas-item-' + $index}}">{{book.Master.CaractValueBas}}</td>
+        <td class="cell-bas" id="{{'list-book-value-tec-item-' + $index}}">{{book.Master.CaractValueTec}}</td>
+        <td class="cell-btn-sp">
+          <button class="btn btn-white" ng-click="$ctrl.setBook(book.Master.EbookCode, book.Master.HyerProd)" id="{{'list-book-articles-item-' + $index}}">Artigos</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
