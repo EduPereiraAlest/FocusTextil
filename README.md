@@ -279,36 +279,36 @@ style F2 fill:#ccffcc,color:#000000
 
 ```mermaid
 gantt
-    title Roadmap de Migração Focus Textil
+    title 🚀 Roadmap de Migração Focus Textil
     dateFormat YYYY-MM-DD
     axisFormat %m-%d
 
     section 🏗️ Fundação
-    Setup Infraestrutura    :done, infra, 2024-01-01, 7d
-    CI/CD Pipeline          :done, cicd, 2024-01-08, 7d
-    Arquitetura Base        :active, arch, 2024-01-15, 7d
-    Database Design         :db, 2024-01-22, 7d
+    🔧 Setup Infraestrutura AWS         :done, infra, 2024-01-01, 7d
+    📦 Pipeline CI/CD Automatizado      :done, cicd, 2024-01-08, 7d
+    🏛️ Arquitetura Base Microserviços  :active, arch, 2024-01-15, 7d
+    🗄️ Design Database PostgreSQL      :db, 2024-01-22, 7d
 
     section ⚛️ Frontend
-    React Setup             :react, 2024-01-29, 7d
-    Component Migration     :comp, 2024-02-05, 21d
-    State Management        :state, 2024-02-26, 14d
-    PWA Implementation      :pwa, 2024-03-11, 7d
+    ⚛️ Setup React 18 + TypeScript     :react, 2024-01-29, 7d
+    🧩 Migração Componentes Legacy     :comp, 2024-02-05, 21d
+    🔄 State Management (Zustand)      :state, 2024-02-26, 14d
+    📱 Implementação PWA               :pwa, 2024-03-11, 7d
 
     section ⚙️ Backend
-    Microserviços Core      :micro, 2024-03-18, 21d
-    API Development         :api, 2024-04-08, 21d
-    Auth & Security         :auth, 2024-04-29, 14d
-    Performance Opt         :perf, 2024-05-13, 14d
+    🎯 Microserviços Core (Node.js)    :micro, 2024-03-18, 21d
+    🔌 Desenvolvimento APIs RESTful    :api, 2024-04-08, 21d
+    🔐 Autenticação JWT + Security     :auth, 2024-04-29, 14d
+    ⚡ Otimização Performance         :perf, 2024-05-13, 14d
 
     section 🔄 Integração
-    Data Migration          :data, 2024-05-27, 21d
-    Testing & QA            :test, 2024-06-03, 14d
+    📊 Migração Dados (Couchbase→PG)  :data, 2024-05-27, 21d
+    🧪 Testing & QA Automatizado      :test, 2024-06-03, 14d
 
     section 🚀 Deploy
-    Staging Deploy          :staging, 2024-06-17, 7d
-    Production Deploy       :prod, 2024-06-24, 7d
-    Training & Handover     :training, 2024-07-01, 7d
+    🎭 Deploy Ambiente Staging         :staging, 2024-06-17, 7d
+    🚀 Deploy Produção                 :prod, 2024-06-24, 7d
+    👨‍🎓 Training & Handover Team       :training, 2024-07-01, 7d
 ```
 
 ### 📊 Milestones Críticos
@@ -460,14 +460,6 @@ npm run deploy:production
 2. **🔍 Due Diligence Técnica** - Semana 2
 3. **💰 Aprovação Orçamentária** - Semana 3
 4. **🚀 Kick-off do Projeto** - Semana 4
-
-### 📞 Contatos do Projeto
-
-| 👤 Função              | 👨‍💻 Responsável   | 📧 Email                | 📱 Telefone       |
-| ---------------------- | ---------------- | ----------------------- | ----------------- |
-| **🎯 Project Manager** | Eduardo Pereira  | edu@focustextil.com     | +55 11 99999-9999 |
-| **🏗️ Tech Lead**       | [Nome Tech Lead] | tech@focustextil.com    | +55 11 99999-9999 |
-| **👔 Product Owner**   | [Nome PO]        | product@focustextil.com | +55 11 99999-9999 |
 
 ---
 
