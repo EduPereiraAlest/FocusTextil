@@ -110,9 +110,9 @@ style B4 fill:#ccffcc,color:#000000
 - Database PostgreSQL + Redis configurados
 - Proxy Gateway funcionando com legacy
 
-**⚛️ FASE 2: FRONTEND CORE (Semanas 5-10)**
+**🅰️ FASE 2: FRONTEND CORE (Semanas 5-10)**
 
-- React 18+ Architecture setup
+- Angular 19 Architecture setup
 - Component Library desenvolvimento
 - Sistema de autenticação migrado
 - Core pages migradas gradualmente
@@ -170,7 +170,7 @@ style B4 fill:#ccffcc,color:#000000
 - **S3 Buckets**: Object storage para arquivos
 - **GitHub Actions**: CI/CD pipeline automatizado
 
-### ⚛️ FASE 2: FRONTEND CORE (Semanas 5-10)
+### 🅰️ FASE 2: FRONTEND CORE (Semanas 5-10)
 
 **Component Migration Priority:**
 
@@ -305,7 +305,7 @@ style B4 fill:#ccffcc,color:#000000
 
 **Semanas 5-10 (Frontend):**
 
-- Frontend Lead + 2 Devs: React migration
+- Frontend Lead + 2 Devs: Angular migration
 - Designer: Component library
 - QA: Test automation setup
 

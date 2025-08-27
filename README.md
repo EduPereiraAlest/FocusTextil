@@ -15,7 +15,7 @@ A modernização dos sistemas Focus Textil é uma solução tecnológica de pont
 | Sistema                | Situação Atual            | Após Modernização      | Melhoria          |
 | ---------------------- | ------------------------- | ---------------------- | ----------------- |
 | Performance Frontend   | 3-5s carregamento         | <800ms                 | 85% redução       |
-| Manutenibilidade       | Crítica (AngularJS 1.x)   | Moderna (React/Vue)    | 100% modernização |
+| Manutenibilidade       | Crítica (AngularJS 1.x)   | Moderna (Angular 19)   | 100% modernização |
 | Deploy e CI/CD         | Manual/Demorado           | Automático/5min        | 95% redução       |
 | Escalabilidade Backend | Limitada/Monolítica       | Microserviços/Elástica | Infinita          |
 | Segurança              | Vulnerável (deps antigas) | Enterprise Grade       | 100% compliance   |
@@ -23,7 +23,7 @@ A modernização dos sistemas Focus Textil é uma solução tecnológica de pont
 
 ### 💼 ESCOPO COMPLETO DA MIGRAÇÃO
 
-🎯 **Frontend Modernization**: React 18+ com TypeScript para catálogo, carrinho e gestão de clientes  
+🎯 **Frontend Modernization**: Angular 19 com TypeScript para catálogo, carrinho e gestão de clientes  
 🎯 **Backend Redesign**: Node.js com microserviços e migração do Couchbase/SAP  
 🎯 **Database Optimization**: PostgreSQL com migração de Couchbase e otimização de queries  
 🎯 **DevOps Implementation**: CI/CD, Docker, Kubernetes e monitoramento da infraestrutura Focus  
@@ -39,11 +39,11 @@ A modernização dos sistemas Focus Textil é uma solução tecnológica de pont
 ```mermaid
 graph TB
 subgraph "🌐 FRONTEND MODERNO"
-A["⚛️ React 18+ TypeScript"]
-B["🎨 Component Library"]
+A["🅰️ Angular 19 TypeScript"]
+B["🎨 Angular Material"]
 C["📱 PWA Support"]
-D["🔄 State Management"]
-E["⚡ Vite Build"]
+D["🔄 NgRx State Management"]
+E["⚡ Angular CLI Build"]
 end
 
 subgraph "🔌 API GATEWAY"
@@ -103,11 +103,11 @@ R --> T
 R --> V
 N --> U
 
-style A fill:#61dafb,color:#000000
-style B fill:#61dafb,color:#000000
-style C fill:#61dafb,color:#000000
-style D fill:#61dafb,color:#000000
-style E fill:#61dafb,color:#000000
+style A fill:#dd0031,color:#ffffff
+style B fill:#dd0031,color:#ffffff
+style C fill:#dd0031,color:#ffffff
+style D fill:#dd0031,color:#ffffff
+style E fill:#dd0031,color:#ffffff
 style F fill:#ff6b35,color:#000000
 style G fill:#ff6b35,color:#000000
 style H fill:#ff6b35,color:#000000
@@ -130,8 +130,8 @@ style U fill:#9f7aea,color:#000000
 
 | Camada           | Tecnologia Atual        | Nova Tecnologia    | Versão | Justificativa                                |
 | ---------------- | ----------------------- | ------------------ | ------ | -------------------------------------------- |
-| 🎨 Frontend      | AngularJS 1.x           | React + TypeScript | 18+    | Performance, comunidade ativa, futuro seguro |
-| 🏗️ Build System  | Gulp + Bower            | Vite + npm         | Latest | Build rápido, HMR, bundle otimizado          |
+| 🎨 Frontend      | AngularJS 1.x           | Angular + TypeScript | 19+    | Enterprise-ready, TypeScript nativo, LTS |
+| 🏗️ Build System  | Gulp + Bower            | Angular CLI + npm  | Latest | Zero config, build otimizado, schematics    |
 | ⚙️ Backend       | Express básico          | Node.js + Fastify  | 20+    | Performance superior, microserviços          |
 | 🗄️ Database      | Couchbase + SAP Gateway | PostgreSQL + Redis | 15+    | ACID compliance, performance, escalabilidade |
 | ⚡ Cache         | Inexistente             | Redis              | 7+     | Performance em tempo real, sessões           |
@@ -186,7 +186,7 @@ style J fill:#c6f6d5,color:#000000
 | 🎯 Fase                   | 📋 Entregas Principais                    | ⏱️ Duração |
 | ------------------------- | ----------------------------------------- | ---------- |
 | 🏗️ **Fundação**           | Infraestrutura + CI/CD + Arquitetura Base | 4 semanas  |
-| ⚛️ **Frontend Migration** | React App + Component Library + PWA       | 6 semanas  |
+| 🅰️ **Frontend Migration** | Angular 19 App + Material UI + PWA        | 6 semanas  |
 | ⚙️ **Backend Redesign**   | Microserviços + APIs + Database           | 8 semanas  |
 | 🔄 **Data Migration**     | Migração de dados + Sincronização         | 3 semanas  |
 | 🚀 **Deploy & Training**  | Produção + Treinamento + Handover         | 3 semanas  |
@@ -220,9 +220,9 @@ Ano 5: ████████████████████████�
 
 | 🚨 Problema                | 💥 Impacto                                 | 🎯 Solução Proposta           |
 | -------------------------- | ------------------------------------------ | ----------------------------- |
-| **AngularJS 1.x EOL**      | Vulnerabilidades de segurança, sem suporte | Migração para React 18+       |
+| **AngularJS 1.x EOL**      | Vulnerabilidades de segurança, sem suporte | Migração para Angular 19      |
 | **Bower Descontinuado**    | Gerenciamento de deps problemático         | npm + package.json moderno    |
-| **Gulp Legacy**            | Build lento, configuração complexa         | Vite - build 10x mais rápido  |
+| **Gulp Legacy**            | Build lento, configuração complexa         | Angular CLI - zero config     |
 | **Arquitetura Monolítica** | Escalabilidade limitada, deploy riskoso    | Microserviços desacoplados    |
 | **Zero Testes**            | Regressões frequentes, deploy inseguro     | Jest + Testing Library (>80%) |
 | **Deploy Manual**          | Erros humanos, downtime                    | CI/CD automatizado            |
@@ -242,11 +242,11 @@ F1["Deploy Manual"]
 end
 
 subgraph "🚀 NOVA STACK (MODERNA)"
-A2["React 18+ TS"]
+A2["Angular 19 TS"]
 B2["npm/yarn"]
-C2["Vite"]
+C2["Angular CLI"]
 D2["Microserviços"]
-E2["Jest + RTL"]
+E2["Jest + Angular"]
 F2["CI/CD Auto"]
 end
 
@@ -296,7 +296,7 @@ graph LR
 | 🎯 Milestone               | 📅 Semana | 📋 Entregas                     | ✅ Critérios de Aceite          |
 | -------------------------- | --------- | ------------------------------- | ------------------------------- |
 | **🏗️ Fundação Pronta**     | 4         | Infra + CI/CD + DB              | Deploy automatizado funcionando |
-| **⚛️ Frontend MVP**        | 10        | React App + Componentes Básicos | Funcionalidades core migradas   |
+| **🅰️ Frontend MVP**        | 10        | Angular App + Componentes Básicos | Funcionalidades core migradas   |
 | **⚙️ Backend Core**        | 16        | APIs + Microserviços + Auth     | Backend funcional integrado     |
 | **🔄 Integração Completa** | 20        | Sistema integrado + Testes      | Todos os fluxos funcionando     |
 | **🚀 Go-Live**             | 24        | Produção + Treinamento          | Sistema em produção estável     |
@@ -419,7 +419,7 @@ npm run deploy:production
 
 - 🎨 [Diagramas Arquiteturais](./01-Proposta/documentacao/diagrams.md) - Visualização completa da transformação
 - 🏛️ [Arquitetura do Sistema](./01-Proposta/documentacao/architecture.md) - Design moderno vs. legacy
-- ⚙️ [Stack Tecnológico](./01-Proposta/documentacao/technology.md) - React 18+ e microserviços Node.js
+- ⚙️ [Stack Tecnológico](./01-Proposta/documentacao/technology.md) - Angular 19 e microserviços Node.js
 - 🔐 [Segurança & Compliance](./01-Proposta/documentacao/security-compliance.md) - Arquitetura de segurança e auditoria
 
 **👨‍💻 Para Desenvolvedores e DevOps**

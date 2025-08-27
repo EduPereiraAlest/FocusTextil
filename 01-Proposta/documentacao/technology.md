@@ -4,13 +4,13 @@
 
 ```mermaid
 graph TB
-subgraph "⚛️ FRONTEND LAYER"
-A["React 18+ TypeScript"]
-B["Vite Build System"]
-C["Tailwind CSS"]
-D["Zustand State"]
-E["React Router"]
-F["PWA Workbox"]
+subgraph "🅰️ FRONTEND LAYER"
+A["Angular 19 TypeScript"]
+B["Angular CLI Build"]
+C["Angular Material"]
+D["NgRx State"]
+E["Angular Router"]
+F["Angular PWA"]
 end
 
 subgraph "🚪 API GATEWAY LAYER"
@@ -120,40 +120,41 @@ style CC fill:#e6522c,color:#000000
 
 ## 📊 JUSTIFICATIVAS TÉCNICAS DETALHADAS
 
-### ⚛️ Frontend: React 18+ como Escolha Estratégica
+### 🅰️ Frontend: Angular 19 como Escolha Estratégica
 
-**Por que React foi escolhido sobre outras alternativas:**
+**Por que Angular foi escolhido como framework moderno:**
 
-| 🎯 Critério              | ⚛️ React   | 🅰️ Angular | 💚 Vue.js | 📈 Vencedor |
+| 🎯 Critério              | 🅰️ Angular | ⚛️ React   | 💚 Vue.js | 📈 Vencedor |
 | ------------------------ | ---------- | ---------- | --------- | ----------- |
-| **Performance**          | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ⭐⭐⭐⭐  | React       |
-| **Ecosystem**            | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ⭐⭐⭐    | React       |
-| **Market Adoption**      | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ⭐⭐⭐    | React       |
-| **Developer Experience** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     | ⭐⭐⭐⭐  | React       |
+| **Enterprise Ready**     | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ⭐⭐⭐    | Angular     |
+| **TypeScript Native**    | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ⭐⭐⭐    | Angular     |
+| **Built-in Tools**       | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     | ⭐⭐⭐    | Angular     |
+| **Long-term Support**    | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     | ⭐⭐⭐    | Angular     |
 
-**React 18+ - Recursos Críticos:**
+**Angular 19 - Recursos Críticos:**
 
-- **Concurrent Features**: Rendering não-bloqueante para melhor UX
-- **Automatic Batching**: Otimização automática de performance
-- **Suspense**: Estados de loading elegantes e consistentes
-- **Server Components**: SSR otimizado para SEO e performance
+- **Standalone Components**: Arquitetura simplificada sem NgModules
+- **Signals**: Sistema reativo moderno para estado e performance
+- **Control Flow**: @if, @for, @switch nativos no template
+- **SSR & Hydration**: Server-side rendering otimizado e hidratação não-bloqueante
 
-### ⚡ Build System: Vite vs. Webpack
+### ⚡ Build System: Angular CLI vs. Outras Opções
 
 **Performance Comparison:**
 
-| 🎯 Métrica        | ⚡ Vite | 📦 Webpack | 🎁 Rollup |
-| ----------------- | ------- | ---------- | --------- |
-| **Cold Start**    | 1-2s    | 15-30s     | 10-20s    |
-| **HMR Speed**     | <100ms  | 1-3s       | 1-2s      |
-| **Configuration** | Mínima  | Complexa   | Média     |
-| **TypeScript**    | Nativo  | Plugin     | Plugin    |
+| 🎯 Métrica        | 🅰️ Angular CLI | ⚡ Vite | 📦 Webpack |
+| ----------------- | -------------- | ------- | ---------- |
+| **Cold Start**    | 2-3s           | 1-2s    | 15-30s     |
+| **HMR Speed**     | <200ms         | <100ms  | 1-3s       |
+| **Configuration** | Zero Config    | Mínima  | Complexa   |
+| **TypeScript**    | Nativo         | Nativo  | Plugin     |
 
-**Vantagens do Vite:**
+**Vantagens do Angular CLI:**
 
-- **10x Faster Builds**: Desenvolvimento muito mais ágil
-- **Native ESM**: Aproveita recursos nativos do browser
-- **Zero Configuration**: Setup rápido e fácil manutenção
+- **Zero Configuration**: Configuração automática para projetos Angular
+- **Build Otimizado**: Bundling e tree-shaking automáticos
+- **Dev Server Integrado**: Hot reload e proxy configuration built-in
+- **Schematics**: Geração automática de componentes e features
 
 ---
 
@@ -231,13 +232,13 @@ style CC fill:#e6522c,color:#000000
 
 **Distribuição de Testes:**
 
-- **Unit Tests (70%)**: Jest + React Testing Library
+- **Unit Tests (70%)**: Jest + Angular Testing Utilities
 - **Integration Tests (20%)**: Supertest + Test Containers
 - **E2E Tests (10%)**: Playwright
 
-| 🎯 Tipo         | 🛠️ Ferramenta | 📊 Coverage         | ⏰ Execução |
-| --------------- | ------------- | ------------------- | ----------- |
-| **Unit Tests**  | Jest + RTL    | 80%+                | <30s        |
+| 🎯 Tipo         | 🛠️ Ferramenta    | 📊 Coverage         | ⏰ Execução |
+| --------------- | ---------------- | ------------------- | ----------- |
+| **Unit Tests**  | Jest + Angular   | 80%+                | <30s        |
 | **Integration** | Supertest     | 60%+                | 2-3min      |
 | **E2E Tests**   | Playwright    | 90%+ critical paths | 10-15min    |
 | **Performance** | k6            | All APIs            | 5min        |
@@ -271,10 +272,10 @@ style CC fill:#e6522c,color:#000000
 
 | 🎯 Técnica             | 📈 Impacto              | 🛠️ Implementação         |
 | ---------------------- | ----------------------- | ------------------------ |
-| **Code Splitting**     | 60% reduction bundle    | React.lazy + Suspense    |
-| **Lazy Loading**       | 40% faster initial load | Intersection Observer    |
-| **Image Optimization** | 70% smaller images      | WebP + responsive images |
-| **Service Worker**     | Offline capability      | Workbox implementation   |
+| **Lazy Loading**       | 60% reduction bundle    | Angular Router lazy load |
+| **OnPush Strategy**    | 40% faster rendering    | ChangeDetectionStrategy  |
+| **Image Optimization** | 70% smaller images      | Angular Image directive  |
+| **Service Worker**     | Offline capability      | Angular PWA Schematics   |
 
 ### ⚙️ Backend Performance Techniques
 
@@ -293,8 +294,8 @@ style CC fill:#e6522c,color:#000000
 
 | 🎯 Category            | 🏆 Chosen Technology    | 💡 Key Reason                           |
 | ---------------------- | ----------------------- | --------------------------------------- |
-| **Frontend Framework** | React 18+ TypeScript    | Performance + ecosystem + future-proof  |
-| **Build Tool**         | Vite                    | 10x faster builds + modern architecture |
+| **Frontend Framework** | Angular 19 TypeScript   | Enterprise-ready + TypeScript + LTS     |
+| **Build Tool**         | Angular CLI             | Zero config + optimized builds + tools  |
 | **Backend Framework**  | Fastify + TypeScript    | 2x performance + type safety            |
 | **Database**           | PostgreSQL + Redis      | ACID compliance + performance           |
 | **Cloud**              | AWS                     | Reliability + complete ecosystem        |

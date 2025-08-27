@@ -16,11 +16,11 @@ E["🛡️ WAF + DDoS Protection"]
 F["🌐 Load Balancer"]
 end
 
-subgraph "⚛️ FRONTEND (React 18+)"
-G["🎨 React SPA"]
+subgraph "🅰️ FRONTEND (Angular 19)"
+G["🎨 Angular SPA"]
 H["📱 PWA Shell"]
 I["🧩 Component Library"]
-J["🗂️ State Management"]
+J["🗂️ NgRx State"]
 end
 
 subgraph "🚪 API GATEWAY"
@@ -113,10 +113,10 @@ BB --> EE
 style A fill:#e8f4fd,color:#000000
 style B fill:#e8f4fd,color:#000000
 style C fill:#e8f4fd,color:#000000
-style G fill:#61dafb,color:#000000
-style H fill:#61dafb,color:#000000
-style I fill:#61dafb,color:#000000
-style J fill:#61dafb,color:#000000
+style G fill:#dd0031,color:#ffffff
+style H fill:#dd0031,color:#ffffff
+style I fill:#dd0031,color:#ffffff
+style J fill:#dd0031,color:#ffffff
 style K fill:#ff6b35,color:#000000
 style L fill:#ff6b35,color:#000000
 style M fill:#ff6b35,color:#000000
@@ -172,7 +172,7 @@ style AA fill:#9f7aea,color:#000000
 
 ## 🚀 NOVA ARQUITETURA PROPOSTA
 
-### 🎨 Frontend Moderno - React 18+ Architecture
+### 🎨 Frontend Moderno - Angular 19 Architecture
 
 **Feature-Based Structure:**
 
@@ -181,29 +181,29 @@ src/
 ├── features/
 │   ├── auth/
 │   │   ├── components/
-│   │   ├── hooks/
 │   │   ├── services/
-│   │   └── types/
+│   │   ├── guards/
+│   │   └── models/
 │   ├── dashboard/
 │   ├── users/
 │   └── analytics/
 ├── shared/
 │   ├── components/
-│   ├── hooks/
+│   ├── services/
 │   ├── utils/
-│   └── types/
+│   └── models/
 └── app/
-    ├── store/
-    ├── router/
-    └── providers/
+    ├── store/ (NgRx)
+    ├── routing/
+    └── core/
 ```
 
 **Component Design Patterns:**
 
-- **Container/Presentational**: Separação de lógica e apresentação
-- **Compound Components**: Para componentes complexos
-- **Custom Hooks**: Para lógica reutilizável
-- **React.memo + useMemo**: Otimização de performance
+- **Smart/Dumb Components**: Separação de lógica e apresentação
+- **Standalone Components**: Componentes independentes sem NgModule
+- **Angular Services**: Para lógica reutilizável e injeção de dependência
+- **OnPush Strategy**: Otimização de performance com Change Detection
 
 ### ⚙️ Backend Microserviços - Node.js Architecture
 
@@ -379,7 +379,7 @@ services/
 ### ✅ Arquitetura Readiness Summary
 
 - ✅ **Scalable Design**: Microserviços com auto-scaling
-- ✅ **Modern Stack**: React 18+ e Node.js otimizados
+- ✅ **Modern Stack**: Angular 19 e Node.js otimizados
 - ✅ **Security First**: Múltiplas camadas de proteção
 - ✅ **Performance Optimized**: <800ms response time
 - ✅ **Cloud Native**: AWS com best practices

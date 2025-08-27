@@ -16,7 +16,7 @@ F["🌐 HTTP sem HTTPS"]
 end
 
 subgraph "🛡️ NOVA ARQUITETURA SEGURA"
-G["🔒 React 18+ - Zero vulnerabilidades"]
+G["🔒 Angular 19 - Zero vulnerabilidades"]
 H["🔐 npm audit + Snyk scanning"]
 I["🗄️ PostgreSQL + encryption"]
 J["🔑 Vault secrets management"]
@@ -130,12 +130,12 @@ const cluster = new couchbase.Cluster('couchbase://focustextil.loc.br', {
 
 ## 🛡️ NOVA ARQUITETURA DE SEGURANÇA
 
-### 🔐 Security by Design - React + Node.js
+### 🔐 Security by Design - Angular + Node.js
 
-**⚛️ Frontend Security (React 18+):**
+**🅰️ Frontend Security (Angular 19):**
 
 ```typescript
-// ✅ IMPLEMENTAÇÃO SEGURA - React Component
+// ✅ IMPLEMENTAÇÃO SEGURA - Angular Component
 import DOMPurify from 'dompurify';
 import { validateInput } from '@/utils/validation';
 
@@ -143,46 +143,54 @@ interface UserInputProps {
   onSubmit: (data: SafeUserData) => void;
 }
 
-export const SecureUserInput: React.FC<UserInputProps> = ({ onSubmit }) => {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    
-    // ✅ Input validation
-    const formData = new FormData(event.currentTarget);
-    const validatedData = validateInput(formData);
-    
-    // ✅ XSS protection
-    const sanitizedData = {
-      name: DOMPurify.sanitize(validatedData.name),
-      email: validator.isEmail(validatedData.email) ? validatedData.email : null
-    };
-    
-    if (sanitizedData.name && sanitizedData.email) {
-      onSubmit(sanitizedData);
-    }
-  };
-  
-  return (
-    <form onSubmit={handleSubmit}>
-      {/* ✅ CSRF protection via SameSite cookies */}
-      <input type="hidden" name="_token" value={csrfToken} />
+@Component({
+  selector: 'app-secure-user-input',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  template: `
+    <form [formGroup]="userForm" (ngSubmit)="handleSubmit()">
+      <!-- ✅ CSRF protection via Angular CSRF interceptor -->
       <input 
         type="text" 
-        name="name" 
+        formControlName="name"
         required
-        maxLength={100}
+        maxlength="100"
         pattern="[A-Za-z\s]+"
       />
       <input 
         type="email" 
-        name="email" 
+        formControlName="email"
         required
-        autoComplete="email"
+        autocomplete="email"
       />
-      <button type="submit">Submit</button>
+      <button type="submit" [disabled]="!userForm.valid">Submit</button>
     </form>
-  );
-};
+  `
+})
+export class SecureUserInputComponent {
+  private fb = inject(FormBuilder);
+  
+  userForm = this.fb.group({
+    name: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/[A-Za-z\s]+/)]],
+    email: ['', [Validators.required, Validators.email]]
+  });
+  
+  @Output() onSubmit = new EventEmitter<SafeUserData>();
+
+  handleSubmit() {
+    if (this.userForm.valid) {
+      const formData = this.userForm.value;
+      
+      // ✅ Input validation and XSS protection
+      const sanitizedData = {
+        name: DOMPurify.sanitize(formData.name!),
+        email: formData.email!
+      };
+      
+      this.onSubmit.emit(sanitizedData);
+    }
+  }
+}
 ```
 
 **⚙️ Backend Security (Node.js + Fastify):**
@@ -665,7 +673,7 @@ export const securityMetrics = {
 |-----------|---------------------------|-------------|
 | **1-2** | Security Assessment + Threat Modeling | Relatório de vulnerabilidades |
 | **3-4** | Secrets Management + Encryption Setup | Credenciais seguras |
-| **5-8** | Secure Frontend Development | React components seguros |
+| **5-8** | Secure Frontend Development | Angular components seguros |
 | **9-12** | Secure Backend Development | APIs com autenticação |
 | **13-16** | Database Security + Migration | Dados migrados com segurança |
 | **17-20** | Security Testing + SIEM Setup | Testes de segurança |

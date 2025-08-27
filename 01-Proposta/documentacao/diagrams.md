@@ -16,14 +16,14 @@ end
 subgraph "🔄 PROCESSO DE MIGRAÇÃO"
 G["📋 Análise Técnica"]
 H["🏗️ Setup Infraestrutura"]
-I["⚛️ Frontend React 18+"]
+I["🅰️ Frontend Angular 19"]
 J["⚙️ Backend Microserviços"]
 K["🔄 Migração Dados"]
 L["🚀 Go-Live Sistema"]
 end
 
 subgraph "🚀 SISTEMA MODERNO (TARGET)"
-M["⚛️ React 18+ TypeScript"]
+M["🅰️ Angular 19 TypeScript"]
 N["🎯 Microserviços Node.js"]
 O["🐘 PostgreSQL + Redis"]
 P["☁️ AWS Cloud Native"]
@@ -151,12 +151,12 @@ style Z fill:#9b59b6,color:#000000
 - Database PostgreSQL + Redis configurados
 - API Gateway e Load Balancer funcionais
 
-**⚛️ Frontend React 18+ (Semanas 5-10)**
+**🅰️ Frontend Angular 19 (Semanas 5-10)**
 
 - Migração componente por componente
-- Component Library moderna implementada
-- PWA com Service Workers configurado
-- Testes automatizados com Jest + RTL
+- Component Library com Angular Material
+- PWA com Angular Service Worker
+- Testes automatizados com Jest + Angular Testing
 
 **⚙️ Backend Microserviços (Semanas 11-16)**
 
@@ -181,12 +181,12 @@ style Z fill:#9b59b6,color:#000000
 
 ### 🚀 Sistema Moderno Target
 
-**⚛️ React 18+ TypeScript**
+**🅰️ Angular 19 TypeScript**
 
-- Concurrent Features para performance superior
-- Server Components para otimização SSR
-- Component Library moderna e reutilizável
-- Type safety com TypeScript 5.0+
+- Standalone Components para arquitetura simplificada
+- Signals para sistema reativo moderno
+- Component Library com Angular Material
+- Type safety nativo com TypeScript 5.0+
 
 **🎯 Microserviços Node.js**
 

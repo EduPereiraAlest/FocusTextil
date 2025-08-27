@@ -13,7 +13,7 @@ E["📉 Competitividade em risco"]
 end
 
 subgraph "🚀 OPORTUNIDADE DE MODERNIZAÇÃO"
-F["⚛️ React 18+ Stack"]
+F["🅰️ Angular 19 Stack"]
 G["💰 R$ 180k economia/ano"]
 H["⚡ 85% performance gain"]
 I["🔐 Security enterprise"]
@@ -190,9 +190,9 @@ style N fill:#f39c12,color:#000000
 - Database PostgreSQL + Redis
 - Proxy Gateway configurado
 
-**⚛️ Fase 2: Frontend (Semanas 5-10)**
+**🅰️ Fase 2: Frontend (Semanas 5-10)**
 
-- React 18+ Migration
+- Angular 19 Migration
 - Component Library
 - PWA Implementation
 - Testing Automation
