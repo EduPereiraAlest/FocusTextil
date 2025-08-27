@@ -275,18 +275,15 @@ style F2 fill:#ccffcc,color:#000000
 
 ## 📋 ROADMAP DE MIGRAÇÃO DETALHADO
 
-### 🚀 Roadmap Visual - 5 Fases Estratégicas
+### 🗓️ Cronograma de 24 Semanas
 
 ```mermaid
-flowchart TD
-    A["🏗️ FASE 1 - FUNDAÇÃO<br/>Semanas 1-4<br/>• Setup Infraestrutura AWS<br/>• CI/CD Pipeline<br/>• Arquitetura Base<br/>• Database Design"] --> B["⚛️ FASE 2 - FRONTEND<br/>Semanas 5-10<br/>• React Setup<br/>• Component Migration<br/>• State Management<br/>• PWA Implementation"]
+graph LR
+    A["🏗️ Fundação<br/>Sem 1-4"] --> B["⚛️ Frontend<br/>Sem 5-10"]
+    B --> C["⚙️ Backend<br/>Sem 11-16"]
+    C --> D["🔄 Integração<br/>Sem 17-20"]
+    D --> E["🚀 Deploy<br/>Sem 21-24"]
     
-    B --> C["⚙️ FASE 3 - BACKEND<br/>Semanas 11-16<br/>• Microservices Core<br/>• API Development<br/>• Auth & Security<br/>• Performance Opt"]
-    
-    C --> D["🔄 FASE 4 - INTEGRAÇÃO<br/>Semanas 17-20<br/>• Data Migration<br/>• Testing & QA<br/>• Sistema Integrado"]
-    
-    D --> E["🚀 FASE 5 - DEPLOY<br/>Semanas 21-24<br/>• Staging Deploy<br/>• Production Deploy<br/>• Training & Handover"]
-
     style A fill:#e8f4fd,color:#000000
     style B fill:#61dafb,color:#000000
     style C fill:#68d391,color:#000000
