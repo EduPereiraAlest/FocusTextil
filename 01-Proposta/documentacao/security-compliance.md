@@ -46,23 +46,23 @@ J --> P
 K --> Q
 L --> Q
 
-style A fill:#e74c3c
-style B fill:#e74c3c
-style C fill:#e74c3c
-style D fill:#e74c3c
-style E fill:#e74c3c
-style F fill:#e74c3c
-style G fill:#27ae60
-style H fill:#27ae60
-style I fill:#27ae60
-style J fill:#27ae60
-style K fill:#27ae60
-style L fill:#27ae60
-style M fill:#3498db
-style N fill:#3498db
-style O fill:#3498db
-style P fill:#3498db
-style Q fill:#3498db
+style A fill:#e74c3c,color:#000000
+style B fill:#e74c3c,color:#000000
+style C fill:#e74c3c,color:#000000
+style D fill:#e74c3c,color:#000000
+style E fill:#e74c3c,color:#000000
+style F fill:#e74c3c,color:#000000
+style G fill:#27ae60,color:#000000
+style H fill:#27ae60,color:#000000
+style I fill:#27ae60,color:#000000
+style J fill:#27ae60,color:#000000
+style K fill:#27ae60,color:#000000
+style L fill:#27ae60,color:#000000
+style M fill:#3498db,color:#000000
+style N fill:#3498db,color:#000000
+style O fill:#3498db,color:#000000
+style P fill:#3498db,color:#000000
+style Q fill:#3498db,color:#000000
 ```
 
 ---

@@ -44,21 +44,21 @@ L --> M
 M --> N
 N --> O
 
-style A fill:#e74c3c
-style B fill:#3498db
-style C fill:#2ecc71
-style D fill:#f39c12
-style E fill:#9b59b6
-style F fill:#e74c3c
-style G fill:#e67e22
-style H fill:#f1c40f
-style I fill:#27ae60
-style J fill:#2980b9
-style K fill:#8e44ad
-style L fill:#27ae60
-style M fill:#3498db
-style N fill:#e67e22
-style O fill:#9b59b6
+style A fill:#e74c3c,color:#000000
+style B fill:#3498db,color:#000000
+style C fill:#2ecc71,color:#000000
+style D fill:#f39c12,color:#000000
+style E fill:#9b59b6,color:#000000
+style F fill:#e74c3c,color:#000000
+style G fill:#e67e22,color:#000000
+style H fill:#f1c40f,color:#000000
+style I fill:#27ae60,color:#000000
+style J fill:#2980b9,color:#000000
+style K fill:#8e44ad,color:#000000
+style L fill:#27ae60,color:#000000
+style M fill:#3498db,color:#000000
+style N fill:#e67e22,color:#000000
+style O fill:#9b59b6,color:#000000
 ```
 
 ---

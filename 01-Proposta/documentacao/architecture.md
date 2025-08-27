@@ -110,30 +110,30 @@ BB --> CC
 BB --> DD
 BB --> EE
 
-style A fill:#e8f4fd
-style B fill:#e8f4fd
-style C fill:#e8f4fd
-style G fill:#61dafb
-style H fill:#61dafb
-style I fill:#61dafb
-style J fill:#61dafb
-style K fill:#ff6b35
-style L fill:#ff6b35
-style M fill:#ff6b35
-style N fill:#ff6b35
-style O fill:#68d391
-style P fill:#68d391
-style Q fill:#68d391
-style R fill:#68d391
-style S fill:#68d391
-style T fill:#68d391
-style U fill:#fc8181
-style V fill:#fc8181
-style W fill:#fc8181
-style X fill:#9f7aea
-style Y fill:#9f7aea
-style Z fill:#9f7aea
-style AA fill:#9f7aea
+style A fill:#e8f4fd,color:#000000
+style B fill:#e8f4fd,color:#000000
+style C fill:#e8f4fd,color:#000000
+style G fill:#61dafb,color:#000000
+style H fill:#61dafb,color:#000000
+style I fill:#61dafb,color:#000000
+style J fill:#61dafb,color:#000000
+style K fill:#ff6b35,color:#000000
+style L fill:#ff6b35,color:#000000
+style M fill:#ff6b35,color:#000000
+style N fill:#ff6b35,color:#000000
+style O fill:#68d391,color:#000000
+style P fill:#68d391,color:#000000
+style Q fill:#68d391,color:#000000
+style R fill:#68d391,color:#000000
+style S fill:#68d391,color:#000000
+style T fill:#68d391,color:#000000
+style U fill:#fc8181,color:#000000
+style V fill:#fc8181,color:#000000
+style W fill:#fc8181,color:#000000
+style X fill:#9f7aea,color:#000000
+style Y fill:#9f7aea,color:#000000
+style Z fill:#9f7aea,color:#000000
+style AA fill:#9f7aea,color:#000000
 ```
 
 ---

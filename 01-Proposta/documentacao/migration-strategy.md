@@ -46,17 +46,17 @@ B3 -->|90%| D3
 A4 --> B4
 B4 -->|100%| D4
 
-style C1 fill:#ffcccc
-style C2 fill:#ffcccc
-style C3 fill:#ffcccc
-style D1 fill:#ccffcc
-style D2 fill:#ccffcc
-style D3 fill:#ccffcc
-style D4 fill:#ccffcc
-style B1 fill:#ffffcc
-style B2 fill:#ffffcc
-style B3 fill:#ffffcc
-style B4 fill:#ccffcc
+style C1 fill:#ffcccc,color:#000000
+style C2 fill:#ffcccc,color:#000000
+style C3 fill:#ffcccc,color:#000000
+style D1 fill:#ccffcc,color:#000000
+style D2 fill:#ccffcc,color:#000000
+style D3 fill:#ccffcc,color:#000000
+style D4 fill:#ccffcc,color:#000000
+style B1 fill:#ffffcc,color:#000000
+style B2 fill:#ffffcc,color:#000000
+style B3 fill:#ffffcc,color:#000000
+style B4 fill:#ccffcc,color:#000000
 ```
 
 ---

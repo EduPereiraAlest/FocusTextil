@@ -52,27 +52,27 @@ N --> U
 O --> U
 P --> U
 
-style A fill:#ffcccc
-style B fill:#ffcccc
-style C fill:#ffcccc
-style D fill:#ffcccc
-style E fill:#ffcccc
-style F fill:#ffcccc
-style G fill:#ffcccc
-style H fill:#ffcccc
-style I fill:#ccffcc
-style J fill:#ccffcc
-style K fill:#ccffcc
-style L fill:#ccffcc
-style M fill:#ccffcc
-style N fill:#ccffcc
-style O fill:#ccffcc
-style P fill:#ccffcc
-style Q fill:#3498db
-style R fill:#3498db
-style S fill:#3498db
-style T fill:#3498db
-style U fill:#9b59b6
+style A fill:#ffcccc,color:#000000
+style B fill:#ffcccc,color:#000000
+style C fill:#ffcccc,color:#000000
+style D fill:#ffcccc,color:#000000
+style E fill:#ffcccc,color:#000000
+style F fill:#ffcccc,color:#000000
+style G fill:#ffcccc,color:#000000
+style H fill:#ffcccc,color:#000000
+style I fill:#ccffcc,color:#000000
+style J fill:#ccffcc,color:#000000
+style K fill:#ccffcc,color:#000000
+style L fill:#ccffcc,color:#000000
+style M fill:#ccffcc,color:#000000
+style N fill:#ccffcc,color:#000000
+style O fill:#ccffcc,color:#000000
+style P fill:#ccffcc,color:#000000
+style Q fill:#3498db,color:#000000
+style R fill:#3498db,color:#000000
+style S fill:#3498db,color:#000000
+style T fill:#3498db,color:#000000
+style U fill:#9b59b6,color:#000000
 ```
 
 ---

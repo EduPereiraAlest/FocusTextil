@@ -103,27 +103,27 @@ R --> T
 R --> V
 N --> U
 
-style A fill:#61dafb
-style B fill:#61dafb
-style C fill:#61dafb
-style D fill:#61dafb
-style E fill:#61dafb
-style F fill:#ff6b35
-style G fill:#ff6b35
-style H fill:#ff6b35
-style I fill:#ff6b35
-style J fill:#68d391
-style K fill:#68d391
-style L fill:#68d391
-style M fill:#68d391
-style N fill:#68d391
-style O fill:#fc8181
-style P fill:#fc8181
-style Q fill:#fc8181
-style R fill:#9f7aea
-style S fill:#9f7aea
-style T fill:#9f7aea
-style U fill:#9f7aea
+style A fill:#61dafb,color:#000000
+style B fill:#61dafb,color:#000000
+style C fill:#61dafb,color:#000000
+style D fill:#61dafb,color:#000000
+style E fill:#61dafb,color:#000000
+style F fill:#ff6b35,color:#000000
+style G fill:#ff6b35,color:#000000
+style H fill:#ff6b35,color:#000000
+style I fill:#ff6b35,color:#000000
+style J fill:#68d391,color:#000000
+style K fill:#68d391,color:#000000
+style L fill:#68d391,color:#000000
+style M fill:#68d391,color:#000000
+style N fill:#68d391,color:#000000
+style O fill:#fc8181,color:#000000
+style P fill:#fc8181,color:#000000
+style Q fill:#fc8181,color:#000000
+style R fill:#9f7aea,color:#000000
+style S fill:#9f7aea,color:#000000
+style T fill:#9f7aea,color:#000000
+style U fill:#9f7aea,color:#000000
 ```
 
 ### 🛠️ Stack Tecnológico de Ponta
@@ -165,16 +165,16 @@ C --> H
 D --> I
 E --> J
 
-style A fill:#fed7d7
-style B fill:#fed7d7
-style C fill:#fed7d7
-style D fill:#fed7d7
-style E fill:#fed7d7
-style F fill:#c6f6d5
-style G fill:#c6f6d5
-style H fill:#c6f6d5
-style I fill:#c6f6d5
-style J fill:#c6f6d5
+style A fill:#fed7d7,color:#000000
+style B fill:#fed7d7,color:#000000
+style C fill:#fed7d7,color:#000000
+style D fill:#fed7d7,color:#000000
+style E fill:#fed7d7,color:#000000
+style F fill:#c6f6d5,color:#000000
+style G fill:#c6f6d5,color:#000000
+style H fill:#c6f6d5,color:#000000
+style I fill:#c6f6d5,color:#000000
+style J fill:#c6f6d5,color:#000000
 ```
 
 ---
@@ -257,18 +257,18 @@ D1 -.->|migração| D2
 E1 -.->|implementação| E2
 F1 -.->|implementação| F2
 
-style A1 fill:#ffcccc
-style B1 fill:#ffcccc
-style C1 fill:#ffcccc
-style D1 fill:#ffcccc
-style E1 fill:#ffcccc
-style F1 fill:#ffcccc
-style A2 fill:#ccffcc
-style B2 fill:#ccffcc
-style C2 fill:#ccffcc
-style D2 fill:#ccffcc
-style E2 fill:#ccffcc
-style F2 fill:#ccffcc
+style A1 fill:#ffcccc,color:#000000
+style B1 fill:#ffcccc,color:#000000
+style C1 fill:#ffcccc,color:#000000
+style D1 fill:#ffcccc,color:#000000
+style E1 fill:#ffcccc,color:#000000
+style F1 fill:#ffcccc,color:#000000
+style A2 fill:#ccffcc,color:#000000
+style B2 fill:#ccffcc,color:#000000
+style C2 fill:#ccffcc,color:#000000
+style D2 fill:#ccffcc,color:#000000
+style E2 fill:#ccffcc,color:#000000
+style F2 fill:#ccffcc,color:#000000
 ```
 
 ---
